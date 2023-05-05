@@ -1,60 +1,63 @@
 <template>
-  <div class="greetings">
+  <div>
   {{ monument }}
-    <img src=""/>
-    <h1 class="green">{{ msg }}</h1>
+    <img :src="monument.images"/>
+
+
+    <h1 class="green">{{ monument.name }}</h1>
     <table>
+      //TODO: namen nog veranderen!
       <tr>
-        <td>Name</td> //TODO: namen nog veranderen!
-        <td></td>
+        <td>Name</td> 
+        <td>{{ monument.name }}</td>
       </tr>
       <tr>
-        <td>Descritpion</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Descritpion</td>  
+        <td>{{ monument.descritpion }}</td>
       </tr>
       <tr>
-        <td>Location</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Location</td> 
+        <td>{{ monument.location }}</td>
       </tr>
        <tr>
-        <td>Historical Significance</td> //TODO: namen nog veranderen!
-        <td></td>
+        <td>Historical Significance</td> 
+        <td>{{ monument.historicalSignificance }}</td>
       </tr>
       <tr>
         <td>Type</td>
-        <td></td>
+        <td>{{ monument.type }}</td>
       </tr>
       <tr>
-        <td>Year of construction</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Year of construction</td> 
+        <td>{{ monument.yearOfConstruction }}</td>
       </tr>
       <tr>
-        <td>Monument Designer</td> //TODO: namen nog veranderen!
-        <td></td>
+        <td>Monument Designer</td> 
+        <td>{{ monument.designer }}</td>
       </tr>
       <tr>
-        <td>Accessibility</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Accessibility</td> 
+        <td>{{ monument.accessibility }}</td>
       </tr>
       <tr>
-        <td>Used Materialas</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Used Materialas</td> 
+        <td>{{ monument.usedMaterials }}</td>
       </tr>
       <tr>
-        <td>Dimensions</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Dimensions</td> 
+        <td>{{ monument.dimension }}</td>
       </tr>
       <tr>
-        <td>Weight</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Weight</td> 
+        <td>{{ monument.weight }}</td>
       </tr>
       <tr>
-        <td>Cost to construct</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Cost to construct</td> 
+        <td>{{ monument.costToConstruct }}</td>
       </tr>
       <tr>
-        <td>Audiovisual</td>  //TODO: namen nog veranderen!
-        <td></td>
+        <td>Audiovisual</td> 
+        <td>{{ monument.audioVisual }}</td>
       </tr>
     </table>
   </div>
