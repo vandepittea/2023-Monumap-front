@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <h2>Add here your monument</h2>
-    <div class="errors" v-show="hasErrors">
+    <div class="error" v-show="hasErrors">
         <ul>
             <li v-for="error in errors">
                 {{ error }}
@@ -48,40 +48,41 @@
     
       <fieldset>
         <legend>Choose wich accesibility your monument has</legend>
+
         <div class="checkbox-container">
-        <input type="checkbox" id="none" name="none" value="true">
+        <input type="checkbox" id="none" name="none" value="true" v-model="accessibility">
         <label for="none">None</label>
         </div>
 
-      <div class="checkbox-container">
-        <input type="checkbox" id="wheelchairFriendly" name="wheelchairFriendly" value="true">
-        <label for="wheelchairFriendly">Wheelchair-friendly</label>
-      </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="wheelchairFriendly" name="wheelchairFriendly" value="true" v-model="accessibility">
+          <label for="wheelchairFriendly">Wheelchair-friendly</label>
+        </div>
 
-      <div class="checkbox-container">
-        <input type="checkbox" id="nearParkingAreas" name="nearParkingAreas" value="true">
-        <label for="nearParkingAreas">Near parking areas</label>
-      </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="nearParkingAreas" name="nearParkingAreas" value="true">
+          <label for="nearParkingAreas">Near parking areas</label>
+        </div>
 
-      <div class="checkbox-container">
-        <input type="checkbox" id="lowSlopeRamps" name="lowSlopeRamps" value="true">
-        <label for="lowSlopeRamps">Low-slope ramps</label>
-      </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="lowSlopeRamps" name="lowSlopeRamps" value="true">
+          <label for="lowSlopeRamps">Low-slope ramps</label>
+        </div>
 
-      <div class="checkbox-container">
-        <input type="checkbox" id="powerAssistedDoors" name="powerAssistedDoors" value="true">
-        <label for="powerAssistedDoors">Power-assisted doors</label>
-      </div>
-      
-      <div class="checkbox-container">
-        <input type="checkbox" id="elevators" name="elevators" value="true">
-        <label for="elevators">Elevators</label>
-      </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="powerAssistedDoors" name="powerAssistedDoors" value="true">
+          <label for="powerAssistedDoors">Power-assisted doors</label>
+        </div>
+        
+        <div class="checkbox-container">
+          <input type="checkbox" id="elevators" name="elevators" value="true">
+          <label for="elevators">Elevators</label>
+        </div>
 
-      <div class="checkbox-container">
-        <input type="checkbox" id="accessibleWashrooms" name="accessibleWashrooms" value="true">
-        <label for="accessibleWashrooms">Accessible washrooms</label>
-      </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="accessibleWashrooms" name="accessibleWashrooms" value="true">
+          <label for="accessibleWashrooms">Accessible washrooms</label>
+        </div>
     </fieldset>
   
     //TODO: usedMaterials
@@ -90,13 +91,13 @@
       <legend>Fill in the dimensions</legend>
 
       <label for="height">Height:</label>
-      <input type="number" id="height" name="height" v-model="height" required>
+      <input type="number" id="height" name="height" v-model="dimensions.height" required>
 
       <label for="width">Width:</label>
-      <input type="number" id="width" name="width" v-model="width">
+      <input type="number" id="width" name="width" v-model="dimensions.width">
 
       <label for="depth">Depth:</label>
-      <input type="number" id="depth" name="depth" v-model="dept">
+      <input type="number" id="depth" name="depth" v-model="dimensions.dept">
     </fieldset>
 
       <label for="weight">Weight:</label>
@@ -142,8 +143,14 @@
         errors: []
       };
     },
+    computed: {
+      hasErrors() {
+        return this.errors.length > 0;
+      }
+    },
     watch: {
-        number(newValue, oldValue) {
+        number(newValue, oldValue) { //TODO: is dit wel oke?
+          console.log("watch")
             this.errors = [];
             if (newValue) {
                 this.validate();
@@ -152,8 +159,7 @@
         
     },
       methods: {
-        addMonument(){
-          console.log("addMonument");
+        addMonument(){ 
           this.validate();
           console.log(this.errors)
           if (this.hasErrors) return;
@@ -166,54 +172,44 @@
 
           if (this.name === "") {
             this.errors.push("Name is required.");
-            return
           }
 
           if (this.description === "") {
             this.errors.push("Description is required.");
-            return
           }
 
           if (this.location.latitude === "") {
             this.errors.push("Latitude is required.");
-            return
           }
 
           if (this.location.longitude === "") {
             this.errors.push("Longitude is required.");
-            return
           }
 
           if (this.location.city === "") {
             this.errors.push("City is required.");
-            return
           }
 
           if (this.type === "") {
             this.errors.push("Type is required.");
-            return
           }
 
            //TODO: is dit wel oke? 
           if (this.yearOfConstruction === "") { 
             this.errors.push("Year of construction is required.");
-            return
           }
 
            //TODO: is dit wel oke?  
           if (this.monumentDesigner === "") {
             this.errors.push("Monument designer is required.");
-            return
           }
 
           if (this.accesibility === "") {
             this.errors.push("Accesibility is required.");
-            return
           }
 
           if (this.dimensions.height === "") {
             this.errors.push("Height is required.");
-            return
           }
         }
       }
@@ -230,13 +226,14 @@
   border-radius: 2%;
 }
 
-errors {
+.errors {
     color: red;
 }
 
 .error{
     border: 1px solid red;
     background-color: rgb(255,182,182);
+    width: 100%;
 }
 
 h2 {
