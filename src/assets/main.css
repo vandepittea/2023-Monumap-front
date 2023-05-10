@@ -3,9 +3,14 @@
 #app {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-
+  padding: 5rem;
+  margin-left: auto;
+  margin-right: auto;
   font-weight: normal;
+}
+
+body{
+  background-color: lightgoldenrodyellow;
 }
 
 a,
@@ -27,9 +32,7 @@ a,
     place-items: center;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  /* #app {
     padding: 0 2rem;
-  }
+  } */
 }
