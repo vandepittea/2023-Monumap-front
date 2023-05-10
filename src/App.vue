@@ -28,11 +28,15 @@ header{
 }
 
 nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   font-size: 12px;
   text-align: center;
   margin-top: 2rem;
-  display: block;
+  background-color: var(--color-background);
+  height: 3rem;
 }
 
 nav a.router-link-exact-active {
@@ -53,7 +57,8 @@ nav a:first-of-type {
   border: 0;
 }
 
-/*@media (min-width: 1024px) {
+/* //TODO: hier aanpassen! */
+@media (min-width: 1024px) { 
   header {
     display: flex;
     place-items: center;
@@ -78,5 +83,5 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
-}*/
+}
 </style>

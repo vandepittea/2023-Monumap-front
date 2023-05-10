@@ -1,6 +1,6 @@
 <template>
   <div>
-  {{ monument }}
+  <!-- {{ monument }} -->
     <img :src="monument.images"/>
 
 
