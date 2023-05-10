@@ -3,11 +3,15 @@
     <h1>Welcome to MonuMap</h1>
     <h3>Find here your favourtie Monuments</h3>
 
+    TODO: serachbar + filter bar toevoegen!
+
     <div class="flexcontainer">
-      <MonumentComponent :monument="monument"/>
+      <!-- <MonumentComponent :monument="monument"/> -->
+      <MonumentComponent v-for="(monument, index) in monuments" :key="index" :monument="monument"/>
+
     </div>
-    <a src="/newMonument">Add your monument</a> //TODO: Wrm werkt dit niet?
-    <img src="..\assets\images\English Flag.png" id="languageImage"/>
+    <router-link to="/newMonument">Add your monument</router-link>
+    <img :src="languageImage" @click="toggleLanguage" id="languageImage" alt="Language switcher"/>
     <!-- <MonumentDetailComponent :monument="monument"/> -->
   </main>
 </template>
@@ -16,16 +20,41 @@
 
 import MonumentDetailComponent from '../components/MonumentDetailComponent.vue'
 import MonumentComponent from '../components/MonumentComponent.vue';
+import EnglishFlag from '../assets/images/EnglishFlag.png';
+import DutchFlag from '../assets/images/DutchFlag.png';
 export default{
   "name": "HomeView",
   components: { MonumentDetailComponent, MonumentComponent },
   data(){
     return {
-      monument: {
-        name: "monument 1",
-        images: "een url"
-      }
+      monuments: [],
+      currentLanguage: "en",
+      languageImages: {
+        en: EnglishFlag,
+        nl: DutchFlag,
+      },
+      languageImage: EnglishFlag,
+      // monument: {
+      //   name: "monument 1",
+      //   images: "een url"
+      // }
     }
+  },
+  methods: {
+    toggleLanguage() {
+      this.currentLanguage = this.currentLanguage === 'en' ? 'nl' : 'en';
+      this.languageImage = this.languageImages[this.currentLanguage];
+    },
+  },
+  created() {
+    // Fetch the list of monuments from the server and assign it to the `monuments` data property.
+    //TODO: nog juiste url toevoegen
+    fetch('/api/monuments')
+      .then(response => response.json())
+      .then(data => {
+        this.monuments = data;
+      })
+      .catch(error => console.error(error));
   }
 }
 </script>

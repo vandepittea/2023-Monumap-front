@@ -149,14 +149,7 @@
       }
     },
     watch: {
-        number(newValue, oldValue) { //TODO: is dit wel oke?
-          console.log("watch")
-            this.errors = [];
-            if (newValue) {
-                this.validate();
-            }
-        }
-        
+      //TODO: watch for changes, maar is dit nodig? 
     },
       methods: {
         addMonument(){ 
