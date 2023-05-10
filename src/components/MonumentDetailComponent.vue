@@ -1,6 +1,6 @@
 <template>
   <div>
-  <!-- {{ monument }} -->
+  {{ monument }}
     <img :src="monument.images"/>
 
 
@@ -68,14 +68,16 @@ export default {
   name: "MonumentDetailComponent",
   props:{
     monument:{
+      type: Object,
       required: true
     }
   },
   data(){
     return {
-
+      
     }
   }
 }
+
 </script>
 

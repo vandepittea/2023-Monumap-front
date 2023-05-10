@@ -117,6 +117,7 @@
     name: "AddMonumentView",
     data(){
       return {
+        id : "",
         name: "",
         description: "",
         location: {
