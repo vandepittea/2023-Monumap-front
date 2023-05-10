@@ -6,12 +6,11 @@
     <div class="flexcontainer">
       <MonumentComponent :monument="monument"/>
     </div>
-
+    <a src="/newMonument">Add your monument</a> //TODO: Wrm werkt dit niet?
+    <img src="..\assets\images\English Flag.png" id="languageImage"/>
     <!-- <MonumentDetailComponent :monument="monument"/> -->
   </main>
 </template>
-
-
 
 <script>
 
@@ -36,6 +35,12 @@ export default{
     margin-bottom: 1rem;
   }
 
+  #languageImage {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1rem;
+  }
+
   h3 {
     margin-bottom: 0.75rem;
   }
@@ -45,10 +50,22 @@ export default{
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
+    margin-bottom: 3rem;
   }
 
   .flexcontainer > * {
     width: 30%;
+  }
+
+  a {
+    background-color: var(--color-background) ;
+    padding: 1rem;
+    border-radius: 10px;
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
   }
 </style>
 
