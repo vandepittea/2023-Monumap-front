@@ -1,5 +1,7 @@
 <template>
   <div class="about">
+  <img class="logo" src="../assets/logo.png"/>
+
     <h1>Welcome to MonuMap</h1>
     <h3>Find here your favourtie Monuments</h3>
 
@@ -11,12 +13,18 @@
 </template>
 
 <style>
+.logo{
+  width: 10%;
+  height: auto;
+}
+
 h3 {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 0.05rem gray solid;
-  }
-  p {
+}
+
+p {
     margin-bottom: 2rem;
-  }
+}
 </style>

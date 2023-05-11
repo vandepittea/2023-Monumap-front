@@ -94,6 +94,7 @@ export default{
     padding-bottom: 1rem;
     border-bottom: 0.05rem gray solid;
   }
+  
   .flexcontainer {
     display: flex;
     flex-wrap: wrap;

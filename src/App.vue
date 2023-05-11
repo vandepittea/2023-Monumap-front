@@ -35,7 +35,7 @@ nav {
   font-size: 12px;
   text-align: center;
   background-color: var(--color-background);
-  height: 4rem;
+  height: 3rem;
 }
 
 nav a.router-link-exact-active {
@@ -49,11 +49,6 @@ nav a.router-link-exact-active:hover {
 nav a {
   display: inline-block;
   width: 100%;
-  text-align: center;
-}
-
-nav a:first-of-type {
-  border: 0;
 }
 
 /* //TODO: hier aanpassen! */
@@ -65,8 +60,7 @@ nav a:first-of-type {
   }
 
   nav {
-    text-align: left;
-    margin-left: -1rem;
+    text-align: center;
     font-size: 1rem;
     padding: 1rem 0;
     width: 100%;
