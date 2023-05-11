@@ -2,31 +2,38 @@
   <main>
     <h1>Welcome to MonuMap</h1>
     <h3>Find here your favourtie Monuments</h3>
-
-    TODO: serachbar + filter bar toevoegen!
-    TODO: order by? 
+    
     TODO: hier apart componentn van maken? 
-
     <form @submit.prevent="filterMonuments">
-      <label for="name">Name:</label>
-      <input type="text" id="name" name="name" v-model="filter.name">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" v-model="filter.name">
+      </div>
 
-      <label for="type">Select the type:</label>
-      <select id="type" name="type" v-model="filter.type">
-        <option value="">Please choose an option</option>
-        <option value="option1">Option 1</option>
-        <option value="option2">Option 2</option>
-        <option value="option3">Option 3</option>
-      </select>
+      <div class="form-group">
+        <label for="type">Select the type:</label>
+        <select id="type" name="type" v-model="filter.type">
+          <option value="">Please choose an option</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
 
-      <label for="yearOfConstructions">Year of construction:</label>
-      <input type="number" id="yearOfConstructions" name="yearOfConstructions" v-model="filter.yearOfConstruction">
+      <div class="form-group">
+        <label for="yearOfConstructions">Year of construction:</label>
+        <input type="number" id="yearOfConstructions" name="yearOfConstructions" v-model="filter.yearOfConstruction">
+      </div>
 
-      <label for="monumentDesigner">Monument designer:</label>
-      <input type="text" id="monumentDesigner" name="monumentDesigner" v-model="filter.monumentDesigner">
+      <div class="form-group">
+        <label for="monumentDesigner">Monument designer:</label>
+        <input type="text" id="monumentDesigner" name="monumentDesigner" v-model="filter.monumentDesigner">
+      </div>
 
-      <label for="costToConstruct">Cost to construct</label>
-      <input type="number" id="costToConstruct" name="costToConstruct" v-model="filter.costToConstruct">
+      <div class="form-group">
+        <label for="costToConstruct">Cost to construct</label>
+        <input type="number" id="costToConstruct" name="costToConstruct" v-model="filter.costToConstruct">
+      </div>
 
       <input type="submit" value="Filter">
     </form>
@@ -177,10 +184,30 @@ export default{
     margin-bottom: 1rem;
   }
 
+  .form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1em;
+  }
+
+  .form-group label {
+    margin-right: 1em;
+  }
+
   form {
     border: 0.05rem gray solid;
     padding: 2rem;
     margin-bottom: 2rem;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    background-color: var(--color-background);
   }
 </style>
 
