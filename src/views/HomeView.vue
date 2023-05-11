@@ -4,7 +4,33 @@
     <h3>Find here your favourtie Monuments</h3>
 
     TODO: serachbar + filter bar toevoegen!
+    TODO: order by? 
+    TODO: hier apart componentn van maken? 
 
+    <form @submit.prevent="filterMonuments">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" v-model="filter.name">
+
+      <label for="type">Select the type:</label>
+      <select id="type" name="type" v-model="filter.type">
+        <option value="">Please choose an option</option>
+        <option value="option1">Option 1</option>
+        <option value="option2">Option 2</option>
+        <option value="option3">Option 3</option>
+      </select>
+
+      <label for="yearOfConstructions">Year of construction:</label>
+      <input type="number" id="yearOfConstructions" name="yearOfConstructions" v-model="filter.yearOfConstruction">
+
+      <label for="monumentDesigner">Monument designer:</label>
+      <input type="text" id="monumentDesigner" name="monumentDesigner" v-model="filter.monumentDesigner">
+
+      <label for="costToConstruct">Cost to construct</label>
+      <input type="number" id="costToConstruct" name="costToConstruct" v-model="filter.costToConstruct">
+
+      <input type="submit" value="Filter">
+    </form>
+    
     <div class="flexcontainer">
       <MonumentComponent v-for="(monument, index) in monuments" :key="index" :monument="monument" @click="viewMonumentDetail(monument)"/>
     </div>
@@ -52,6 +78,13 @@ export default{
         nl: DutchFlag,
       },
       languageImage: EnglishFlag,
+      filter : {
+        name: '',
+        type: '',
+        yearOfConstruction: '',
+        monumentDesigner: '',
+        costToConstruct: '',
+      }
     }
   },
   methods: {
@@ -60,9 +93,35 @@ export default{
       this.languageImage = this.languageImages[this.currentLanguage];
     },
     viewMonumentDetail(monument) {
-      console.log("viewMonumentDetail")
-      console.log(monument);
-    this.$router.push({ name: 'MonumentDetail', params: { id : monument.id, monument : monument} });
+      this.$router.push({ name: 'MonumentDetail', params: { id : monument.id, monument : monument} });
+    },
+    filterMonuments() {
+      //TODO: juiste url meegeven!
+      let url = '/api/monuments?';
+      if (this.name) {
+        url += `name=${this.name}&`;
+      }
+      if (this.type) {
+        url += `type=${this.type}&`;
+      }
+      if (this.yearOfConstruction) {
+        url += `yearOfConstruction=${this.yearOfConstruction}&`;
+      }
+      if (this.monumentDesigner) {
+        url += `monumentDesigner=${this.monumentDesigner}&`;
+      }
+      if (this.costToConstruct) {
+        url += `costToConstruct=${this.costToConstruct}&`;
+      }
+      // Remove the trailing '&' character
+      url = url.slice(0, -1);
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          this.monuments = data;
+        })
+        .catch(error => console.error(error));
     },
   },
   created() {
@@ -94,7 +153,7 @@ export default{
     padding-bottom: 1rem;
     border-bottom: 0.05rem gray solid;
   }
-  
+
   .flexcontainer {
     display: flex;
     flex-wrap: wrap;
@@ -116,6 +175,12 @@ export default{
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 1rem;
+  }
+
+  form {
+    border: 0.05rem gray solid;
+    padding: 2rem;
+    margin-bottom: 2rem;
   }
 </style>
 
