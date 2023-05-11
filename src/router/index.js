@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-
+import { getMonumentById } from '../api/monumentApi.js'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,7 +22,8 @@ const router = createRouter({
       path: '/monument/:id',
       name: 'MonumentDetail',
       component: () => import ('../components/MonumentDetailComponent.vue'),
-      props: true,
+      props: route => ({monument: getMonumentById(route.params.id) })
+      // props: true,
     },
     
     {

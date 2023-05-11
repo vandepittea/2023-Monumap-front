@@ -1,10 +1,7 @@
 <template>
   <div>
-  {{ monument }}
-    <img :src="monument.images"/>
-
-
     <h1 class="green">{{ monument.name }}</h1>
+    <img :src="monument.images"/>
     <table>
       //TODO: namen nog veranderen!
       <tr>
@@ -13,7 +10,7 @@
       </tr>
       <tr>
         <td>Descritpion</td>  
-        <td>{{ monument.descritpion }}</td>
+        <td>{{ monument.description }}</td>
       </tr>
       <tr>
         <td>Location</td> 
@@ -71,13 +68,30 @@ export default {
       type: Object,
       required: true
     }
-  },
-  data(){
-    return {
-      
-    }
   }
 }
-
 </script>
+
+<style>
+ img{
+   height: 25rem;
+   border-radius: 10px 10px 0 0;
+   margin-bottom: 2rem;
+ }
+
+ table{
+   margin-left: auto;
+   margin-right: auto;
+   width: 80%;
+   border-collapse: collapse;
+ }
+
+ tr {
+  border-bottom: 0.05rem gray solid;
+ }
+
+ td {
+  padding: 1rem;
+ }
+</style>
 

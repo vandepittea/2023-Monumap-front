@@ -62,7 +62,7 @@ export default{
     viewMonumentDetail(monument) {
       console.log("viewMonumentDetail")
       console.log(monument);
-    this.$router.push({ name: 'MonumentDetail', params: { id : monument.id} });
+    this.$router.push({ name: 'MonumentDetail', params: { id : monument.id, monument : monument} });
     },
   },
   created() {
