@@ -8,7 +8,7 @@
     <div class="flexcontainer">
       <MonumentComponent v-for="(monument, index) in monuments" :key="index" :monument="monument" @click="viewMonumentDetail(monument)"/>
     </div>
-    <router-link to="/newMonument">Add your monument</router-link>
+    <router-link to="/newMonument" id="addMonumentButton">Add your monument</router-link>
     <img :src="languageImage" @click="toggleLanguage" id="languageImage" alt="Language switcher"/>
     <!-- <MonumentDetailComponent :monument="monument"/> -->
   </main>
@@ -90,9 +90,10 @@ export default{
   }
 
   h3 {
-    margin-bottom: 0.75rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.05rem gray solid;
   }
-
   .flexcontainer {
     display: flex;
     flex-wrap: wrap;
@@ -105,7 +106,7 @@ export default{
     width: 30%;
   }
 
-  a {
+  #addMonumentButton {
     background-color: var(--color-background) ;
     padding: 1rem;
     border-radius: 10px;
