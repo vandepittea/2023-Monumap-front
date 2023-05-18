@@ -101,13 +101,6 @@ export default {
 </script>
 
 <style>
-.home-view {
-  background-color: #f3f8ff;
-  padding: 2rem;
-  text-align: center;
-  background-image: linear-gradient(to bottom, #f3f8ff, #c5d9f4);
-}
-
 #languageImage {
   width: 50px;
   height: 50px;

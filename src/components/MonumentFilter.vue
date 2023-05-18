@@ -30,7 +30,7 @@
         <input type="number" id="costToConstruct" name="costToConstruct" v-model="filter.costToConstruct">
       </div>
   
-      <button type="submit" class="filter-button">Filter</button>
+      <button type="submit" class="filter-button button">Filter</button>
     </form>
   </template>
   
@@ -64,48 +64,22 @@
   </script>
   
   <style>
-  .filter-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2rem;
-  }
+.filter-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
   
   .form-group {
     display: flex;
     flex-direction: column;
     margin-right: 1rem;
     margin-bottom: 1rem;
-  }
-  
-  label {
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  input[type='text'],
-  input[type='number'],
-  select {
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1rem;
-  }
-  
-  .filter-button {
-    padding: 0.5rem 1rem;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-  }
-  
-  .filter-button:hover {
-    background-color: #555;
   }
   </style>  
