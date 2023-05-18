@@ -10,14 +10,12 @@
 </template>
 
 <script>
-import MonumentDetailComponent from '../components/MonumentDetailComponent.vue';
 import MonumentList from '../components/MonumentList.vue';
 import MonumentFilter from '../components/MonumentFilter.vue';
 
 export default {
   name: 'HomeView',
   components: {
-    MonumentDetailComponent,
     MonumentList,
     MonumentFilter,
   },

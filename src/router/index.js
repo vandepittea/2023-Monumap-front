@@ -23,7 +23,7 @@ const routes = [
   {
     path: '/monument/:id',
     name: 'MonumentDetail',
-    component: () => import ('../components/MonumentDetailComponent.vue'),
+    component: () => import ('../components/MonumentDetail.vue'),
     props: route => ({monument: getMonumentById(route.params.id) })
   }
 ];
