@@ -70,15 +70,26 @@
       </div>
     </div>
   </div>
+  <div class="button-container" v-if="loggedIn">
+    <input type="submit" @click="deleteMonument" value="Delete">
+    <input type="submit" @click="updateMonument" value="Update">
+  </div>
 </template>
 
 <script>
+import { useStore } from 'vuex';
 import Slideshow from "./Slideshow.vue";
 
 export default {
   name: "MonumentDetail",
   components: {
     Slideshow,
+  },
+  computed: {
+    loggedIn() {
+      const store = useStore();
+      return store.state.loggedIn;
+    },
   },
   props: {
     monument: {
@@ -160,5 +171,15 @@ export default {
 video,
 audio {
   width: 600px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.button {
+  margin: 0 0.5rem;
 }
 </style>

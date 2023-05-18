@@ -18,7 +18,7 @@
             <label for="confirm-password">Confirm Password:</label>
             <input type="password" id="confirm-password" name="confirm_password" v-model="confirmPassword" required>
 
-            <input type="submit" value="Register" class="button">
+            <input type="submit" value="Register">
         </form>
     </main>
 </template>

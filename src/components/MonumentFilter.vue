@@ -30,7 +30,7 @@
         <input type="number" id="costToConstruct" name="costToConstruct" v-model="filter.costToConstruct">
       </div>
   
-      <button type="submit" class="filter-button button">Filter</button>
+      <input type="submit" value="Filter">
     </form>
   </template>
   
