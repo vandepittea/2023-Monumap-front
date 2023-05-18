@@ -71,7 +71,7 @@
   align-items: center;
   margin-bottom: 2rem;
   background-color: #fff;
-  padding: 1rem;
+  padding: 4rem;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
