@@ -13,7 +13,7 @@
         <li><router-link to="/">Home</router-link></li>
         <li v-if="!loggedIn"><router-link to="/login">Login</router-link></li>
         <li v-if="!loggedIn"><router-link to="/register">Register</router-link></li>
-        <li v-if="loggedIn"><router-link to="/add-monument">Add Monument</router-link></li>
+        <li v-if="loggedIn"><router-link to="/new-monument">Add Monument</router-link></li>
         <li v-if="loggedIn"><router-link to="/logout">Logout</router-link></li>
       </ul>
     </nav>

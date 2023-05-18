@@ -106,6 +106,9 @@ export default {
       const { height, width, depth } = dimensions;
       return `${height} x ${width} x ${depth}`;
     },
+    deleteMonument() {
+      // Delete monument logic...
+    },
   },
 };
 </script>
