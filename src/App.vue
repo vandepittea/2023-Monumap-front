@@ -18,15 +18,6 @@ import { RouterLink, RouterView } from 'vue-router';
 </template>
 
 <style scoped>
-#app {
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: #f0f0f0;
-}
-
 header {
   background-color: #333;
   padding: 10px;
