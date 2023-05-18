@@ -13,8 +13,6 @@
 import MonumentDetailComponent from '../components/MonumentDetailComponent.vue';
 import MonumentList from '../components/MonumentList.vue';
 import MonumentFilter from '../components/MonumentFilter.vue';
-import EnglishFlag from '../assets/images/EnglishFlag.png';
-import DutchFlag from '../assets/images/DutchFlag.png';
 
 export default {
   name: 'HomeView',
@@ -47,12 +45,6 @@ export default {
           images: 'https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2023/01/31124623/Great-Wall-Of-China.jpg?tr=w-1200,h-900',
         },
       ],
-      currentLanguage: 'en',
-      languageImages: {
-        en: EnglishFlag,
-        nl: DutchFlag,
-      },
-      languageImage: EnglishFlag,
       filter: {
         name: '',
         type: '',
@@ -72,10 +64,6 @@ export default {
     },
   },
   methods: {
-    toggleLanguage() {
-      this.currentLanguage = this.currentLanguage === 'en' ? 'nl' : 'en';
-      this.languageImage = this.languageImages[this.currentLanguage];
-    },
     viewMonumentDetail(monument) {
       this.$router.push({ name: 'MonumentDetail', params: { id: monument.id, monument: monument } });
     },
