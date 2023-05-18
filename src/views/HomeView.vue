@@ -6,8 +6,6 @@
     <MonumentFilter @filterMonuments="filterMonuments" />
 
     <MonumentList :monuments="filteredMonuments" @viewMonumentDetail="viewMonumentDetail" />
-
-    <img :src="languageImage" @click="toggleLanguage" id="languageImage" alt="Language switcher" />
   </main>
 </template>
 
@@ -101,10 +99,4 @@ export default {
 </script>
 
 <style>
-#languageImage {
-  width: 50px;
-  height: 50px;
-  margin-bottom: 1rem;
-  cursor: pointer;
-}
 </style>
