@@ -100,25 +100,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home-view {
   background-color: #f3f8ff;
   padding: 2rem;
   text-align: center;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  color: #333;
-}
-
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #ccc;
-  color: #555;
+  background-image: linear-gradient(to bottom, #f3f8ff, #c5d9f4);
 }
 
 #languageImage {
@@ -126,9 +113,5 @@ h3 {
   height: 50px;
   margin-bottom: 1rem;
   cursor: pointer;
-}
-
-.home-view {
-  background-image: linear-gradient(to bottom, #f3f8ff, #c5d9f4);
 }
 </style>

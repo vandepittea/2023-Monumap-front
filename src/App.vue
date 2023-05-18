@@ -17,37 +17,5 @@ import { RouterLink, RouterView } from 'vue-router';
   </main>
 </template>
 
-<style scoped>
-header {
-  background-color: #333;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-}
-
-nav {
-  display: flex;
-}
-
-nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav li {
-  margin: 0 10px;
-}
-
-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-nav a:hover {
-  color: #ccc;
-}
+<style>
 </style>

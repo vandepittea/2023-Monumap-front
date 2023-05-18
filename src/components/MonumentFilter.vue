@@ -63,7 +63,7 @@
   };
   </script>
   
-  <style scoped>
+  <style>
   .filter-form {
     display: flex;
     flex-wrap: wrap;
