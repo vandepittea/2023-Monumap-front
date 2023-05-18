@@ -1,7 +1,7 @@
 <template>
   <main class="home-view">
     <h1>Welcome to MonuMap</h1>
-    <h3>Find your favorite Monuments</h3>
+    <h3>Find your favorite monuments</h3>
 
     <MonumentFilter @filterMonuments="filterMonuments" />
 

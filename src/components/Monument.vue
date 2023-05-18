@@ -18,6 +18,10 @@
   </script>
   
   <style>
+  img{
+    margin-bottom: 1rem;
+  }
+
   .monumentCard {
     display: flex;
     flex-direction: column;
@@ -44,6 +48,5 @@
   .monumentCard-name {
     font-size: 1.2rem;
     font-weight: bold;
-    margin-top: 1rem;
   }
   </style>  

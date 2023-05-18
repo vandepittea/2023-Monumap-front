@@ -1,11 +1,11 @@
 <template>
     <div class="flexcontainer">
-      <MonumentComponent v-for="(monument, index) in monuments" :key="index" :monument="monument" @click="viewMonumentDetail(monument)" />
+      <Monument v-for="(monument, index) in monuments" :key="index" :monument="monument" @click="viewMonumentDetail(monument)" />
     </div>
   </template>
   
   <script>
-  import MonumentComponent from './MonumentComponent.vue';
+  import Monument from './Monument.vue';
   
   export default {
     props: {
@@ -15,7 +15,7 @@
       },
     },
     components: {
-      MonumentComponent,
+      Monument,
     },
     methods: {
       viewMonumentDetail(monument) {
