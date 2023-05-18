@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/HomeView.vue';
 import Login from '../views/LoginView.vue';
 import Register from '../views/RegisterView.vue';
+import { getMonumentById } from '../api/monumentApi.js'
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register
+  },
+  {
+    path: '/monument/:id',
+    name: 'MonumentDetail',
+    component: () => import ('../components/MonumentDetailComponent.vue'),
+    props: route => ({monument: getMonumentById(route.params.id) })
   }
 ];
 
