@@ -39,7 +39,6 @@ export default {
         this.errors = [];
 
         if (this.password !== this.confirmPassword) {
-            console.log("passwords do not match"); //TODO: verwijderen
         this.errors.push("Passwords do not match");
         }
 
