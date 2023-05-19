@@ -4,6 +4,7 @@ import Login from '../views/LoginView.vue';
 import Register from '../views/RegisterView.vue';
 import MonumentDetail from '../components/MonumentDetail.vue';
 import NewMonument from '../views/AddMonumentView.vue';
+import UpdateMonument from '../views/UpdateMonumentView.vue';
 import { getMonumentById } from '../api/monumentApi.js'
 
 const routes = [
@@ -26,6 +27,11 @@ const routes = [
     path: '/new-monument',
     name: 'NewMonument',
     component: NewMonument
+  },
+  {
+    path: '/update-monument',
+    name: 'UpdateMonument',
+    component: UpdateMonument
   },
   {
     path: '/monument/:id',

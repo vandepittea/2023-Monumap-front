@@ -14,30 +14,30 @@
 import MonumentForm from "@/components/MonumentForm.vue";
 
 export default {
-  name: "AddMonumentView",
+  name: "UpdateMonumentView",
   data() {
     return {
       formData: {
-        name: { en: "", nl: "" },
-        description: { en: "", nl: "" },
-        historicalSignificance: { en: "", nl: "" },
-        type: [],
-        yearOfConstruction: 0,
-        monumentDesigner: { en: "", nl: "" },
-        accessibility: { en: [], nl: [] },
-        materialsUsed: { en: "", nl: "" },
-        weight: 0,
-        costOfConstruction: 0,
+        name: { en: "test", nl: "test" },
+        description: { en: "test", nl: "test" },
+        historicalSignificance: { en: "test", nl: "test" },
+        type: [ "option1", "option2" ],
+        yearOfConstruction: 2012,
+        monumentDesigner: { en: "test", nl: "test" },
+        accessibility: ["none", "partial"],
+        materialsUsed: { en: ["test", "test2"], nl: ["test", "test2"] },
+        weight: 112,
+        costOfConstruction: 34567,
         location: {
-          latitude: 0,
-          longitude: 0,
-          street: "",
-          number: 0,
-          city: ""
+          latitude: 90,
+          longitude: -90,
+          street: "test",
+          number: 3,
+          city: "test"
         },
-        dimensions: { height: 0, width: 0, depth: 0 },
-        images: { url: "", caption: "" },
-        audiovisualSource: { title: "", url: "", type: "" }
+        dimensions: { height: 1, width: 2, depth: 3 },
+        images: { url: [ "test.com", "test2.com" ], caption: [ "test", "test2" ] },
+        audiovisualSource: { title: "test", url: "test.com", type: "audio" }
       },
       errors: []
     };
