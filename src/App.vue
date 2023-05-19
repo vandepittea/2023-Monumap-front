@@ -1,6 +1,7 @@
 <script setup>
   import { useStore } from 'vuex';
   import { RouterLink, RouterView } from 'vue-router';
+  import Home from './views/HomeView.vue';
 
   const store = useStore();
   const loggedIn = store.state.loggedIn;
@@ -27,7 +28,6 @@
 <script>
 import EnglishFlag from './assets/images/EnglishFlag.png';
 import DutchFlag from './assets/images/DutchFlag.png';
-import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -47,9 +47,12 @@ export default {
       this.languageImage = this.languageImages[this.currentLanguage];
     },
     logout() {
-      this.logout();
-    },
-    ...mapActions(['logout'])
+      this.$store.commit('setLoggedIn', false);
+      this.$router.push({ name: 'Home' });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+   }
   }
 };
 </script>
