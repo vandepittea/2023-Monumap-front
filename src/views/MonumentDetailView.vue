@@ -109,6 +109,9 @@
       deleteMonument() {
         // Delete monument logic...
       },
+      updateMonument() {
+        this.$router.push({ name: 'UpdateMonumentView', params: { id: this.monument.id, formData: this.monument } });
+      }
     },
   };
   </script>

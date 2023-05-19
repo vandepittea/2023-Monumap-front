@@ -29,9 +29,10 @@ const routes = [
     component: NewMonument
   },
   {
-    path: '/update-monument',
+    path: '/update-monument/:id',
     name: 'UpdateMonument',
-    component: UpdateMonument
+    component: () => UpdateMonument,
+    props: route => ({formData: getMonumentById(route.params.id) })
   },
   {
     path: '/monument/:id',

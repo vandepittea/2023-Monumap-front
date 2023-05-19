@@ -15,7 +15,13 @@ import MonumentForm from "@/components/MonumentForm.vue";
 
 export default {
   name: "UpdateMonumentView",
-  data() {
+  props: {
+      formData: {
+        type: Object,
+        required: true,
+      },
+    },
+  /*data() {
     return {
       formData: {
         name: { en: "test", nl: "test" },
@@ -41,7 +47,7 @@ export default {
       },
       errors: []
     };
-  },
+  },*/
   computed: {
     hasErrors() {
       return this.errors.length > 0;
