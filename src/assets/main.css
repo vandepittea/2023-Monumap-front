@@ -77,11 +77,13 @@ label {
 }
 
 input,
-select {
+select,
+textarea {
   padding: 0.5rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 1rem;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 input[type="submit"] {
