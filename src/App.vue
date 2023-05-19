@@ -14,7 +14,7 @@
         <li v-if="!loggedIn"><router-link to="/login">Login</router-link></li>
         <li v-if="!loggedIn"><router-link to="/register">Register</router-link></li>
         <li v-if="loggedIn"><router-link to="/new-monument">Add Monument</router-link></li>
-        <li v-if="loggedIn"><router-link to="/logout">Logout</router-link></li>
+        <li v-if="loggedIn"><button @click="logout">Logout</button></li>
       </ul>
     </nav>
     <img :src="languageImage" @click="toggleLanguage" id="languageImage" alt="Language switcher" />
@@ -27,6 +27,7 @@
 <script>
 import EnglishFlag from './assets/images/EnglishFlag.png';
 import DutchFlag from './assets/images/DutchFlag.png';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
@@ -44,7 +45,11 @@ export default {
     toggleLanguage() {
       this.currentLanguage = this.currentLanguage === 'en' ? 'nl' : 'en';
       this.languageImage = this.languageImages[this.currentLanguage];
-    }
+    },
+    logout() {
+      this.logout();
+    },
+    ...mapActions(['logout'])
   }
 };
 </script>

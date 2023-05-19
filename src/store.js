@@ -11,6 +11,11 @@ const store = createStore({
       state.loggedIn = value;
     }
   },
+  actions: {
+    logout({ commit }) {
+      commit('setLoggedIn', false);
+    }
+  }
 });
 
 export default store;

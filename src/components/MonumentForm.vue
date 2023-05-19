@@ -157,9 +157,9 @@
         <legend>AudiovisualSource:</legend>
         <div class="language-field">
           <div class="language-label">Title:</div>
-          <input type="number" v-model="formData.audiovisualSource.title" required>
+          <input type="text" v-model="formData.audiovisualSource.title" required>
           <div class="language-label">Url:</div>
-          <input type="number" v-model="formData.audiovisualSource.url" required>
+          <input type="text" v-model="formData.audiovisualSource.url" required>
         </div>
         <div class="language-field">
           <label class="language-label" for="audio-video-type">Type:</label>
@@ -178,10 +178,18 @@
   <script>
   export default {
     mounted() {
-      this.formData.materialsUsed.en = this.formData.materialsUsed.en.join("\n");
-      this.formData.materialsUsed.nl = this.formData.materialsUsed.nl.join("\n");
-      this.formData.images.url = this.formData.images.url.join("\n");
-      this.formData.images.caption = this.formData.images.caption.join("\n");
+      if (this.formData.materialsUsed.en.length > 0) {
+        this.formData.materialsUsed.en = this.formData.materialsUsed.en.join("\n");
+      }
+      if (this.formData.materialsUsed.nl.length > 0) {
+        this.formData.materialsUsed.nl = this.formData.materialsUsed.nl.join("\n");
+      }
+      if (this.formData.images.url.length > 0) {
+        this.formData.images.url = this.formData.images.url.join("\n");
+      }
+      if (this.formData.images.caption.length > 0) {
+        this.formData.images.caption = this.formData.images.caption.join("\n");
+      }
     },
     props: {
       formData: {
