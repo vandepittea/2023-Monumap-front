@@ -53,9 +53,11 @@ export default {
       return `${height} x ${width} x ${depth}`;
     },
     deleteMonument() {
-      // Delete monument logic...
+      // TODO: Delete monument logic...
+     // this.$router.push({ name: 'deleteMonument', params: { id: this.monument.id} });
     },
     updateMonument() {
+      //TODO: hier token meegeven of in de updateMonument zelf
       this.$router.push({ name: 'UpdateMonument', params: { id: this.monument.id, formData: this.monument } });
     },
     getSlideshowImages() {

@@ -8,7 +8,7 @@
       <div class="form-group">
         <label for="type">Select the type:</label>
         <select id="type" name="type" v-model="filter.type">
-          <option value="">Please choose an option</option>
+          <option value="">Please choose an option</option> //TODO: Hier nog options krijgen via API of zelf toevoegen?
           <option value="option1">Option 1</option>
           <option value="option2">Option 2</option>
           <option value="option3">Option 3</option>
@@ -35,6 +35,8 @@
   </template>
   
   <script>
+  import MonumnetService from '../services/MonumentService';
+
   export default {
     name: 'MonumentFilter',
     data() {
@@ -46,23 +48,26 @@
           monumentDesigner: '',
           costToConstruct: '',
         },
+        "service": new MonumnetService(), //TODO: is dit oke hier? 
       };
     },
     methods: {
-      filterMonuments() {
-        // TODO: Implement the filtering logic or call the API endpoint
-        // You can access the filter values using `this.filter`
-  
+      async filterMonuments() {
+          
+
+
+        // TODO: Implement the filtering logic or call the API endpoint V
+        // You can access the filter values using `this.filter` V
         // Example code to log the filter values
         console.log('Filter:', this.filter);
   
         // TODO: Update the parent component's `monuments` data with the filtered results
         // You can emit an event or call a method in the parent component to achieve this
+        this.$emit('filteredMonuments', this.filter); //TODO: werkt dit?
       },
     },
   };
   </script>
-  
   <style>
 .filter-form {
   display: flex;

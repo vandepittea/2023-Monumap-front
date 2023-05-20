@@ -21,13 +21,16 @@
 </template>
 
 <script>
+import CardService from "../services/CardService";
+
 export default {    
     name: "LoginView",
     data() {
     return {
         username: "",
         password: "",
-        errors: []
+        errors: [],
+        "service": new CardService(), 
     };
     },
     methods: {
@@ -36,24 +39,14 @@ export default {
 
         if (this.errors.length === 0) {
         try {
-            const response = await fetch("http://localhost:3000/login", { //TODO: veranderen naar jusite!
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: this.username,
-                password: this.password
-            })
-            });
-
-            if (response.ok) {
+            const response = await this.service.login(this.username, this.password);
+            if (response.ok) { //TODO: controleren of dit werkt
             this.$router.push("/");
             } else {
             this.errors.push("Invalid login");
             }
         } catch (error) {
-            this.errors.push("Failed to login"); //TODO: is deze boodschap juist? 
+            this.errors.push("Failed to login"); 
         }
         }
     }

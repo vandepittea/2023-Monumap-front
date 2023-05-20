@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import CardService from "../services/CardService";
+
 export default {    
     name: "RegisterView",
     data() {
@@ -31,7 +33,8 @@ export default {
         username: "",
         password: "",
         confirmPassword: "",
-        errors: []
+        errors: [],
+        "service": new CardService(), 
     };
     },
     methods: {
@@ -44,18 +47,9 @@ export default {
 
         if (this.errors.length === 0) {
         try {
-            const response = await fetch("http://localhost:3000/register", { //TODO: veranderen naar jusite!
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username: this.username,
-                password: this.password
-            })
-            });
+            const response = await this.service.register(this.username, this.password);
 
-            if (response.ok) {
+            if (response.ok) { //TODO: controleren of dit werkt
             this.$router.push("/login");
             } else {
             this.errors.push("Could not register");

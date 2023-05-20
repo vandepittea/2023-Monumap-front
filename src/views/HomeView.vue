@@ -12,6 +12,7 @@
 <script>
 import MonumentList from '../components/MonumentList.vue';
 import MonumentFilter from '../components/MonumentFilter.vue';
+import MonumnetService from '../services/MonumentService';
 
 export default {
   name: 'HomeView',
@@ -50,6 +51,7 @@ export default {
         monumentDesigner: '',
         costToConstruct: '',
       },
+      "service": new MonumnetService(), 
     };
   },
   computed: {
@@ -65,13 +67,23 @@ export default {
     viewMonumentDetail(monument) {
       this.$router.push({ name: 'MonumentDetail', params: { id: monument.id, monument: monument } });
     },
-    filterMonuments() {
-      // Apply filtering logic or call the API endpoint here
-      console.log('Filter:', this.filter);
+
+    async filterMonuments(filterMonument) { //TODO: werkt dit?
+      filteredMonuments  = await this.MonumnetService
+                                  .getMonuments(filterMonument.name, 
+                                                filterMonument.type, 
+                                                filterMonument.yearOfConstruction, 
+                                                filterMonument.monumentDesigner, 
+                                                filterMonument.costToConstruct);
+                                                //TODO: pages hier ook nog toevoegen?
+
+       // Apply filtering logic or call the API endpoint here
+       console.log('Filter:', this.filter);
       // TODO: Update the filteredMonuments computed property based on the filter values
-    },
+      this.filteredMonuments = filteredMonuments;
   },
-  created() {
+  },
+  async created() {
     // Fetch the list of monuments from the server and assign it to the `monuments` data property.
     // TODO: Replace with the actual API endpoint URL
     // fetch('/api/monuments')
@@ -80,6 +92,8 @@ export default {
     //     this.monuments = data;
     //   })
     //   .catch(error => console.error(error));
+    monuments  = await this.MonumnetService.getMonuments
+    
   },
 };
 </script>
