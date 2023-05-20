@@ -45,6 +45,10 @@ export default {
         this.errors.push("Passwords do not match");
         }
 
+        if (this.password.length < 6) {
+            this.errors.push("Password should have a minimum length of 6 characters");
+        }
+
         if (this.errors.length === 0) {
         try {
             const response = await this.service.register(this.username, this.password);

@@ -33,17 +33,17 @@ export default {
   name: 'App',
   data() {
     return {
-      currentLanguage: 'en',
+      currentLanguage: 'English',
       languageImages: {
-        en: EnglishFlag,
-        nl: DutchFlag,
+        English: EnglishFlag,
+        Dutsh: DutchFlag,
       },
       languageImage: EnglishFlag
     };
   },
   methods: {
     toggleLanguage() {
-      this.currentLanguage = this.currentLanguage === 'en' ? 'nl' : 'en';
+      this.currentLanguage = this.currentLanguage === 'English' ? 'Dutsh' : 'English';
       this.languageImage = this.languageImages[this.currentLanguage];
       localStorage.setItem('language', this.currentLanguage);
     },
@@ -54,6 +54,9 @@ export default {
         window.location.reload();
       }, 1000);
    }
+  },
+  created() {
+    localStorage.setItem('language', this.currentLanguage);
   }
 };
 </script>
