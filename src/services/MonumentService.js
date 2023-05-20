@@ -41,16 +41,23 @@ export default class MonumnetService{
             queryParams.push(`language=${encodeURIComponent(language)}`);
         }
       
-        let fullUrl = url;
-        if (queryParams.length > 0) {
-          fullUrl += `?${queryParams.join('&')}`;
-        }
-        fullUrl += `&page=${this.page}`;
+        let fullUrl = url + '?';
+
+        fullUrl += `page=${this.page}`;
         fullUrl += `&per_page=${this.perPage}`;
         fullUrl += `&language=${storedLanguage}`;
+
+        if (queryParams.length > 0) {
+          fullUrl += `${queryParams.join('&')}`;
+        }
+      
+
+        console.log(fullUrl);
       
         const response = await fetch(fullUrl);
+        console.log(response);
         const data = await response.json();
+        console.log(data);
         return data;
     }
     

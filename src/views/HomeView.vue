@@ -57,10 +57,11 @@ export default {
   computed: {
     filteredMonuments() {
       // Apply filtering logic based on the filter object
-      return this.monuments.filter((monument) => {
-        // Example filtering condition: filter by name
-        return monument.name.toLowerCase().includes(this.filter.name.toLowerCase());
-      });
+      //TODO: hier nog juiste monumenten ophalen
+      // return this.monuments.filter((monument) => {
+      //   // Example filtering condition: filter by name
+      //   return monument.name.toLowerCase().includes(this.filter.name.toLowerCase());
+      // });
     },
   },
   methods: {
@@ -69,6 +70,7 @@ export default {
     },
 
     async filterMonuments(filterMonument) { //TODO: werkt dit?
+      console.log("in filtere Monuments")
       filteredMonuments  = await this.MonumnetService
                                   .getAllMonuments(filterMonument.name, 
                                                   filterMonument.type, 
@@ -76,6 +78,7 @@ export default {
                                                   filterMonument.monumentDesigner, 
                                                   filterMonument.costToConstruct);
                                                   //TODO: pages hier ook nog toevoegen?
+        console.log(filterMonuments)
 
        // Apply filtering logic or call the API endpoint here
        //console.log('Filter:', this.filter);
@@ -84,7 +87,9 @@ export default {
   },
   },
   async created() {
-    monuments  = await this.service.getAllMonuments();
+    console.log("in created")
+    this.monuments  = await this.service.getAllMonuments();
+    console.log("after creazted")
   },
 };
 </script>
