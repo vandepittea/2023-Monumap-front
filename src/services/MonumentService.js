@@ -1,4 +1,6 @@
-const url = "http://monuments.local/api/monuments/";
+const url = "http://monuments.local/api/monuments";
+
+const storedLanguage = localStorage.getItem('language');
 
 export default class MonumnetService{
     constructor(){
@@ -16,24 +18,50 @@ export default class MonumnetService{
         return this;
     }
 
-    async getAllMonuments(){
-        let fullUrl = url;
-        fullUrl += "?page=" + this.page;
-        fullUrl += "&per_page=" + this.perPage;
+    async getAllMonuments(name, type, yearOfConstruction, monumentDesigner, costToConstruct, language) {
+        let queryParams = [];
+      
+        if (name) {
+          queryParams.push(`name=${encodeURIComponent(name)}`);
+        }
+        if (type) {
+          queryParams.push(`type=${encodeURIComponent(type)}`);
+        }
+        if (yearOfConstruction) {
+          queryParams.push(`yearOfConstruction=${encodeURIComponent(yearOfConstruction)}`);
+        }
+        if (monumentDesigner) {
+          queryParams.push(`monumentDesigner=${encodeURIComponent(monumentDesigner)}`);
+        }
+        if (costToConstruct) {
+          queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`);
+        }
 
+        if (language){
+            queryParams.push(`language=${encodeURIComponent(language)}`);
+        }
+      
+        let fullUrl = url;
+        if (queryParams.length > 0) {
+          fullUrl += `?${queryParams.join('&')}`;
+        }
+        fullUrl += `&page=${this.page}`;
+        fullUrl += `&per_page=${this.perPage}`;
+        fullUrl += `&language=${storedLanguage}`;
+      
         const response = await fetch(fullUrl);
         const data = await response.json();
-        return data //TODO: hier controleren of data corect wordt weergegeven, daaarna nog        
-    }
-
+        return data;
+      }
+      
     async getMonumentById(id){
-        const response = await fetch(url + id);
+        const response = await fetch(url + "/" + id); //TODO: hier ook lanugage meegeven??
         const data = await response.json();
         return data; //TODO: hier controleren of data corect wordt weergegeven
     }
 
     async register(username, password){
-        const response = await fetch(url + "register", {
+        const response = await fetch(url + "/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -45,7 +73,7 @@ export default class MonumnetService{
     }
 
     async login(username, password){
-        const response = await fetch(url + "login", {
+        const response = await fetch(url + "/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -70,7 +98,7 @@ export default class MonumnetService{
     }
  
     async updateMonument(id, monumentData, token) {
-        const response = await fetch(url + id, {
+        const response = await fetch(url + "/" + id, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -83,7 +111,7 @@ export default class MonumnetService{
       }
       
       async deleteMonument(id, token) {
-        const response = await fetch(url + id, {
+        const response = await fetch(url + "/" + id, {
           method: 'DELETE',
           headers: {
             Authorization: `Bearer ${token}`,

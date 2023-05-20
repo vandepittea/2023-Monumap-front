@@ -70,12 +70,12 @@ export default {
 
     async filterMonuments(filterMonument) { //TODO: werkt dit?
       filteredMonuments  = await this.MonumnetService
-                                  .getMonuments(filterMonument.name, 
-                                                filterMonument.type, 
-                                                filterMonument.yearOfConstruction, 
-                                                filterMonument.monumentDesigner, 
-                                                filterMonument.costToConstruct);
-                                                //TODO: pages hier ook nog toevoegen?
+                                  .getAllMonuments(filterMonument.name, 
+                                                  filterMonument.type, 
+                                                  filterMonument.yearOfConstruction, 
+                                                  filterMonument.monumentDesigner, 
+                                                  filterMonument.costToConstruct);
+                                                  //TODO: pages hier ook nog toevoegen?
 
        // Apply filtering logic or call the API endpoint here
        //console.log('Filter:', this.filter);
@@ -84,7 +84,7 @@ export default {
   },
   },
   async created() {
-    monuments  = await this.MonumnetService.getMonuments
+    monuments  = await this.service.getAllMonuments();
   },
 };
 </script>

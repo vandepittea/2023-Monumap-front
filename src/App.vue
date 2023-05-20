@@ -1,14 +1,10 @@
 <script setup>
   import { useStore } from 'vuex';
   import { RouterLink, RouterView } from 'vue-router';
-  import { computed } from 'vue'; 
+  import Home from './views/HomeView.vue';
 
   const store = useStore();
   const loggedIn = store.state.loggedIn;
-  const currentLanguage = computed({
-    get: () => store.state.currentLanguage,
-    set: (value) => store.commit('setCurrentLanguage', value)
-  });
 </script>
 
 <template>
@@ -35,14 +31,21 @@ import DutchFlag from './assets/images/DutchFlag.png';
 
 export default {
   name: 'App',
-  computed: {
-    languageImage() {
-      return this.currentLanguage === 'English' ? EnglishFlag : DutchFlag;
-    }
+  data() {
+    return {
+      currentLanguage: 'en',
+      languageImages: {
+        en: EnglishFlag,
+        nl: DutchFlag,
+      },
+      languageImage: EnglishFlag
+    };
   },
   methods: {
     toggleLanguage() {
-      this.currentLanguage = this.currentLanguage === 'English' ? 'Dutch' : 'English';
+      this.currentLanguage = this.currentLanguage === 'en' ? 'nl' : 'en';
+      this.languageImage = this.languageImages[this.currentLanguage];
+      localStorage.setItem('language', this.currentLanguage);
     },
     logout() {
       this.$store.commit('setLoggedIn', false);
@@ -56,11 +59,11 @@ export default {
 </script>
 
 <style>
-#languageImage {
-  width: 4rem;
-  height: 4rem;
-  cursor: pointer;
-  margin-left: 5rem;
-  margin-top: 1.5rem;
-}
+    #languageImage {
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    margin-left: 5rem;
+    margin-top: 1.5rem;
+  }
 </style>
