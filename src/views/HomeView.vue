@@ -78,22 +78,13 @@ export default {
                                                 //TODO: pages hier ook nog toevoegen?
 
        // Apply filtering logic or call the API endpoint here
-       console.log('Filter:', this.filter);
+       //console.log('Filter:', this.filter);
       // TODO: Update the filteredMonuments computed property based on the filter values
       this.filteredMonuments = filteredMonuments;
   },
   },
   async created() {
-    // Fetch the list of monuments from the server and assign it to the `monuments` data property.
-    // TODO: Replace with the actual API endpoint URL
-    // fetch('/api/monuments')
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.monuments = data;
-    //   })
-    //   .catch(error => console.error(error));
     monuments  = await this.MonumnetService.getMonuments
-    
   },
 };
 </script>

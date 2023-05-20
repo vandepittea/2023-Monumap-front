@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import CardService from "../services/CardService";
+import MonumnetService from '../services/MonumentService';
 
 export default {    
     name: "LoginView",
@@ -30,7 +30,7 @@ export default {
         username: "",
         password: "",
         errors: [],
-        "service": new CardService(), 
+        "service": new MonumnetService(), 
     };
     },
     methods: {
