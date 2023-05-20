@@ -21,11 +21,11 @@ export default {
         name: { en: "", nl: "" },
         description: { en: "", nl: "" },
         historicalSignificance: { en: "", nl: "" },
-        type: [],
+        type: [ "", "" ],
         yearOfConstruction: 0,
         monumentDesigner: { en: "", nl: "" },
-        accessibility: { en: [], nl: [] },
-        materialsUsed: { en: "", nl: "" },
+        accessibility: ["", ""],
+        materialsUsed: { en: ["", ""], nl: ["", ""] },
         weight: 0,
         costOfConstruction: 0,
         location: {
@@ -36,7 +36,7 @@ export default {
           city: ""
         },
         dimensions: { height: 0, width: 0, depth: 0 },
-        images: { url: "", caption: "" },
+        images: { url: [ "", "" ], caption: [ "", "" ] },
         audiovisualSource: { title: "", url: "", type: "" }
       },
       errors: []

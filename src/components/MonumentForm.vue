@@ -178,22 +178,15 @@
   <script>
   export default {
     mounted() {
-      if (this.formData.materialsUsed.en.length > 0) {
-        this.formData.materialsUsed.en = this.formData.materialsUsed.en.join("\n");
-      }
-      if (this.formData.materialsUsed.nl.length > 0) {
-        this.formData.materialsUsed.nl = this.formData.materialsUsed.nl.join("\n");
-      }
-      if (this.formData.images.url.length > 0) {
-        this.formData.images.url = this.formData.images.url.join("\n");
-      }
-      if (this.formData.images.caption.length > 0) {
-        this.formData.images.caption = this.formData.images.caption.join("\n");
-      }
+      this.formData.materialsUsed.en = this.formData.materialsUsed.en.join("\n");
+      this.formData.materialsUsed.nl = this.formData.materialsUsed.nl.join("\n");
+      this.formData.images.url = this.formData.images.url.join("\n");
+      this.formData.images.caption = this.formData.images.caption.join("\n");
     },
     props: {
       formData: {
-        type: Object
+        type: Object,
+        required: true
       }
     },
     computed: {

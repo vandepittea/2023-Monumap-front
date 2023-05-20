@@ -6,11 +6,11 @@
         <li v-for="error in errors" :key="error">{{ error }}</li>
       </ul>
     </div>
-    <MonumentForm :formData="formData" @formSubmitted="formSubmitted" />
+    <MonumentForm :formData="this.formData" @formSubmitted="this.formSubmitted" />
   </div>
 </template>
 
-<script lang="js">
+<script>
 import MonumentForm from "@/components/MonumentForm.vue";
 
 export default {
@@ -18,36 +18,14 @@ export default {
   props: {
       formData: {
         type: Object,
-        required: true,
+        required: true
       },
     },
-  /*data() {
+  data() {
     return {
-      formData: {
-        name: { en: "test", nl: "test" },
-        description: { en: "test", nl: "test" },
-        historicalSignificance: { en: "test", nl: "test" },
-        type: [ "option1", "option2" ],
-        yearOfConstruction: 2012,
-        monumentDesigner: { en: "test", nl: "test" },
-        accessibility: ["none", "partial"],
-        materialsUsed: { en: ["test", "test2"], nl: ["test", "test2"] },
-        weight: 112,
-        costOfConstruction: 34567,
-        location: {
-          latitude: 90,
-          longitude: -90,
-          street: "test",
-          number: 3,
-          city: "test"
-        },
-        dimensions: { height: 1, width: 2, depth: 3 },
-        images: { url: [ "test.com", "test2.com" ], caption: [ "test", "test2" ] },
-        audiovisualSource: { title: "test", url: "test.com", type: "audio" }
-      },
       errors: []
     };
-  },*/
+  },
   computed: {
     hasErrors() {
       return this.errors.length > 0;
