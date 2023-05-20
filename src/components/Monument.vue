@@ -1,7 +1,8 @@
 <template>
     <div class="monumentCard">
       <img :src="monument.images[0].url" />
-      <p>{{ monument.images[0].url }}</p> //TODO: hier zal naam moeten komen
+      <p>{{ monument.monument_language[0].name}}</p> 
+      <!-- //TODO: hier nog kijken of Nederlands of Engels moet genomen worden  -->
     </div>
   </template>
   
@@ -15,9 +16,6 @@
       },
     },
   };
-
-
- 
   </script>
   
   <style>

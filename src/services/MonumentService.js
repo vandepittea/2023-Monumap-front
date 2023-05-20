@@ -22,35 +22,38 @@ export default class MonumnetService{
         let queryParams = [];
       
         if (name) {
-          queryParams.push(`name=${encodeURIComponent(name)}`);
+          queryParams.push(`name=${encodeURIComponent(name)}`); //TODO: werkt nog niet, moet nog gecontroleerd worden
         }
         if (type) {
           queryParams.push(`type=${encodeURIComponent(type)}`);
         }
         if (yearOfConstruction) {
-          queryParams.push(`yearOfConstruction=${encodeURIComponent(yearOfConstruction)}`);
+          queryParams.push(`year=${encodeURIComponent(yearOfConstruction)}`);
         }
         if (monumentDesigner) {
-          queryParams.push(`monumentDesigner=${encodeURIComponent(monumentDesigner)}`);
+          queryParams.push(`designer=${encodeURIComponent(monumentDesigner)}`);
         }
         if (costToConstruct) {
-          queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`);
+          queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`); //todo: deze parameter is niet correct, moet nog gecontroleerd zijn
         }
 
         if (language){
-            queryParams.push(`language=${encodeURIComponent(language)}`);
+            queryParams.push(`language=${encodeURIComponent(language)}`); //TODO: deze parameter is niet correct, moet nog gecontroleerd zijn
         }
       
         let fullUrl = url + '?';
 
         fullUrl += `page=${this.page}`;
         fullUrl += `&per_page=${this.perPage}`;
-        fullUrl += `&language=${storedLanguage}`;
+        fullUrl += `&language=${storedLanguage}&`;
+
 
         if (queryParams.length > 0) {
+            console.log(queryParams.length);
           fullUrl += `${queryParams.join('&')}`;
         }
         
+
         const response = await fetch(fullUrl);
         const json = await response.json();
         const data = json.data;
@@ -60,6 +63,8 @@ export default class MonumnetService{
     async getMonumentById(id){
         const response = await fetch(url + "/" + id); //TODO: hier ook lanugage meegeven??
         const data = await response.json();
+        console.log("---------------------------------------")
+        console.log(data);
         return data; //TODO: hier controleren of data corect wordt weergegeven
     }
    

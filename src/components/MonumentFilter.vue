@@ -58,10 +58,21 @@
         // You can access the filter values using `this.filter` V
         // Example code to log the filter values
         console.log('Filter:', this.filter);
+
+        const filteredMonuments  = await this.service
+                                  .getAllMonuments(this.filter.name, 
+                                                  this.filter.type, 
+                                                  this.filter.yearOfConstruction, 
+                                                  this.filter.monumentDesigner, 
+                                                  this.filter.costToConstruct);
+                                                  //TODO: pages hier ook nog toevoegen?
+        console.log(filteredMonuments)
   
         // TODO: Update the parent component's `monuments` data with the filtered results
         // You can emit an event or call a method in the parent component to achieve this
-        this.$emit('filteredMonuments', this.filter); //TODO: werkt dit?
+        //this.$emit('filteredMonuments', this.filter); //TODO: werkt dit?
+        this.$emit('filterMonuments', filteredMonuments);
+
       },
     },
   };

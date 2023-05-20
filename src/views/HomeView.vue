@@ -57,42 +57,28 @@ export default {
     };
   },
   computed: {
-    filteredMonuments() {
-      if (this.filteredMonuments.length === 0) {
-        return this.monuments;
-      } else {
-        return this.filteredMonuments;
-      }
-    },
+    // filteredMonuments() {
+    //   console.log(this.filteredMonuments.length)
+    //   if (this.filteredMonuments.length === 0) {
+    //     return this.monuments;
+    //   } else {
+    //     return this.filteredMonuments;
+    //   }
+    // },
   },
   methods: {
     viewMonumentDetail(monument) {
       this.$router.push({ name: 'MonumentDetail', params: { id: monument.id, monument: monument } });
     },
 
-    async filterMonuments(filterMonument) { //TODO: werkt dit?
-      console.log("in filtere Monuments")
-      filteredMonuments  = await this.MonumnetService
-                                  .getAllMonuments(filterMonument.name, 
-                                                  filterMonument.type, 
-                                                  filterMonument.yearOfConstruction, 
-                                                  filterMonument.monumentDesigner, 
-                                                  filterMonument.costToConstruct);
-                                                  //TODO: pages hier ook nog toevoegen?
-        console.log(filterMonuments)
-
-       // Apply filtering logic or call the API endpoint here
-       //console.log('Filter:', this.filter);
-      // TODO: Update the filteredMonuments computed property based on the filter values
+    filterMonuments(filteredMonuments) {
+      //TODO: controleren als filterMonuments leeg is dan moet je de monuments tonen
       this.filteredMonuments = filteredMonuments;
-  },
+      console.log(this.filteredMonuments)
+    },
   },
   async created() {
-    console.log("in created")
     this.monuments  = await this.service.getAllMonuments();
-    console.log("-------")
-    console.log(this.monuments)
-    console.log("after creazted")
   },
 };
 </script>

@@ -22,6 +22,7 @@
         this.$emit('viewMonumentDetail', monument);
       },
     },
+
   };
   </script>
   

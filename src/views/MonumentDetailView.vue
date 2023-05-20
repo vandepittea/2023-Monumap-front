@@ -24,10 +24,12 @@ export default {
       return this.$store.state.loggedIn;
     },
     currentLanguage() {
-      return this.$store.state.currentLanguage;
+      return this.$store.state.currentLanguage; //TODO: hier localStorge.getItem('language') gebruiken
     },
     languageValue() {
       return computed(() => {
+        console.log(this.monument);
+        console.log("langaugvalue in detail view")
         const languageData = this.monument.monuments_language.find(
           data => data.language === this.currentLanguage
         );
