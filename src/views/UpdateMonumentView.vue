@@ -12,6 +12,7 @@
 
 <script>
 import MonumentForm from "@/components/MonumentForm.vue";
+import MonumentService from "../services/MonumentService";
 
 export default {
   name: "UpdateMonumentView",
@@ -23,7 +24,8 @@ export default {
     },
   data() {
     return {
-      errors: []
+      errors: [],
+      "service": new MonumentService(),
     };
   },
   computed: {
@@ -42,18 +44,18 @@ export default {
       if (!this.formData.description.en || !this.formData.description.nl) {
         this.errors.push("Please enter the description in both English and Dutch.");
       }
-      if (!this.formData.type.en || !this.formData.type.nl) {
-        this.errors.push("Please choose the type in both English and Dutch.");
-      }
+      // if (!this.formData.type.en || !this.formData.type.nl) { //TODO: nog implementeren
+      //   this.errors.push("Please choose the type in both English and Dutch.");
+      // }
       if (!this.formData.yearOfConstruction) {
         this.errors.push("Please enter the year of construction.");
       }
       if (!this.formData.monumentDesigner.en || !this.formData.monumentDesigner.nl) {
         this.errors.push("Please enter the monument designer in both English and Dutch.");
       }
-      if (this.formData.accessibility.en.length === 0 || this.formData.accessibility.nl.length === 0) {
+      /*if (this.formData.accessibility.en.length === 0 || this.formData.accessibility.nl.length === 0) { //TODO: terugzetten als beide talen er zijn
         this.errors.push("Please select the accessibility in both English and Dutch.");
-      }
+      }*/
       if (!this.formData.materialsUsed.en || !this.formData.materialsUsed.nl) {
         this.errors.push("Please enter the materials used in both English and Dutch.");
       }
@@ -65,8 +67,15 @@ export default {
       }
 
       if (this.errors.length === 0) {
-        // Form is valid, submit data to the server or perform necessary actions
-        console.log("Form submitted:", this.formData);
+        //TODO: hier logica van api 
+        this.service.updateMonument(this.formData).then(response => {
+          if (response.ok) {
+            this.$router.push("/"); //TODO: moet dit hier / of Home zijn
+          } else {
+            this.errors.push("Could not update the monument");
+          }
+       }
+        );
       }
     }
   },

@@ -5,7 +5,9 @@ import Register from '../views/RegisterView.vue';
 import MonumentDetail from '../views/MonumentDetailView.vue';
 import NewMonument from '../views/AddMonumentView.vue';
 import UpdateMonument from '../views/UpdateMonumentView.vue';
-import { getMonumentById } from '../api/monumentApi.js'
+import getMonumentById  from '../services/MonumentService';
+//import { getMonumentById } from '../api/monumentApi.js' TODO: nog wegdoen!
+
 
 const routes = [
   {
@@ -32,13 +34,13 @@ const routes = [
     path: '/update-monument/:id',
     name: 'UpdateMonument',
     component: () => UpdateMonument,
-    props: route => ({formData: getMonumentById(route.params.id) })
+    props: route => ({formData: getMonumentById(route.params.id) }) //TODO: werkt dit? 
   },
   {
     path: '/monument/:id',
     name: 'MonumentDetail',
     component: () => MonumentDetail,
-    props: route => ({monument: getMonumentById(route.params.id) })
+    props: route => ({monument: getMonumentById(route.params.id) }) //TOOD: werkt dit? 
   }
 ];
 

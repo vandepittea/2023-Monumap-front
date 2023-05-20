@@ -1,5 +1,6 @@
 <script>
 import Slideshow from "../components/Slideshow.vue";
+import MonumentService from "../services/MonumentService";
 import { computed } from 'vue';
 
 export default {
@@ -12,6 +13,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      "service": new MonumentService(), 
+    };
   },
   computed: {
     loggedIn() {
@@ -53,8 +59,14 @@ export default {
       return `${height} x ${width} x ${depth}`;
     },
     deleteMonument() {
-      // TODO: Delete monument logic...
-     // this.$router.push({ name: 'deleteMonument', params: { id: this.monument.id} });
+      this.service.deleteMonument(this.monument.id) //TODO: controleren of dit werkt
+        .then(() => {
+        this.$router.push({ name: 'Home' }); // TODO: controleren of dit werkt!
+      })
+      .catch(error => {
+        console.error('Error deleting monument:', error);
+      });
+        
     },
     updateMonument() {
       //TODO: hier token meegeven of in de updateMonument zelf

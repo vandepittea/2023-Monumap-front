@@ -52,13 +52,14 @@ export default class MonumnetService{
         const response = await fetch(fullUrl);
         const data = await response.json();
         return data;
-      }
-      
+    }
+    
     async getMonumentById(id){
         const response = await fetch(url + "/" + id); //TODO: hier ook lanugage meegeven??
         const data = await response.json();
         return data; //TODO: hier controleren of data corect wordt weergegeven
     }
+   
 
     async register(username, password){
         const response = await fetch(url + "/register", {

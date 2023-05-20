@@ -1,3 +1,4 @@
+//TODO: deze wegdoen???
 //TODO: asycn await maken
 const getMonumentById = (id) => {
     return {

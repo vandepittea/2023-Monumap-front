@@ -12,6 +12,9 @@
 
 <script lang="js">
 import MonumentForm from "@/components/MonumentForm.vue";
+import MonumentService from "../services/MonumentService";
+
+import { computed } from 'vue';
 
 export default {
   name: "AddMonumentView",
@@ -24,7 +27,7 @@ export default {
         type: [ "", "" ],
         yearOfConstruction: 0,
         monumentDesigner: { en: "", nl: "" },
-        accessibility: ["", ""],
+        accessibility:  { en: "", nl: "" },
         materialsUsed: { en: ["", ""], nl: ["", ""] },
         weight: 0,
         costOfConstruction: 0,
@@ -39,7 +42,8 @@ export default {
         images: { url: [ "", "" ], caption: [ "", "" ] },
         audiovisualSource: { title: "", url: "", type: "" }
       },
-      errors: []
+      errors: [],
+      "service": new MonumentService(),
     };
   },
   computed: {
@@ -58,18 +62,18 @@ export default {
       if (!this.formData.description.en || !this.formData.description.nl) {
         this.errors.push("Please enter the description in both English and Dutch.");
       }
-      if (!this.formData.type.en || !this.formData.type.nl) {
+      /*if (!this.formData.type.en || !this.formData.type.nl) {  //TODO: terugzetten als beide talen er zijn
         this.errors.push("Please choose the type in both English and Dutch.");
-      }
+      }*/
       if (!this.formData.yearOfConstruction) {
         this.errors.push("Please enter the year of construction.");
       }
       if (!this.formData.monumentDesigner.en || !this.formData.monumentDesigner.nl) {
         this.errors.push("Please enter the monument designer in both English and Dutch.");
       }
-      if (this.formData.accessibility.en.length === 0 || this.formData.accessibility.nl.length === 0) {
+      /*if (!this.formData.accessibility.en || !this.formData.accessibility.nl) { //TODO: terugzetten als beide talen er zijn
         this.errors.push("Please select the accessibility in both English and Dutch.");
-      }
+      }*/
       if (!this.formData.materialsUsed.en || !this.formData.materialsUsed.nl) {
         this.errors.push("Please enter the materials used in both English and Dutch.");
       }
@@ -81,8 +85,13 @@ export default {
       }
 
       if (this.errors.length === 0) {
-        // Form is valid, submit data to the server or perform necessary actions
-        console.log("Form submitted:", this.formData);
+        this.service.addMonument(this.formData).then(response => {
+          if (response.ok) { //TODO: contrroleren of dit werkt
+            this.$router.push("/"); 
+          } else {
+            this.errors.push("Could not update the monument");
+          }
+        });
       }
     }
   },
