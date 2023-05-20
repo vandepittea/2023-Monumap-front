@@ -53,9 +53,7 @@
     },
     methods: {
       async filterMonuments() {
-          
-
-
+        
         // TODO: Implement the filtering logic or call the API endpoint V
         // You can access the filter values using `this.filter` V
         // Example code to log the filter values

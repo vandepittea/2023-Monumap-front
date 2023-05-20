@@ -1,7 +1,7 @@
 <template>
     <div class="monumentCard">
-      <img :src="monument.images" />
-      <p class="monumentCard-name">{{ monument.name }}</p>
+      <img :src="monument.images[0].url" />
+      <p>{{ monument.images[0].url }}</p> //TODO: hier zal naam moeten komen
     </div>
   </template>
   
@@ -15,6 +15,9 @@
       },
     },
   };
+
+
+ 
   </script>
   
   <style>

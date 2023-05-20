@@ -22,28 +22,30 @@ export default {
   },
   data() {
     return {
-      monuments: [
-        {
-          id: 1,
-          name: 'Eiffel Tower',
-          images: 'https://www.eiffeltoren.info/wp-content/uploads/sites/12/2022/12/eiffel-tower.jpg',
-        },
-        {
-          id: 2,
-          name: 'Statue of Liberty',
-          images: 'https://static.dw.com/image/15861462_605.jpg',
-        },
-        {
-          id: 3,
-          name: 'Taj Mahal',
-          images: 'https://www.reisroutes.be/userfiles/fotos/taj-mahal_8991_xl.jpg',
-        },
-        {
-          id: 4,
-          name: 'Great Wall of China',
-          images: 'https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2023/01/31124623/Great-Wall-Of-China.jpg?tr=w-1200,h-900',
-        },
-      ],
+      // monuments: [
+      //   {
+      //     id: 1,
+      //     name: 'Eiffel Tower',
+      //     images: 'https://www.eiffeltoren.info/wp-content/uploads/sites/12/2022/12/eiffel-tower.jpg',
+      //   },
+      //   {
+      //     id: 2,
+      //     name: 'Statue of Liberty',
+      //     images: 'https://static.dw.com/image/15861462_605.jpg',
+      //   },
+      //   {
+      //     id: 3,
+      //     name: 'Taj Mahal',
+      //     images: 'https://www.reisroutes.be/userfiles/fotos/taj-mahal_8991_xl.jpg',
+      //   },
+      //   {
+      //     id: 4,
+      //     name: 'Great Wall of China',
+      //     images: 'https://images.travelandleisureasia.com/wp-content/uploads/sites/2/2023/01/31124623/Great-Wall-Of-China.jpg?tr=w-1200,h-900',
+      //   },
+      // ],
+        monuments: [],
+        filteredMonuments: [],
       filter: {
         name: '',
         type: '',
@@ -56,12 +58,11 @@ export default {
   },
   computed: {
     filteredMonuments() {
-      // Apply filtering logic based on the filter object
-      //TODO: hier nog juiste monumenten ophalen
-      // return this.monuments.filter((monument) => {
-      //   // Example filtering condition: filter by name
-      //   return monument.name.toLowerCase().includes(this.filter.name.toLowerCase());
-      // });
+      if (this.filteredMonuments.length === 0) {
+        return this.monuments;
+      } else {
+        return this.filteredMonuments;
+      }
     },
   },
   methods: {
@@ -89,6 +90,8 @@ export default {
   async created() {
     console.log("in created")
     this.monuments  = await this.service.getAllMonuments();
+    console.log("-------")
+    console.log(this.monuments)
     console.log("after creazted")
   },
 };

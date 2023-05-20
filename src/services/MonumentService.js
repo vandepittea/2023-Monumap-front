@@ -50,14 +50,10 @@ export default class MonumnetService{
         if (queryParams.length > 0) {
           fullUrl += `${queryParams.join('&')}`;
         }
-      
-
-        console.log(fullUrl);
-      
+        
         const response = await fetch(fullUrl);
-        console.log(response);
-        const data = await response.json();
-        console.log(data);
+        const json = await response.json();
+        const data = json.data;
         return data;
     }
     
