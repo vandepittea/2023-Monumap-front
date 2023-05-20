@@ -70,15 +70,18 @@ export default class MonumnetService{
    
 
     async register(username, password){
+        console.log(username);
+        console.log(password);
+        console.log(JSON.stringify({username, password}));
+        console.log(url + "/register");
         const response = await fetch(url + "/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password}) //TODO: zal dit werken? 
+            body: JSON.stringify({username, password}) 
         });
-        const data = await response.json();
-        return data; //TODO: er is geen response, enkel als er een error is, dus dit opvangen of in server veranderen, status meegeven
+        return response;
     }
 
     async login(username, password){
@@ -87,10 +90,11 @@ export default class MonumnetService{
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password}) //TODO: zal dit werken? 
+            body: JSON.stringify({username, password}) 
+
+            //TODO: hier ergens cookies opvangen?
         });
-        const data = await response.json();
-        return data; //TODO: er is geen response, enkel als er een error is, dus dit opvangen of in server veranderen, status meegeven
+        return response;  
     }
 
     async addMonument(monumentData, token){

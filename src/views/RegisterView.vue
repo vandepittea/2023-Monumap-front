@@ -46,20 +46,22 @@ export default {
         }
 
         if (this.password.length < 6) {
-            this.errors.push("Password should have a minimum length of 6 characters");
-        }
+        this.errors.push("Password should have a minimum length of 6 characters");
+    }
 
         if (this.errors.length === 0) {
         try {
             const response = await this.service.register(this.username, this.password);
+            console.log(response)
 
-            if (response.ok) { //TODO: controleren of dit werkt
-            this.$router.push("/login");
-            } else {
-            this.errors.push("Could not register");
-            }
+        if (response.ok || response.status === 204) { // Handle 204 as successful
+          this.$router.push("/login");
+        } else {
+          this.errors.push("Could not register");
+        }
         } catch (error) {
             this.errors.push("An error occurred while registering");
+            console.log(error);
         }
         }
     }

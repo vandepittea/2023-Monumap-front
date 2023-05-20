@@ -44,6 +44,7 @@ export default {
       },
       errors: [],
       "service": new MonumentService(),
+      "token": document.cookie// localStorage.getItem('token'), //TODO: uit cookies halen 
     };
   },
   computed: {
@@ -85,7 +86,7 @@ export default {
       }
 
       if (this.errors.length === 0) {
-        this.service.addMonument(this.formData).then(response => {
+        this.service.addMonument(this.formData, this.token).then(response => {
           if (response.ok) { //TODO: contrroleren of dit werkt
             this.$router.push("/"); 
           } else {

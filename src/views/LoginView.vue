@@ -22,6 +22,9 @@
 
 <script>
 import MonumnetService from '../services/MonumentService';
+import { useStore } from 'vuex'; //TODO: laten staan? 
+
+
 
 export default {    
     name: "LoginView",
@@ -31,6 +34,7 @@ export default {
         password: "",
         errors: [],
         "service": new MonumnetService(), 
+        
     };
     },
     methods: {
@@ -40,12 +44,14 @@ export default {
         if (this.errors.length === 0) {
         try {
             const response = await this.service.login(this.username, this.password);
-            if (response.ok) { //TODO: controleren of dit werkt
+            if (response.ok) { 
+                this.$store.commit('setLoggedIn', true);
             this.$router.push("/");
             } else {
             this.errors.push("Invalid login");
             }
         } catch (error) {
+            console.log(error);
             this.errors.push("Failed to login"); 
         }
         }

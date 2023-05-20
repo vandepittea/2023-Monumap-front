@@ -12,7 +12,7 @@
 <script>
 import MonumentList from '../components/MonumentList.vue';
 import MonumentFilter from '../components/MonumentFilter.vue';
-import MonumnetService from '../services/MonumentService';
+import MonumentService from '../services/MonumentService';
 
 export default {
   name: 'HomeView',
@@ -53,10 +53,11 @@ export default {
         monumentDesigner: '',
         costToConstruct: '',
       },
-      "service": new MonumnetService(), 
+      "service": new MonumentService(), 
     };
   },
   computed: {
+    //TODO: controler doen !
     // filteredMonuments() {
     //   console.log(this.filteredMonuments.length)
     //   if (this.filteredMonuments.length === 0) {
@@ -68,7 +69,11 @@ export default {
   },
   methods: {
     viewMonumentDetail(monument) {
+      console.log("viewMonumentDetail")
+      console.log(monument) // is juist
+      console.log(monument.id)  // is juist
       this.$router.push({ name: 'MonumentDetail', params: { id: monument.id, monument: monument } });
+
     },
 
     filterMonuments(filteredMonuments) {

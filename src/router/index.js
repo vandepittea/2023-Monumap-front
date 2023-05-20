@@ -41,8 +41,19 @@ const routes = [
     path: '/monument/:id',
     name: 'MonumentDetail',
     component: () => MonumentDetail,
-    //props: route => ({formData: MonumentService.getMonumentById(route.params.id) }) //TODO: werkt dit? 
-    props: route => ({ formData: new MonumentService().getMonumentById(route.params.id) }) //TODO: werkt dit?
+    //props: route => ({monument: MonumentService.getMonumentById(route.params.id) }) //TODO: wegdoen
+    props: route => ({ monument: new MonumentService().getMonumentById(route.params.id) }) //TODO: werkt dit? 
+    // props: route => { //TODO: iets doen met promise
+    //   return new Promise((resolve, reject) => {
+    //     new MonumentService()
+    //       .getMonumentById(route.params.id)
+    //       .then(monument => {
+    //         resolve({ monument });
+    //       })
+    //       .catch(error => {
+    //         reject(error);
+    //       });
+    //   });
   }
 ];
 
