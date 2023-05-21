@@ -5,7 +5,7 @@
         <input type="text" id="name" name="name" v-model="filter.name">
       </div>
   
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="type">Select the type:</label>
         <select id="type" name="type" v-model="filter.type">
           <option value="">Please choose an option</option> //TODO: Hier nog options krijgen via API of zelf toevoegen?
@@ -14,7 +14,26 @@
           <option value="option3">Option 3</option>
         </select>
       </div>
-  
+   -->
+<!-- 
+      <select v-model="formData.monument_types" required>
+      <option value="" disabled>Select Monument Type</option>
+      <option v-for="type in monumentTypesOptions" :key="type">{{ type }}</option>
+      </select> -->
+
+          <!-- <div class="language-label">Monument Type:</div>
+    <select v-model="selectedMonumentType">
+      <option v-for="type in monumentTypes" :key="type" :value="type">{{ type }}</option>
+    </select> -->
+
+    <div class="form-group">
+      <label for="monumentType">Monument Type:</label>
+      <select id="monumentType" name="monumentType" v-model="filter.type">
+        <option value="" disabled>Select Monument Type</option>
+        <option v-for="type in monumentTypesOptions" :key="type" :value="type">{{ type }}</option>
+      </select>
+    </div>
+
       <div class="form-group">
         <label for="yearOfConstruction">Year of construction:</label>
         <input type="number" id="yearOfConstruction" name="yearOfConstruction" v-model="filter.yearOfConstruction">
@@ -36,6 +55,7 @@
   
   <script>
   import MonumnetService from '../services/MonumentService';
+  import { typesNl, typesEn } from "../utils/arraysValues.js";
 
   export default {
     name: 'MonumentFilter',
@@ -48,15 +68,25 @@
           monumentDesigner: '',
           costToConstruct: '',
         },
-        "service": new MonumnetService(), //TODO: is dit oke hier? 
+        "service": new MonumnetService(), 
       };
+    },
+    computed: {
+      monumentTypesOptions() {
+        const language = localStorage.getItem('language') //TODO: hier met store werken?
+        if (language === 'Dutch') {
+          console.log(typesNl)
+          return typesNl;
+        } else if (language === 'English') {
+          console.log(typesEn)
+          return typesEn;
+        } else {
+          return [];
+        }
+      },
     },
     methods: {
       async filterMonuments() {
-        
-        // TODO: Implement the filtering logic or call the API endpoint V
-        // You can access the filter values using `this.filter` V
-        // Example code to log the filter values
         console.log('Filter:', this.filter);
 
         const filteredMonuments  = await this.service
@@ -65,14 +95,7 @@
                                                   this.filter.yearOfConstruction, 
                                                   this.filter.monumentDesigner, 
                                                   this.filter.costToConstruct);
-                                                  //TODO: pages hier ook nog toevoegen?
-        console.log("in filterdMonuments")                                           
-        console.log(filteredMonuments)
-        console.log("in filterdMonuments")
-  
-        // TODO: Update the parent component's `monuments` data with the filtered results
-        // You can emit an event or call a method in the parent component to achieve this
-        //this.$emit('filteredMonuments', this.filter); //TODO: werkt dit?
+
         this.$emit('filterMonuments', filteredMonuments);
 
       },

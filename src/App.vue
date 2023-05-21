@@ -43,9 +43,11 @@ export default {
   },
   methods: {
     toggleLanguage() {
+      console.log('toggleLanguage');
       this.currentLanguage = this.currentLanguage === 'English' ? 'Dutch' : 'English'; 
       this.languageImage = this.languageImages[this.currentLanguage];
       this.$store.commit('setCurrentLanguage', this.currentLanguage);
+      localStorage.setItem('language', this.currentLanguage);
     },
     logout() {
       this.$store.commit('setLoggedIn', false);
