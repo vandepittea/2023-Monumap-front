@@ -30,6 +30,28 @@
         </div>
       </div>
 
+      <fieldset>
+        <legend>Type:</legend> //TDO: css hier nog aanpassen
+        <div class="language-field">
+          <div class="language-label">English</div>
+          <div class="radio-container" v-for="(type, index) in typesEn" :key="index">
+            <input type="radio" :id="`option${index+1}`" :value="type" v-model="formData.type" required>
+            <label :for="`option${index+1}`">{{ type }}</label>
+          </div>
+        </div>
+
+        <div class="language-field">
+          <div class="language-label">Dutch</div>
+          <div class="radio-container" v-for="(type, index) in typesNl" :key="index">
+            <input type="radio" :id="`option${index+1}`" :value="type" v-model="formData.type" required>
+            <label :for="`option${index+1}`">{{ type }}</label>
+          </div>
+        </div>
+      </fieldset>
+
+
+
+
       <!-- <fieldset>
         <legend>Type:</legend> //TODO: nog implementeren
         <div class="language-field">
@@ -64,28 +86,24 @@
       <div class="form-field">
         <label for="monument-designer">Monument designer:</label>
         <div class="language-field">
-          <div class="language-label">English</div>
+          <div class="language-label">Designer</div>
           <input type="text" name="monument-designer" v-model="formData.monument_designer" required>
         </div>
       </div>
 
-      <!-- <fieldset>
-        <legend>Accessibility:</legend> //TODO: dit nog implementeren
-        <div class="language-field">
-          <div class="checkbox-container">
-            <input type="checkbox" name="none" value="none" v-model="formData.accessibility">
-            <label for="none">None</label>
+      <fieldset> //TODO: css hier beter maken!
+        <legend>Accessibility:</legend>
+          <div class="language-label">English</div>
+          <div class="checkbox-container" v-for="option in accessibilityEn" :key="option">
+            <input type="checkbox" :name="option" :value="option" v-model="formData.accessibility">
+            <label :for="option">{{ option }}</label>
           </div>
-          <div class="checkbox-container">
-            <input type="checkbox" name="partial" value="partial" v-model="formData.accessibility">
-            <label for="partial">Partial</label>
+          <div class="language-label">Dutch</div>
+          <div class="checkbox-container" v-for="option in accessibilityNl" :key="option">
+            <input type="checkbox" :name="option" :value="option" v-model="formData.accessibility">
+            <label :for="option">{{ option }}</label>
           </div>
-          <div class="checkbox-container">
-            <input type="checkbox" name="full" value="full" v-model="formData.accessibility">
-            <label for="full">Full</label>
-          </div>
-        </div>
-      </fieldset> -->
+      </fieldset>
 
       <div class="form-field">
         <label for="materials-used">Materials used:</label>
@@ -140,46 +158,55 @@
           <input type="text" v-model="formData.dimensions.depth" required>
         </div>
       </fieldset>
+      <fieldset>
+      <legend>Images:</legend>
+      <div v-for="(image, index) in formData.images" :key="index" class="language-field">
+        <div class="language-label">Url:</div>
+        <textarea name="url" v-model="image.url" required></textarea>
+        <div class="language-label">Caption:</div>
+        <textarea name="caption" v-model="image.caption" required></textarea>
+      </div>
+    </fieldset>
 
-      <!-- <fieldset>
-        <legend>Images:</legend> //TODO: dit nog implementeren
-        <div class="language-field">
-          <div class="language-label">Url:</div>
-          <textarea name="url" v-model="formData.images.url" required></textarea>
-          <div class="language-label">Caption:</div>
-          <textarea name="caption" v-model="formData.images.caption" required></textarea>
-        </div>
-      </fieldset> -->
-
-      <!-- <fieldset>
-        <legend>AudiovisualSource:</legend> //TODO: dit nog implementeren
-        <div class="language-field">
-          <div class="language-label">Title:</div>
-          <input type="text" v-model="formData.audiovisualSource.title" required>
-          <div class="language-label">Url:</div>
-          <input type="text" v-model="formData.audiovisualSource.url" required>
-        </div>
-        <div class="language-field">
-          <label class="language-label" for="audio-video-type">Type:</label>
-          <select name="audio-video-type" v-model="formData.audiovisualSource.type" required>
-            <option value="">Please choose an option</option>
-            <option value="video">Video</option>
-            <option value="audio">Audio</option>
-          </select>
-        </div>
-      </fieldset>  -->
+    <fieldset>
+      <legend>AudiovisualSource:</legend>
+      <div class="language-field">
+        <div class="language-label">Title:</div>
+        <input type="text" v-model="formData.audiovisual_source.audiovisual_source_language[0].title" required>
+        <div class="language-label">Url:</div>
+        <input type="text" v-model="formData.audiovisual_source.url" required>
+      </div>
+      <div class="language-field">
+        <label class="language-label" for="audio-video-type">Type:</label>
+        <select name="audio-video-type" v-model="formData.audiovisual_source.type" required>
+          <option value="">Please choose an option</option>
+          <option value="video">Video</option>
+          <option value="audio">Audio</option>
+        </select>
+      </div>
+    </fieldset>
 
       <input type="submit" value="Submit">
     </form>
   </template> 
   
   <script>
+  import { typesNl, typesEn, accessibilityEn, accessibilityNl } from "../utils/arraysValues.js";
+
   export default {
+    data (){
+      return {
+        typesNl,
+        typesEn,
+        accessibilityEn,
+        accessibilityNl,
+      }
+    },
     mounted() {
-      // this.formData.materialsUsed.en = this.formData.materialsUsed.en.join("\n");
-      // this.formData.materialsUsed.nl = this.formData.materialsUsed.nl.join("\n");
-      // this.formData.images.url = this.formData.images.url.join("\n");
-      // this.formData.images.caption = this.formData.images.caption.join("\n");
+       this.formData.monument_language.find(lang => lang.language === 'English').used_materials = formData.monument_language.find(lang => lang.language === 'English').used_materials.join("\n"); //TODO
+       this.formData.monument_language.find(lang => lang.language === 'Dutch').used_materials = formData.monument_language.find(lang => lang.language === 'Dutch').used_materials.join("\n"); //TODO
+      this.formData.images.url = this.formData.images.url.join("\n"); //TODO: werkt dit? 
+      this.formData.images.caption = this.formData.images.caption.join("\n"); //TODO: werkt dit? 
     },
     props: {
       formData: {
@@ -188,7 +215,7 @@
       },
     },
     computed: {
-    // updatedMaterialsUsed() {
+    // updatedMaterialsUsed() { //TODO: dit nog gebruiken? 
     //   const updatedFormData = { ...this.formData };
     //   updatedFormData.materialsUsed.en = updatedFormData.materialsUsed.en.split("\n");
     //   updatedFormData.materialsUsed.nl = updatedFormData.materialsUsed.nl.split("\n");
@@ -220,6 +247,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 1rem;
+    margin-bottom: 2rem;
   }
   
   .language-label {
