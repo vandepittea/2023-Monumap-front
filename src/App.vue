@@ -14,8 +14,8 @@
         <li><router-link to="/">Home</router-link></li>
         <li v-if="!loggedIn"><router-link to="/login">Login</router-link></li>
         <li v-if="!loggedIn"><router-link to="/register">Register</router-link></li>
-        <li v-if="store.state.loggedIn"><router-link to="/new-monument">Add Monument</router-link></li>
-        <li v-if="store.state.loggedIn"><button @click="logout">Logout</button></li>
+        <li v-if="store.state.loggedIn"><router-link to="/new-monument">Add Monument</router-link></li> //TODO: dit netter maken? 
+        <li v-if="store.state.loggedIn"><button @click="logout">Logout</button></li> //TODO: dit netter maken?
       </ul>
     </nav>
     <img :src="languageImage" @click="toggleLanguage" id="languageImage" alt="Language switcher" />
@@ -36,16 +36,16 @@ export default {
       currentLanguage: 'English',
       languageImages: {
         English: EnglishFlag,
-        Dutsh: DutchFlag,
+        Dutch: DutchFlag,
       },
       languageImage: EnglishFlag
     };
   },
   methods: {
     toggleLanguage() {
-      this.currentLanguage = this.currentLanguage === 'English' ? 'Dutsh' : 'English';
+      this.currentLanguage = this.currentLanguage === 'English' ? 'Dutch' : 'English'; 
       this.languageImage = this.languageImages[this.currentLanguage];
-      localStorage.setItem('language', this.currentLanguage);
+      localStorage.setItem('language', this.currentLanguage); //TODO: dit hier in de store maken 
     },
     logout() {
       this.$store.commit('setLoggedIn', false);

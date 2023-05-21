@@ -2,64 +2,62 @@
 import Slideshow from "../components/Slideshow.vue";
 import MonumentService from "../services/MonumentService";
 import { computed } from 'vue';
-
 export default {
   name: "MonumentDetail",
   components: {
     Slideshow,
   },
   props: {
-    monument: {
-      type: Object,
-      required: true,
-    },
+  monumentId: {
+    type: String,
+    required: true,
   },
+},
   data() {
     return {
-      "service": new MonumentService(), 
+      monument: {},
+      service: new MonumentService(), 
     };
   },
+  created() {
+    this.monument = this.fetchMonument()
+},
+
   computed: {
     loggedIn() {
       return this.$store.state.loggedIn;
     },
     currentLanguage() {
-      return this.$store.state.currentLanguage; //TODO: hier localStorge.getItem('language') gebruiken
+      return this.$store.state.currentLanguage; 
     },
-    languageValue() {
-      return computed(() => {
-        console.log(this.monument);
-        console.log("langaugvalue in detail view")
-        const languageData = this.monument.monuments_language.find(
-          data => data.language === this.currentLanguage
-        );
-        return languageData || {};
-        }).value;
-      },
-      languageSourceValue() {
-      return computed(() => {
-        const languageData = this.monument.source_language.find(
-          data => data.language === this.currentLanguage
-        );
-        return languageData || {};
-        }).value;
-      }
   },
   methods: {
+    async fetchMonument() {
+    try {
+      this.monument = await this.service.getMonumentById(this.monumentId);
+    } catch (error) {
+      console.error('Error fetching monument:', error);
+    }
+  },
     getLanguageValue(key) {
-      return this.languageValue[key] || '';
+      return this.languageValue?.[key] || '';
     },
+
     getSourceLanguageValue(key) {
-      return this.languageSourceValue[key] || '';
+      return this.languageSourceValue?.[key] || '';
     },
     getLocationString(location) {
       const { latitude, longitude, street, number, city } = location;
       return `${latitude}, ${longitude}, ${street} ${number}, ${city}`;
     },
     getDimensionsString(dimensions) {
+      if (!dimensions) {
+        return '';
+      }
       const { height, width, depth } = dimensions;
       return `${height} x ${width} x ${depth}`;
     },
+
     deleteMonument() {
       this.service.deleteMonument(this.monument.id) //TODO: controleren of dit werkt
         .then(() => {
@@ -74,58 +72,55 @@ export default {
       //TODO: hier token meegeven of in de updateMonument zelf
       this.$router.push({ name: 'UpdateMonument', params: { id: this.monument.id, formData: this.monument } });
     },
-    getSlideshowImages() {
-      const currentLanguage = this.currentLanguage;
-      const imagesLanguage = this.monument.images_language.find(
-        data => data.language === currentLanguage
-      );
-      const captions = imagesLanguage ? imagesLanguage.captions : [];
-      
-      return this.monument.images.urls.map((url, index) => ({
-        url,
-        caption: captions[index] || '',
-      }));
-    }
+//     getSlideshowImages() {
+//       const images = this.monument.images; 
+//       const captions = this.monument.audiovisual_source.map(audiovisual => audiovisual.caption); 
+//       console.log(images);
+//       return images.map((image, index) => ({
+//         url: image[index].url,
+//         caption: captions[index] || '',
+//       }));
+// }
   },
 };
 </script>
 
 <template>
   <div class="monument-detail">
-    <h1>{{ getLanguageValue('name') }}</h1>
-    <slideshow :images="getSlideshowImages()" />
+    <h1>{{ monument.monument_language[0].name }}</h1>
+    <!-- <slideshow :images="getSlideshowImages()" />  TODO: foto's hier krijgen-->
     <div class="details-container">
       <div class="detail-row">
         <div class="label">Name</div>
-        <div>{{ getLanguageValue('name') }}</div>
+        <div>{{monument.monument_language[0].name  }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Description</div>
-        <div>{{ getLanguageValue('description') }}</div>
+        <div>{{ monument.monument_language[0].description }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Historical Significance</div>
-        <div>{{ getLanguageValue('historical_significance') }}</div>
+        <div>{{ monument.monument_language[0].historical_significance}}</div>
       </div>
       <div class="detail-row">
         <div class="label">Type</div>
-        <div>{{ getLanguageValue('type') }}</div>
+        <div>{{ monument.monument_language[0].type }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Year of Construction</div>
-        <div>{{ monument.yearOfConstruction }}</div>
+        <div>{{ monument.year_of_construction }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Monument Designer</div>
-        <div>{{ monument.monumentDesigner }}</div>
+        <div>{{ monument.monument_designer }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Accessibility</div>
-        <div>{{ getLanguageValue('accessibility') }}</div>
+        <div>{{ monument.monument_language[0].accessibility }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Used Materials</div>
-        <div>{{ getLanguageValue('used_materials') }}</div>
+        <div>{{ monument.monument_language[0].used_materials }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Weight</div>
@@ -152,7 +147,7 @@ export default {
             <div v-else-if="audiovisual.type === 'video'">
               <video :src="audiovisual.url" controls></video>
             </div>
-            <p class="audiovisual-caption">{{ getSourceLanguageValue(audiovisual.language) }}</p>
+            <!-- <p class="audiovisual-caption">{{ getSourceLanguageValue(audiovisual.language) }}</p> //TODO: caption hier krijgen-->
           </div>
         </div>
       </div>

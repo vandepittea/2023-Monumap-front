@@ -1,6 +1,10 @@
 const url = "http://monuments.local/api/monuments";
 
 const storedLanguage = localStorage.getItem('language');
+console.log(storedLanguage);
+// import { useStore } from 'vuex';
+// const store = useStore();
+// const storedLanguage = store.state.currentLanguage;
 
 export default class MonumnetService{
     constructor(){
@@ -36,23 +40,19 @@ export default class MonumnetService{
         if (costToConstruct) {
           queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`); //todo: deze parameter is niet correct, moet nog gecontroleerd zijn
         }
-
-        if (language){
-            queryParams.push(`language=${encodeURIComponent(language)}`); //TODO: deze parameter is niet correct, moet nog gecontroleerd zijn
-        }
       
         let fullUrl = url + '?';
 
         fullUrl += `page=${this.page}`;
         fullUrl += `&per_page=${this.perPage}`;
-        fullUrl += `&language=${storedLanguage}&`;
+        fullUrl += `&Language=${storedLanguage}&`; //TODO: language hier uit store halen 
 
 
         if (queryParams.length > 0) {
             console.log(queryParams.length);
           fullUrl += `${queryParams.join('&')}`;
         }
-        
+        console.log(fullUrl);
 
         const response = await fetch(fullUrl);
         const json = await response.json();
@@ -61,11 +61,16 @@ export default class MonumnetService{
     }
     
     async getMonumentById(id){
-        const response = await fetch(url + "/" + id); //TODO: hier ook lanugage meegeven??
-        const data = await response.json();
-        console.log("---------------------------------------")
+        let fullUrl = url + "/" + id ;
+        fullUrl += `?Language=${storedLanguage}`; //TODO: language hier uit store halen 
+        console.log(fullUrl);
+        const response = await fetch(fullUrl); 
+        //TODO: hier ook lanugage meegeven??
+        const json = await response.json();
+        const data = json.data;
         console.log(data);
-        return data; //TODO: hier controleren of data corect wordt weergegeven
+        console .log("--------------------")
+        return data; 
     }
    
 
@@ -94,6 +99,8 @@ export default class MonumnetService{
 
             //TODO: hier ergens cookies opvangen?
         });
+        console.log(response.headers.get('set-cookie'));
+
         return response;  
     }
 
@@ -107,6 +114,7 @@ export default class MonumnetService{
             body: JSON.stringify(monumentData),
         });
         const data = await response.json();
+        console.log(data)
         return data;
     }
  
