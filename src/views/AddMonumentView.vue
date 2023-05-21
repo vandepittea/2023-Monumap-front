@@ -20,32 +20,111 @@ export default {
   name: "AddMonumentView",
   data() {
     return {
-      formData: {
-        name: { en: "", nl: "" },
-        description: { en: "", nl: "" },
-        historicalSignificance: { en: "", nl: "" },
-        type: [ "", "" ],
-        yearOfConstruction: 0,
-        monumentDesigner: { en: "", nl: "" },
-        accessibility:  { en: "", nl: "" },
-        materialsUsed: { en: ["", ""], nl: ["", ""] },
-        weight: 0,
-        costOfConstruction: 0,
-        location: {
-          latitude: 0,
-          longitude: 0,
-          street: "",
-          number: 0,
-          city: ""
-        },
-        dimensions: { height: 0, width: 0, depth: 0 },
-        images: { url: [ "", "" ], caption: [ "", "" ] },
-        audiovisualSource: { title: "", url: "", type: "" }
-      },
-      errors: [],
-      "service": new MonumentService(),
-      "token": document.cookie// localStorage.getItem('token'), //TODO: uit cookies halen 
-    };
+     
+
+//   formData: {
+//   audiovisual_source: {
+//     audiovisual_source_language: [
+//       { language: "", title: "" },
+//       { language: "", title: "" }
+//     ],
+//     type: "",
+//     url: ""
+//   },
+//   cost_to_construct: 0,
+//   dimensions: { height: 0, width: 0, depth: 0 },
+//   images: {},
+//   location: {
+//     latitude: 0,
+//     longitude: 0,
+//     street: "",
+//     number: 0,
+//     city: ""
+//   },
+//   yearOfConstruction: 0,
+//   monumentDesigner: { en: "", nl: "" },
+//   weight: 0,
+//   monument_language: [
+//     {
+//       language: "",
+//       name: "",
+//       description: "",
+//       historical_significance: "",
+//       type: "",
+//       used_materials: [],
+//       accessibility: []
+//     },
+//     {
+//       language: "",
+//       name: "",
+//       description: "",
+//       historical_significance: "",
+//       type: "",
+//       used_materials: [],
+//       accessibility: []
+//     }
+//   ]
+// },
+
+formData : {
+  year_of_construction: 0,
+  monument_designer: "",
+  audiovisual_source: {
+    audiovisual_source_language: [
+      { language: "", title: "" },
+      { language: "", title: "" }
+    ],
+    url: "",
+    type: "",
+  },
+  cost_to_construct: 0,
+  dimensions: {
+    height: 0,
+    width: 0,
+    depth: 0,
+  },
+  images: [
+    { /* ... */ },
+    { /* ... */ }
+  ],
+  location: {
+    id: 0,
+    latitude: 0,
+    longitude: 0,
+    street: "",
+    number: 0,
+    city: ""
+  },
+  monument_designer: "",
+  monument_language: [
+    {
+      accessibility: [""],
+      description: "",
+      historical_significance: "",
+      language: "Dutch",
+      name: "",
+      type: "",
+      used_materials: [""]
+    },
+    {
+      accessibility: [""],
+      description: "",
+      historical_significance: "",
+      language: "English",
+      name: "",
+      type: "",
+      used_materials: [""]
+    }
+  ],
+  weight: 1000,
+  year_of_construction: 2016
+},
+
+errors: [],
+service: new MonumentService(),
+token: document.cookie
+};
+
   },
   computed: {
     hasErrors() {

@@ -1,37 +1,37 @@
 <template>
     <form @submit.prevent="submitForm">
       <div class="form-field">
-        <label for="name">Name:</label>
-        <div class="language-field">
-          <div class="language-label">English</div>
-          <input type="text" name="name" v-model="formData.monument_language[1].name" required>
-          <div class="language-label">Dutch</div>
-          <input type="text" name="name" v-model="formData.monument_language[0].name" required>
-        </div>
+      <label for="name">Name:</label>
+      <div class="language-field">
+        <div class="language-label">English</div>
+        <input type="text" name="name" v-model="formData.monument_language.find(lang => lang.language === 'English').name" required>
+        <div class="language-label">Dutch</div>
+        <input type="text" name="name" v-model="formData.monument_language.find(lang => lang.language === 'Dutch').name" required>
       </div>
+    </div>
 
-       <div class="form-field">
-        <label for="description">Description:</label>
-        <div class="language-field">
-          <div class="language-label">English</div>
-          <textarea name="description" v-model="formData.monument_language[1].description" required></textarea>
-          <div class="language-label">Dutch</div>
-          <textarea name="description" v-model="formData.monument_language[0].description" required></textarea>
-        </div>
+    <div class="form-field">
+      <label for="description">Description:</label>
+      <div class="language-field">
+        <div class="language-label">English</div>
+        <textarea name="description" v-model="formData.monument_language.find(lang => lang.language === 'English').description" required></textarea>
+        <div class="language-label">Dutch</div>
+        <textarea name="description" v-model="formData.monument_language.find(lang => lang.language === 'Dutch').description" required></textarea>
       </div>
+    </div>
 
       <div class="form-field">
         <label for="historical-significance">Historical significance:</label>
         <div class="language-field">
           <div class="language-label">English</div>
-          <textarea name="historical-significance" v-model="formData.monument_language[1].historical_significance"></textarea>
+          <textarea name="historical-significance" v-model="formData.monument_language.find(lang => lang.language === 'English').historical_significance"></textarea>
           <div class="language-label">Dutch</div>
-          <textarea name="historical-significance" v-model="formData.monument_language[0].historical_significance"></textarea>
+          <textarea name="historical-significance" v-model="formData.monument_language.find(lang => lang.language === 'Dutch').historical_significance"></textarea>
         </div>
       </div>
 
       <!-- <fieldset>
-        <legend>Type:</legend>
+        <legend>Type:</legend> //TODO: nog implementeren
         <div class="language-field">
           <div class="checkbox-container">
             <input type="checkbox" name="option1" value="option1" v-model="formData.type">
@@ -70,7 +70,7 @@
       </div>
 
       <!-- <fieldset>
-        <legend>Accessibility:</legend>
+        <legend>Accessibility:</legend> //TODO: dit nog implementeren
         <div class="language-field">
           <div class="checkbox-container">
             <input type="checkbox" name="none" value="none" v-model="formData.accessibility">
@@ -91,9 +91,9 @@
         <label for="materials-used">Materials used:</label>
         <div class="language-field">
           <div class="language-label">English</div>
-          <textarea name="materials-used" v-model="formData.monument_language[1].used_materials" required></textarea>
+          <textarea name="materials-used" v-model="formData.monument_language.find(lang => lang.language === 'English').used_materials" required></textarea>
           <div class="language-label">Dutch</div>
-          <textarea name="materials-used" v-model="formData.monument_language[0].used_materials" required></textarea>
+          <textarea name="materials-used" v-model="formData.monument_language.find(lang => lang.language === 'Dutch').used_materials" required></textarea>
         </div>
       </div>
 
@@ -142,7 +142,7 @@
       </fieldset>
 
       <!-- <fieldset>
-        <legend>Images:</legend>
+        <legend>Images:</legend> //TODO: dit nog implementeren
         <div class="language-field">
           <div class="language-label">Url:</div>
           <textarea name="url" v-model="formData.images.url" required></textarea>
@@ -152,7 +152,7 @@
       </fieldset> -->
 
       <!-- <fieldset>
-        <legend>AudiovisualSource:</legend>
+        <legend>AudiovisualSource:</legend> //TODO: dit nog implementeren
         <div class="language-field">
           <div class="language-label">Title:</div>
           <input type="text" v-model="formData.audiovisualSource.title" required>
@@ -208,6 +208,7 @@
       }
     }
   };
+
   </script>
   
   <style>
