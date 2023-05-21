@@ -159,32 +159,17 @@
           <input type="text" v-model="formData.dimensions.depth" required>
         </div>
       </fieldset>
-      <!-- <fieldset>
+        <!-- <fieldset>
       <legend>Images:</legend>
       <div v-for="(image, index) in formData.images" :key="index" class="language-field">
         <div class="language-label">Url:</div>
         <textarea name="url" v-model="image.url" required></textarea>
         <div class="language-label">Caption English:</div>
-        <textarea name="caption" v-model="formdata.images[0].caption"></textarea>
+        <textarea name="caption" v-model="image.image_language.find(lang => lang.language === 'English').caption" required></textarea>
         <div class="language-label">Caption Dutch:</div>
-        <textarea name="caption" v-model="formdata.images[1].caption"></textarea>
+        <textarea name="caption" v-model="image.image_language.find(lang => lang.language === 'Dutch').caption" required></textarea>
       </div>
     </fieldset> -->
-    <!-- <fieldset>
-  <legend>Images:</legend>
-  <div v-for="(image, index) in formData.images" :key="index" class="language-field">
-    <div class="language-label">Url:</div>
-    <textarea name="url" v-model="image.url" required></textarea>
-    <div class="language-label">Caption English:</div>
-    <textarea name="caption" v-model="image.image_language.find(lang => lang.language === 'English').caption" required></textarea>
-    <div class="language-label">Caption Dutch:</div>
-    <textarea name="caption" v-model="image.image_language.find(lang => lang.language === 'Dutch').caption" required></textarea>
-  </div>
-</fieldset> -->
-
-
-
-
 
     <fieldset>
       <legend>AudiovisualSource:</legend>
@@ -254,12 +239,7 @@
   // },
     methods: {
       submitForm() {
-        // Emit event to notify parent component
-        console.log("emit formSubmitted")
-        console.log(JSON.parse(JSON.stringify(this.formData)));
         this.$emit("formSubmitted", JSON.parse(JSON.stringify(this.formData))); //todo: hier de formdata meegeven?
-
-        // this.$emit("formSubmitted", this.formData); //todo: hier de formdata meegeven?
       }
     }
   };

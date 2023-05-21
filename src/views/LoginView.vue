@@ -22,8 +22,7 @@
 
 <script>
 import MonumnetService from '../services/MonumentService';
-import { useStore } from 'vuex'; //TODO: laten staan? 
-
+import { useStore } from 'vuex'; 
 
 export default {    
     name: "LoginView",

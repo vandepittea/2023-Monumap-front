@@ -52,7 +52,6 @@ export default {
         if (this.errors.length === 0) {
         try {
             const response = await this.service.register(this.username, this.password);
-            console.log(response)
 
         if (response.ok || response.status === 204) { // Handle 204 as successful
           this.$router.push("/login");

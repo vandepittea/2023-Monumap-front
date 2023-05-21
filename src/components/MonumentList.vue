@@ -19,7 +19,6 @@
     },
     methods: {
       viewMonumentDetail(monument) {
-        console.log('viewMonumentDetail', monument);
         this.$emit('viewMonumentDetail', monument);
       },
     },

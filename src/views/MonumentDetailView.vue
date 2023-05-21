@@ -59,9 +59,9 @@ export default {
     },
 
     deleteMonument() {
-      this.service.deleteMonument(this.monument.id) //TODO: controleren of dit werkt
+      this.service.deleteMonument(this.monument.id) 
         .then(() => {
-        this.$router.push({ name: 'Home' }); // TODO: controleren of dit werkt!
+        this.$router.push({ name: 'Home' }); 
       })
       .catch(error => {
         console.error('Error deleting monument:', error);
@@ -69,28 +69,8 @@ export default {
         
     },
     updateMonument() {
-      //TODO: hier token meegeven of in de updateMonument zelf 
       this.$router.push({ name: 'UpdateMonument', params: { id: this.monument.id } });
     },
-    
-    // getSlideshowImages() {
-    //   const images = this.monument.images; 
-    //   const captions = this.monument.audiovisual_source.map(audiovisual => audiovisual.caption); 
-    //   console.log(images);
-    //   return images.map((image, index) => ({
-    //     url: image[index].url,
-    //     caption: captions[index] || '',
-  //   //   }));
-  // getSlideshowImages() {
-  //   const images = this.monument.images;
-  //   console.log(images);
-  //   const captions = images.map(image => image.caption || '');
-  //   return images.map((image, index) => ({
-  //     url: image.url,
-  //     caption: captions[index],
-  //   }));
-  // },
-  // },
 
   getSlideshowImages() {
     const images = this.monument.images;
@@ -171,7 +151,6 @@ export default {
             <div v-else-if="audiovisual.type === 'video'">
               <video :src="audiovisual.url" controls></video>
             </div>
-            <!-- <p class="audiovisual-caption">{{ getSourceLanguageValue(audiovisual.language) }}</p> //TODO: caption hier krijgen-->
           </div>
         </div>
       </div>

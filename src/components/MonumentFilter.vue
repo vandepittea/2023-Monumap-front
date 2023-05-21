@@ -53,12 +53,10 @@
     },
     computed: {
       monumentTypesOptions() {
-        const language = localStorage.getItem('language') //TODO: hier met store werken?
+        const language = localStorage.getItem('language') 
         if (language === 'Dutch') {
-          console.log(typesNl)
           return typesNl;
         } else if (language === 'English') {
-          console.log(typesEn)
           return typesEn;
         } else {
           return [];
@@ -67,8 +65,6 @@
     },
     methods: {
       async filterMonuments() {
-        console.log('Filter:', this.filter);
-
         const filteredMonuments  = await this.service
                                   .getAllMonuments(this.filter.name, 
                                                   this.filter.type, 

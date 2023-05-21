@@ -52,42 +52,29 @@ export default {
     formSubmitted(formData) { 
       this.errors = [];
 
-      console.log("in formSubmitted update !!!!")
-
-      console.log("formdata in updateMonumentView")
-      console.log(formData)
-      console.log(formData)
-      console.log("formdata in updateMonumentView")
-
       // Validate form fields
-      if (!formData.monument_language[1].name|| !formData.monument_language[0].name) { //TODO: this hier terugzetten
+      if (!formData.monument_language[1].name|| !formData.monument_language[0].name) { 
         this.errors.push("Please enter the name in both English and Dutch.");
       }
       if (!formData.monument_language[1].description || !formData.monument_language[0].description) {
         this.errors.push("Please enter the description in both English and Dutch.");
       }
-      // if (!formData.type.en || !formData.type.nl) { //TODO: nog implementeren
-      //   this.errors.push("Please choose the type in both English and Dutch.");
-      // }
+
       if (!formData.year_of_construction) {
         this.errors.push("Please enter the year of construction.");
       }
       if (!formData.monument_designer) {
         this.errors.push("Please enter the monument designer.");
       }
-      /*if (formData.accessibility.en.length === 0 || formData.accessibility.nl.length === 0) { //TODO: terugzetten als beide talen er zijn
-        this.errors.push("Please select the accessibility in both English and Dutch.");
-      }*/
+
       if (!formData.monument_language[1].used_materials || !formData.monument_language[0].used_materials) {
         this.errors.push("Please enter the materials used in both English and Dutch.");
       }
 
       if (this.errors.length === 0) {
-        //TODO: hier logica van api 
-        console.log(formData)
         this.service.updateMonument(formData).then(response => {
           if (response.ok) {
-            this.$router.push("/"); //TODO: moet dit hier / of Home zijn
+            this.$router.push("/"); 
           } else {
             this.errors.push("Could not update the monument");
           }

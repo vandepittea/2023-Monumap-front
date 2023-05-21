@@ -39,7 +39,6 @@ export default {
   computed: {
     //TODO: controler doen !
     // filteredMonuments() {
-    //   console.log(this.filteredMonuments.length)
     //   if (this.filteredMonuments.length === 0) {
     //     return this.monuments;
     //   } else {
@@ -55,7 +54,6 @@ export default {
     filterMonuments(filteredMonuments) {
       //TODO: controleren als filterMonuments leeg is dan moet je de monuments tonen
       this.filteredMonuments = filteredMonuments;
-      console.log(this.filteredMonuments)
     },
   },
   async created() {
