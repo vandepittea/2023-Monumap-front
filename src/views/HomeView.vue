@@ -3,9 +3,9 @@
     <h1>Welcome to MonuMap</h1>
     <h3>Find your favorite monuments</h3>
 
-    <MonumentFilter @filterMonuments="filterMonuments" />
+    <MonumentFilter @filterMonuments="monuments" />
 
-    <MonumentList :monuments="filteredMonuments" :currentPage="currentPage" :totalPages="lastPage" @viewMonumentDetail="viewMonumentDetail" />
+    <MonumentList :monuments="monuments"  @viewMonumentDetail="viewMonumentDetail" />
   </main>
 </template>
 
@@ -23,7 +23,6 @@ export default {
   data() {
     return {
         monuments: [],
-        filteredMonuments: [],
       filter: {
         name: '',
         type: '',
@@ -32,19 +31,7 @@ export default {
         costToConstruct: '',
       },
       "service": new MonumentService(), 
-      currentPage: 0,       // Variable to store the current page
-    lastPage: 0
     };
-  },
-  computed: {
-    //TODO: controler doen !
-    // filteredMonuments() {
-    //   if (this.filteredMonuments.length === 0) {
-    //     return this.monuments;
-    //   } else {
-    //     return this.filteredMonuments;
-    //   }
-    // },
   },
   methods: {
     viewMonumentDetail(monument) {
@@ -52,8 +39,7 @@ export default {
     },
 
     filterMonuments(filteredMonuments) {
-      //TODO: controleren als filterMonuments leeg is dan moet je de monuments tonen
-      this.filteredMonuments = filteredMonuments;
+      this.monuments = filteredMonuments;
     },
   },
   async created() {

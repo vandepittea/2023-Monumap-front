@@ -92,7 +92,7 @@ export default {
 <template>
   <div class="monument-detail">
     <h1>{{ monument.monument_language[0].name }}</h1>
-    <slideshow :images="getSlideshowImages()" />  TODO: foto's hier krijgen
+    <slideshow :images="getSlideshowImages()" />  
     <div class="details-container">
       <div class="detail-row">
         <div class="label">Name</div>

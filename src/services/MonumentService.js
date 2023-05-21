@@ -34,14 +34,14 @@ export default class MonumentService{
           queryParams.push(`designer=${encodeURIComponent(monumentDesigner)}`);
         }
         if (costToConstruct) {
-          queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`); //todo: deze parameter is niet correct, moet nog gecontroleerd zijn
+          queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`); 
         }
       
         let fullUrl = url + 'monuments?';
 
         fullUrl += `page=${this.page}`;
         fullUrl += `&per_page=${this.perPage}`;
-        fullUrl += `&Language=${storedLanguage}&`; //TODO: language hier uit store halen 
+        fullUrl += `&Language=${storedLanguage}&`; 
    
         if (queryParams.length > 0) {
           fullUrl += `${queryParams.join('&')}`;

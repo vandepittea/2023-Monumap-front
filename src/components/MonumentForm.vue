@@ -212,8 +212,8 @@
     // mounted() {
     //    formData.monument_language.find(lang => lang.language === 'English').used_materials = formData.monument_language.find(lang => lang.language === 'English').used_materials.join("\n"); //TODO
     //    formData.monument_language.find(lang => lang.language === 'Dutch').used_materials = formData.monument_language.find(lang => lang.language === 'Dutch').used_materials.join("\n"); //TODO
-    //   formData.images.url = formData.images.url.join("\n"); //TODO: werkt dit? 
-    //   formData.images.caption = formData.images.caption.join("\n"); //TODO: werkt dit? 
+    //   formData.images.url = formData.images.url.join("\n"); 
+    //   formData.images.caption = formData.images.caption.join("\n"); 
     // },
     props: {
       formData: {
@@ -221,25 +221,9 @@
         required: true,
       },
     },
-
-
-  //   computed: {
-  //   // updatedMaterialsUsed() { //TODO: dit nog gebruiken? 
-  //   //   const updatedFormData = { ...formData };
-  //   //   updatedFormData.materialsUsed.en = updatedFormData.materialsUsed.en.split("\n");
-  //   //   updatedFormData.materialsUsed.nl = updatedFormData.materialsUsed.nl.split("\n");
-  //   //   return updatedFormData;
-  //   // },
-  //   // updatedImages() {
-  //   //   const updatedFormData = { ...formData };
-  //   //   updatedFormData.images.url = updatedFormData.images.url.split("\n");
-  //   //   updatedFormData.images.caption = updatedFormData.images.caption.split("\n");
-  //   //   return updatedFormData;
-  //   // }
-  // },
     methods: {
       submitForm() {
-        this.$emit("formSubmitted", JSON.parse(JSON.stringify(this.formData))); //todo: hier de formdata meegeven?
+        this.$emit("formSubmitted", JSON.parse(JSON.stringify(this.formData)));
       }
     }
   };
