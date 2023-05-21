@@ -52,9 +52,11 @@ export default {
     formSubmitted(formData) { 
       this.errors = [];
 
+      console.log("in formSubmitted update !!!!")
+
       console.log("formdata in updateMonumentView")
       console.log(formData)
-      console.log(this.formData)
+      console.log(formData)
       console.log("formdata in updateMonumentView")
 
       // Validate form fields
@@ -64,7 +66,7 @@ export default {
       if (!formData.monument_language[1].description || !formData.monument_language[0].description) {
         this.errors.push("Please enter the description in both English and Dutch.");
       }
-      // if (!this.formData.type.en || !this.formData.type.nl) { //TODO: nog implementeren
+      // if (!formData.type.en || !formData.type.nl) { //TODO: nog implementeren
       //   this.errors.push("Please choose the type in both English and Dutch.");
       // }
       if (!formData.year_of_construction) {
@@ -73,7 +75,7 @@ export default {
       if (!formData.monument_designer) {
         this.errors.push("Please enter the monument designer.");
       }
-      /*if (this.formData.accessibility.en.length === 0 || this.formData.accessibility.nl.length === 0) { //TODO: terugzetten als beide talen er zijn
+      /*if (formData.accessibility.en.length === 0 || formData.accessibility.nl.length === 0) { //TODO: terugzetten als beide talen er zijn
         this.errors.push("Please select the accessibility in both English and Dutch.");
       }*/
       if (!formData.monument_language[1].used_materials || !formData.monument_language[0].used_materials) {
@@ -83,7 +85,7 @@ export default {
       if (this.errors.length === 0) {
         //TODO: hier logica van api 
         console.log(formData)
-        this.service.updateMonument(this.formData).then(response => {
+        this.service.updateMonument(formData).then(response => {
           if (response.ok) {
             this.$router.push("/"); //TODO: moet dit hier / of Home zijn
           } else {

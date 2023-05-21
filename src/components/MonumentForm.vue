@@ -30,53 +30,38 @@
         </div>
       </div>
 
+
       <fieldset>
-        <legend>Type:</legend> //TDO: css hier nog aanpassen
+        <legend>Type:</legend>
         <div class="language-field">
           <div class="language-label">English</div>
           <div class="radio-container" v-for="(type, index) in typesEn" :key="index">
-            <input type="radio" :id="`option${index+1}`" :value="type" v-model="formData.type" required>
-            <label :for="`option${index+1}`">{{ type }}</label>
+            <input
+              type="radio"
+              :id="`optionEn${index+1}`"
+              :value="type"
+              v-model="formData.monument_language.find(lang => lang.language === 'English').type"
+              required
+            >
+            <label :for="`optionEn${index+1}`">{{ type }}</label>
           </div>
         </div>
 
         <div class="language-field">
           <div class="language-label">Dutch</div>
           <div class="radio-container" v-for="(type, index) in typesNl" :key="index">
-            <input type="radio" :id="`option${index+1}`" :value="type" v-model="formData.type" required>
-            <label :for="`option${index+1}`">{{ type }}</label>
+            <input
+              type="radio"
+              :id="`optionNl${index+1}`"
+              :value="type"
+              v-model="formData.monument_language.find(lang => lang.language === 'Dutch').type"
+              required
+            >
+            <label :for="`optionNl${index+1}`">{{ type }}</label>
           </div>
         </div>
       </fieldset>
 
-
-
-
-      <!-- <fieldset>
-        <legend>Type:</legend> //TODO: nog implementeren
-        <div class="language-field">
-          <div class="checkbox-container">
-            <input type="checkbox" name="option1" value="option1" v-model="formData.type">
-            <label for="option1">Option1</label>
-          </div>
-          <div class="checkbox-container">
-            <input type="checkbox" name="option2" value="option2" v-model="formData.type">
-            <label for="option2">Option2</label>
-          </div>
-          <div class="checkbox-container">
-            <input type="checkbox" name="option3" value="option3" v-model="formData.type">
-            <label for="option3">Option3</label>
-          </div>
-          <div class="checkbox-container">
-            <input type="checkbox" name="option4" value="option4" v-model="formData.type">
-            <label for="option4">Option4</label>
-          </div>
-          <div class="checkbox-container">
-            <input type="checkbox" name="option5" value="option5" v-model="formData.type">
-            <label for="option5">Option5</label>
-          </div>
-        </div>
-      </fieldset> -->
 
       <div class="form-field">
         <label for="year-of-construction">Year of construction:</label>
@@ -91,18 +76,33 @@
         </div>
       </div>
 
-      <fieldset> //TODO: css hier beter maken!
+      <fieldset>
         <legend>Accessibility:</legend>
-          <div class="language-label">English</div>
-          <div class="checkbox-container" v-for="option in accessibilityEn" :key="option">
-            <input type="checkbox" :name="option" :value="option" v-model="formData.accessibility">
-            <label :for="option">{{ option }}</label>
-          </div>
-          <div class="language-label">Dutch</div>
-          <div class="checkbox-container" v-for="option in accessibilityNl" :key="option">
-            <input type="checkbox" :name="option" :value="option" v-model="formData.accessibility">
-            <label :for="option">{{ option }}</label>
-          </div>
+        <div class="language-label">English</div>
+        <div class="checkbox-container" v-for="option in accessibilityEn" :key="option">
+          <input
+            type="checkbox"
+            :name="option"
+            :value="option"
+            v-model="formData.monument_language.find(lang => lang.language === 'English').accessibility"
+            :true-value="option"
+            :false-value="null"
+          >
+          <label :for="option">{{ option }}</label>
+        </div>
+
+        <div class="language-label">Dutch</div>
+        <div class="checkbox-container" v-for="option in accessibilityNl" :key="option">
+          <input
+            type="checkbox"
+            :name="option"
+            :value="option"
+            v-model="formData.monument_language.find(lang => lang.language === 'Dutch').accessibility"
+            :true-value="option"
+            :false-value="null"
+          >
+          <label :for="option">{{ option }}</label>
+        </div>
       </fieldset>
 
       <div class="form-field">
@@ -129,9 +129,9 @@
         <legend>Location:</legend>
         <div class="language-field">
           <div class="language-label">Latitude:</div>
-          <input type="number" v-model="formData.location.latitude" required>
+          <input type="number" v-model="formData.location.latitude" step="any" required>
           <div class="language-label">Longitude:</div>
-          <input type="number" v-model="formData.location.longitude" required>
+          <input type="number" v-model="formData.location.longitude" step="any" required>
         </div>
         <div class="language-field">
           <div class="language-label">Street:</div>
@@ -164,15 +164,19 @@
         <div class="language-label">Url:</div>
         <textarea name="url" v-model="image.url" required></textarea>
         <div class="language-label">Caption:</div>
-        <textarea name="caption" v-model="image.caption" required></textarea>
+        <textarea name="caption" v-model="image.caption"></textarea>
       </div>
     </fieldset>
 
     <fieldset>
       <legend>AudiovisualSource:</legend>
       <div class="language-field">
-        <div class="language-label">Title:</div>
-        <input type="text" v-model="formData.audiovisual_source.audiovisual_source_language[0].title" required>
+        <div class="language-label">Title English:</div>
+        <input type="text" v-model="formData.audiovisual_source.audiovisual_source_language.find(lang => lang.language === 'English').title" required>        
+
+        <div class="language-label">Title Dutch:</div>
+        <input type="text" v-model="formData.audiovisual_source.audiovisual_source_language.find(lang => lang.language === 'Dutch').title" required>     
+      
         <div class="language-label">Url:</div>
         <input type="text" v-model="formData.audiovisual_source.url" required>
       </div>
@@ -202,12 +206,12 @@
         accessibilityNl,
       }
     },
-    mounted() {
-       this.formData.monument_language.find(lang => lang.language === 'English').used_materials = formData.monument_language.find(lang => lang.language === 'English').used_materials.join("\n"); //TODO
-       this.formData.monument_language.find(lang => lang.language === 'Dutch').used_materials = formData.monument_language.find(lang => lang.language === 'Dutch').used_materials.join("\n"); //TODO
-      this.formData.images.url = this.formData.images.url.join("\n"); //TODO: werkt dit? 
-      this.formData.images.caption = this.formData.images.caption.join("\n"); //TODO: werkt dit? 
-    },
+    // mounted() {
+    //    formData.monument_language.find(lang => lang.language === 'English').used_materials = formData.monument_language.find(lang => lang.language === 'English').used_materials.join("\n"); //TODO
+    //    formData.monument_language.find(lang => lang.language === 'Dutch').used_materials = formData.monument_language.find(lang => lang.language === 'Dutch').used_materials.join("\n"); //TODO
+    //   formData.images.url = formData.images.url.join("\n"); //TODO: werkt dit? 
+    //   formData.images.caption = formData.images.caption.join("\n"); //TODO: werkt dit? 
+    // },
     props: {
       formData: {
         type: Object,
@@ -216,13 +220,13 @@
     },
     computed: {
     // updatedMaterialsUsed() { //TODO: dit nog gebruiken? 
-    //   const updatedFormData = { ...this.formData };
+    //   const updatedFormData = { ...formData };
     //   updatedFormData.materialsUsed.en = updatedFormData.materialsUsed.en.split("\n");
     //   updatedFormData.materialsUsed.nl = updatedFormData.materialsUsed.nl.split("\n");
     //   return updatedFormData;
     // },
     // updatedImages() {
-    //   const updatedFormData = { ...this.formData };
+    //   const updatedFormData = { ...formData };
     //   updatedFormData.images.url = updatedFormData.images.url.split("\n");
     //   updatedFormData.images.caption = updatedFormData.images.caption.split("\n");
     //   return updatedFormData;
@@ -231,7 +235,11 @@
     methods: {
       submitForm() {
         // Emit event to notify parent component
-        this.$emit("formSubmitted", this.formData); //todo: hier de formdata meegeven?
+        console.log("emit formSubmitted")
+        console.log(JSON.parse(JSON.stringify(this.formData)));
+        this.$emit("formSubmitted", JSON.parse(JSON.stringify(this.formData))); //todo: hier de formdata meegeven?
+
+        // this.$emit("formSubmitted", this.formData); //todo: hier de formdata meegeven?
       }
     }
   };

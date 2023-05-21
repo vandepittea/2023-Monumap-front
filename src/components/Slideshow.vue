@@ -1,8 +1,8 @@
-<template>
+  <template>
     <div class="slideshow">
       <div v-for="(image, index) in images" :key="index" :class="['slide', { 'active-slide': index === currentSlide }]">
         <img :src="image.url" />
-        <div class="caption">{{ image.caption }}</div>
+        <div class="caption">   {{ image.captions.english || image.captions.dutch }} </div>
       </div>
       <div class="slideshow-navigation">
         <button @click="prevSlide" :disabled="currentSlide === 0">
@@ -28,6 +28,9 @@
       return {
         currentSlide: 0,
       };
+    },
+    mounted() {
+    setInterval(this.nextSlide, 3000);
     },
     methods: {
       prevSlide() {
@@ -106,4 +109,5 @@
   button:hover {
     transform: scale(1.2);
   }
-  </style>  
+  </style>   
+  

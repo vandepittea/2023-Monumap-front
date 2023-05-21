@@ -1,7 +1,7 @@
 <script>
 import Slideshow from "../components/Slideshow.vue";
 import MonumentService from "../services/MonumentService";
-//import { computed } from 'vue'; TODO: wegdoen
+
 export default {
   name: "MonumentDetail",
   components: {
@@ -73,23 +73,46 @@ export default {
       this.$router.push({ name: 'UpdateMonument', params: { id: this.monument.id } });
     },
     
-//     getSlideshowImages() {
-//       const images = this.monument.images; 
-//       const captions = this.monument.audiovisual_source.map(audiovisual => audiovisual.caption); 
-//       console.log(images);
-//       return images.map((image, index) => ({
-//         url: image[index].url,
-//         caption: captions[index] || '',
-//       }));
-// }
+    // getSlideshowImages() {
+    //   const images = this.monument.images; 
+    //   const captions = this.monument.audiovisual_source.map(audiovisual => audiovisual.caption); 
+    //   console.log(images);
+    //   return images.map((image, index) => ({
+    //     url: image[index].url,
+    //     caption: captions[index] || '',
+  //   //   }));
+  // getSlideshowImages() {
+  //   const images = this.monument.images;
+  //   console.log(images);
+  //   const captions = images.map(image => image.caption || '');
+  //   return images.map((image, index) => ({
+  //     url: image.url,
+  //     caption: captions[index],
+  //   }));
+  // },
+  // },
+
+  getSlideshowImages() {
+    const images = this.monument.images;
+    return images.map((image) => {
+      const captions = image.image_language.reduce((acc, lang) => {
+        acc[lang.language.toLowerCase()] = lang.caption;
+        return acc;
+      }, {});
+      return {
+        url: image.url,
+        captions: captions,
+      };
+    });
   },
+},
 };
 </script>
 
 <template>
   <div class="monument-detail">
     <h1>{{ monument.monument_language[0].name }}</h1>
-    <!-- <slideshow :images="getSlideshowImages()" />  TODO: foto's hier krijgen-->
+    <slideshow :images="getSlideshowImages()" />  TODO: foto's hier krijgen
     <div class="details-container">
       <div class="detail-row">
         <div class="label">Name</div>
