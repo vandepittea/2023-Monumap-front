@@ -1,6 +1,6 @@
 <template>
     <form @submit.prevent="submitForm">
-      {{ formData }}
+      <!-- {{ formData }} -->
       <div class="form-field">
       <label for="name">Name:</label>
       <div class="language-field">

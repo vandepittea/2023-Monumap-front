@@ -186,12 +186,19 @@ formData: {
         this.errors.push("Please enter the materials used in both English and Dutch.");
       }
 
-      if (this.errors.length === 0) {
+    if (this.errors.length === 0) {
         this.service.addMonument(formData, this.token).then(response => {
-          if (response.ok) { //TODO: contrroleren of dit werkt
+          console.log("response in addMonumentView" )
+          console.log(response)
+          console.log("response in addMonumentView" )
+
+          if (response.message === "Monument already exists") {
+            this.errors.push("Could not add the monument");
+
+          } else if (!response.message) { 
             this.$router.push("/"); 
           } else {
-            this.errors.push("Could not update the monument");
+            this.errors.push("Could not add the monument");
           }
         });
       }
