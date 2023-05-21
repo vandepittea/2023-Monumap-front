@@ -45,7 +45,7 @@ export default {
     toggleLanguage() {
       this.currentLanguage = this.currentLanguage === 'English' ? 'Dutch' : 'English'; 
       this.languageImage = this.languageImages[this.currentLanguage];
-      localStorage.setItem('language', this.currentLanguage); //TODO: dit hier in de store maken 
+      this.$store.commit('setCurrentLanguage', this.currentLanguage);
     },
     logout() {
       this.$store.commit('setLoggedIn', false);

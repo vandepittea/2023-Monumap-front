@@ -1,15 +1,19 @@
-const url = "http://monuments.local/api/monuments";
+// const url = "http://monuments.local/api/monuments";
+
+const url = "http://localhost:8000/api/monuments";
 
 const storedLanguage = localStorage.getItem('language');
+// console.log(this.$store.state.currentLanguage);
 console.log(storedLanguage);
 // import { useStore } from 'vuex';
 // const store = useStore();
-// const storedLanguage = store.state.currentLanguage;
+// const la = store.state.currentLanguage;
+// console.log(la);
 
-export default class MonumnetService{
+export default class MonumentService{
     constructor(){
         this.page = 1;
-        this.perPage = 10;
+        this.perPage = 4;
     }
 
     setPage(page){
@@ -63,14 +67,11 @@ export default class MonumnetService{
     async getMonumentById(id, language=""){
         let fullUrl = url + "/" + id;
         if (!language == ""){
-            fullUrl += `?language=${language}`; //TODO: language hier uit store halen
+            fullUrl += `?language=${language}`;
         }
         const response = await fetch(fullUrl); 
         const json = await response.json();
         const data = json.data;
-        console.log("-----------------------------")
-        console.log(data);
-        console.log("-----------------------------")
 
         return data; 
     }
@@ -94,17 +95,13 @@ export default class MonumnetService{
     async login(username, password){
         const response = await fetch(url + "/login", {
             method: "POST",
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password})
+            body: JSON.stringify({username, password}),
             //TODO: hier ergens cookies opvangen?
         });
-
-    
-        // const setCookieHeader = response.headers.get("Set-Cookie");
-        // console.log(setCookieHeader);
-
         return response;  
     }
 

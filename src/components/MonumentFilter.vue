@@ -66,7 +66,9 @@
                                                   this.filter.monumentDesigner, 
                                                   this.filter.costToConstruct);
                                                   //TODO: pages hier ook nog toevoegen?
+        console.log("in filterdMonuments")                                           
         console.log(filteredMonuments)
+        console.log("in filterdMonuments")
   
         // TODO: Update the parent component's `monuments` data with the filtered results
         // You can emit an event or call a method in the parent component to achieve this
