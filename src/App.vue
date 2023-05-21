@@ -5,6 +5,8 @@
 
   const store = useStore();
   const loggedIn = store.state.loggedIn;
+  localStorage.setItem('language', "English");
+
 </script>
 
 <template>
