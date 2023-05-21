@@ -14,8 +14,8 @@
         <li><router-link to="/">Home</router-link></li>
         <li v-if="!store.state.loggedIn"><router-link to="/login">Login</router-link></li>
         <li v-if="!store.state.loggedIn"><router-link to="/register">Register</router-link></li>
-        <li v-if="store.state.loggedIn"><router-link to="/new-monument">Add Monument</router-link></li> //TODO: dit netter maken? 
-        <li v-if="store.state.loggedIn"><button @click="logout">Logout</button></li> //TODO: dit netter maken?
+        <li v-if="store.state.loggedIn"><router-link to="/new-monument">Add Monument</router-link></li> 
+        <li v-if="store.state.loggedIn"><button @click="logout">Logout</button></li> 
       </ul>
     </nav>
     <img :src="languageImage" @click="toggleLanguage" id="languageImage" alt="Language switcher" />

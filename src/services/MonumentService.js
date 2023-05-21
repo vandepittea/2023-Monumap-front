@@ -3,7 +3,7 @@
 // const dsq = store.state.currentLanguage; // Access language from Vuex store
 // console.log(dsq); // Log the language to the console
 
-const url = "http://localhost:8000/api/monuments";
+const url = "http://localhost:8000/api/";
 
 const storedLanguage = localStorage.getItem('language');
 console.log(storedLanguage);
@@ -44,7 +44,7 @@ export default class MonumentService{
           queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`); //todo: deze parameter is niet correct, moet nog gecontroleerd zijn
         }
       
-        let fullUrl = url + '?';
+        let fullUrl = url + 'monuments?';
 
         fullUrl += `page=${this.page}`;
         fullUrl += `&per_page=${this.perPage}`;
@@ -64,7 +64,7 @@ export default class MonumentService{
     }
     
     async getMonumentById(id, language=""){
-        let fullUrl = url + "/" + id;
+        let fullUrl = url + "monuments/" + id;
         if (!language == ""){
             fullUrl += `?language=${language}`;
         }
@@ -80,8 +80,8 @@ export default class MonumentService{
         console.log(username);
         console.log(password);
         console.log(JSON.stringify({username, password}));
-        console.log(url + "/register");
-        const response = await fetch(url + "/register", {
+        console.log(url + "register");
+        const response = await fetch(url + "register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -92,7 +92,7 @@ export default class MonumentService{
     }
 
     async login(username, password){
-        const response = await fetch(url + "/login", {
+        const response = await fetch(url + "login", {
             method: "POST",
            // credentials: 'include',
             headers: {
@@ -105,7 +105,7 @@ export default class MonumentService{
     }
 
     async addMonument(monumentData, token){
-        const response = await fetch(url, {
+        const response = await fetch(url + "monuments", {
             method: "POST",
             credentials: 'include',
             headers: {
@@ -120,7 +120,7 @@ export default class MonumentService{
     }
  
     async updateMonument(id, monumentData, token) {
-        const response = await fetch(url + "/" + id, {
+        const response = await fetch(url + "monuments/" + id, {
           method: 'PUT',
           credentials: 'include',
           headers: {
@@ -136,7 +136,7 @@ export default class MonumentService{
       }
       
       async deleteMonument(id, token) {
-        const response = await fetch(url + "/" + id, {
+        const response = await fetch(url + "monuments/" + id, {
           method: 'DELETE',
           credentials: 'include',
         });

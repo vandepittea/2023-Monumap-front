@@ -25,7 +25,6 @@ import MonumnetService from '../services/MonumentService';
 import { useStore } from 'vuex'; //TODO: laten staan? 
 
 
-
 export default {    
     name: "LoginView",
     data() {
