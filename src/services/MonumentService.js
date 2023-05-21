@@ -107,9 +107,10 @@ export default class MonumentService{
     async addMonument(monumentData, token){
         const response = await fetch(url, {
             method: "POST",
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${token}`,
+               // Authorization: `Bearer ${token}`,
             }, 
             body: JSON.stringify(monumentData),
         });
@@ -121,12 +122,15 @@ export default class MonumentService{
     async updateMonument(id, monumentData, token) {
         const response = await fetch(url + "/" + id, {
           method: 'PUT',
+          credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
+           // Authorization: `Bearer ${token}`,
+        }, 
           body: JSON.stringify(monumentData),
         });
+
+        console.log(response)
         const data = await response.json();
         return data;
       }
@@ -135,7 +139,6 @@ export default class MonumentService{
         const response = await fetch(url + "/" + id, {
           method: 'DELETE',
           credentials: 'include',
-          
         });
         const data = await response.json();
         return data;
