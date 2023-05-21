@@ -66,65 +66,91 @@ export default {
 //   ]
 // },
 
-formData : {
-  year_of_construction: 0,
-  monument_designer: "",
-  audiovisual_source: {
-    audiovisual_source_language: [
-      { language: "English", title: "" },
-      { language: "Dutch", title: "" }
-    ],
-    url: "",
-    type: "",
-  },
-  cost_to_construct: 0,
-  dimensions: {
-    height: 0,
-    width: 0,
-    depth: 0,
-  },
-  images: [
-    { /* ... */ },
-    { /* ... */ }
-  ],
-  location: {
-    id: 0,
-    latitude: 0,
-    longitude: 0,
-    street: "",
-    number: 0,
-    city: ""
-  },
-  monument_designer: "",
-  monument_language: [
-    {
-      accessibility: [],
-      description: "",
-      historical_significance: "",
-      language: "English",
-      name: "",
-      type: "",
-      used_materials: []
-    },
-    {
-      accessibility: [""],
-      description: "",
-      historical_significance: "",
-      language: "Dutch",
-      name: "",
-      type: "",
-      used_materials: [""]
-    }
-  ],
-  weight: 1000,
-  year_of_construction: 2016
-},
-
-errors: [],
-service: new MonumentService(),
-token: document.cookie
-};
-
+formData: {
+          year_of_construction: 1975,
+          monument_designer: 'John Smith',
+          weight: 5000,
+          cost_to_construct: '100000.00',
+          location: {
+            latitude: 51.123456,
+            longitude: -0.987654,
+            street: 'null',
+            number: 0,
+            city: 'null',
+          },
+          dimensions: {
+            height: 10,
+            width: 10,
+            depth: 10,
+          },
+          images: [
+            {
+              url: 'https://www.eiffeltoren.info/wp-content/uploads/sites/12/2022/12/eiffel-tower.jpg',
+              image_language: [
+                {
+                  caption: 'Caption of image 1',
+                  language: 'English',
+                },
+                {
+                  caption: 'Beschrijving van afbeelding 1',
+                  language: 'Dutch',
+                },
+              ],
+            },
+            {
+              url: 'https://static.dw.com/image/15861462_605.jpg',
+              image_language: [
+                {
+                  caption: 'Caption of image 2',
+                  language: 'English',
+                },
+                {
+                  caption: 'Beschrijving van afbeelding 2',
+                  language: 'Dutch',
+                },
+              ],
+            },
+          ],
+          audiovisual_source: {
+            url: 'http://example.com/audiovisual_source.mp4',
+            type: 'video',
+            audiovisual_source_language: [
+              {
+                title: 'English audiovisual source',
+                language: 'English',
+              },
+              {
+                title: 'Nederlandse audiovisuele bron',
+                language: 'Dutch',
+              },
+            ],
+          },
+          monument_language: [
+            {
+              language: 'Dutch',
+              name: 'Voorbeeldmonument',
+              description: 'Beschrijving van het voorbeeldmonument',
+              historical_significance: 'Historische betekenis van het voorbeeldmonument',
+              type: 'Oorlogsmonumenten',
+              accessibility: ['rolstoelvriendelijk', 'in de buurt van parkeerterreinen'],
+              used_materials: ['Steen', ' Metaal'],
+            },
+            {
+              language: 'English',
+              name: 'Example Monument 1',
+              description: 'Description of the example monument 1',
+              historical_significance: 'Historical significance of the example monument 1',
+              type: 'War Memorials',
+              accessibility: ['wheelchair-friendly', 'near parking areas'],
+              used_materials: ['Stone', ' Metal'],
+            },
+          ],
+        
+      },
+      errors: [],
+      service: new MonumentService(),
+      token: document.cookie
+    };
   },
   computed: {
     hasErrors() {

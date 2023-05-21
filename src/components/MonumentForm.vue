@@ -1,5 +1,6 @@
 <template>
     <form @submit.prevent="submitForm">
+      {{ formData }}
       <div class="form-field">
       <label for="name">Name:</label>
       <div class="language-field">
@@ -158,15 +159,32 @@
           <input type="text" v-model="formData.dimensions.depth" required>
         </div>
       </fieldset>
-      <fieldset>
+      <!-- <fieldset>
       <legend>Images:</legend>
       <div v-for="(image, index) in formData.images" :key="index" class="language-field">
         <div class="language-label">Url:</div>
         <textarea name="url" v-model="image.url" required></textarea>
-        <div class="language-label">Caption:</div>
-        <textarea name="caption" v-model="image.caption"></textarea>
+        <div class="language-label">Caption English:</div>
+        <textarea name="caption" v-model="formdata.images[0].caption"></textarea>
+        <div class="language-label">Caption Dutch:</div>
+        <textarea name="caption" v-model="formdata.images[1].caption"></textarea>
       </div>
-    </fieldset>
+    </fieldset> -->
+    <!-- <fieldset>
+  <legend>Images:</legend>
+  <div v-for="(image, index) in formData.images" :key="index" class="language-field">
+    <div class="language-label">Url:</div>
+    <textarea name="url" v-model="image.url" required></textarea>
+    <div class="language-label">Caption English:</div>
+    <textarea name="caption" v-model="image.image_language.find(lang => lang.language === 'English').caption" required></textarea>
+    <div class="language-label">Caption Dutch:</div>
+    <textarea name="caption" v-model="image.image_language.find(lang => lang.language === 'Dutch').caption" required></textarea>
+  </div>
+</fieldset> -->
+
+
+
+
 
     <fieldset>
       <legend>AudiovisualSource:</legend>
@@ -192,7 +210,7 @@
 
       <input type="submit" value="Submit">
     </form>
-  </template> 
+  </template>  
   
   <script>
   import { typesNl, typesEn, accessibilityEn, accessibilityNl } from "../utils/arraysValues.js";
@@ -218,20 +236,22 @@
         required: true,
       },
     },
-    computed: {
-    // updatedMaterialsUsed() { //TODO: dit nog gebruiken? 
-    //   const updatedFormData = { ...formData };
-    //   updatedFormData.materialsUsed.en = updatedFormData.materialsUsed.en.split("\n");
-    //   updatedFormData.materialsUsed.nl = updatedFormData.materialsUsed.nl.split("\n");
-    //   return updatedFormData;
-    // },
-    // updatedImages() {
-    //   const updatedFormData = { ...formData };
-    //   updatedFormData.images.url = updatedFormData.images.url.split("\n");
-    //   updatedFormData.images.caption = updatedFormData.images.caption.split("\n");
-    //   return updatedFormData;
-    // }
-  },
+
+
+  //   computed: {
+  //   // updatedMaterialsUsed() { //TODO: dit nog gebruiken? 
+  //   //   const updatedFormData = { ...formData };
+  //   //   updatedFormData.materialsUsed.en = updatedFormData.materialsUsed.en.split("\n");
+  //   //   updatedFormData.materialsUsed.nl = updatedFormData.materialsUsed.nl.split("\n");
+  //   //   return updatedFormData;
+  //   // },
+  //   // updatedImages() {
+  //   //   const updatedFormData = { ...formData };
+  //   //   updatedFormData.images.url = updatedFormData.images.url.split("\n");
+  //   //   updatedFormData.images.caption = updatedFormData.images.caption.split("\n");
+  //   //   return updatedFormData;
+  //   // }
+  // },
     methods: {
       submitForm() {
         // Emit event to notify parent component
