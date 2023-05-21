@@ -74,22 +74,6 @@ export default class MonumentService{
 
         return data; 
     }
-   
-
-    // async register(username, password){
-    //     console.log(username);
-    //     console.log(password);
-    //     console.log(JSON.stringify({username, password}));
-    //     console.log(url + "register");
-    //     const response = await fetch(url + "register", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         body: JSON.stringify({username, password}) 
-    //     });
-    //     return response;
-    // }
 
     async register(username, password){
       console.log(username);
@@ -110,7 +94,7 @@ export default class MonumentService{
     async login(username, password){
         const response = await fetch(url + "login", {
             method: "POST",
-           // credentials: 'include',
+            credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },
