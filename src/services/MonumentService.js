@@ -50,7 +50,7 @@ export default class MonumentService{
         fullUrl += `&per_page=${this.perPage}`;
         fullUrl += `&Language=${storedLanguage}&`; //TODO: language hier uit store halen 
    
-
+        console.log(fullUrl)
         if (queryParams.length > 0) {
             console.log(queryParams.length);
           fullUrl += `${queryParams.join('&')}`;
@@ -76,20 +76,36 @@ export default class MonumentService{
     }
    
 
+    // async register(username, password){
+    //     console.log(username);
+    //     console.log(password);
+    //     console.log(JSON.stringify({username, password}));
+    //     console.log(url + "register");
+    //     const response = await fetch(url + "register", {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify({username, password}) 
+    //     });
+    //     return response;
+    // }
+
     async register(username, password){
-        console.log(username);
-        console.log(password);
-        console.log(JSON.stringify({username, password}));
-        console.log(url + "register");
-        const response = await fetch(url + "register", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({username, password}) 
-        });
-        return response;
-    }
+      console.log(username);
+      console.log(password);
+      console.log(JSON.stringify({username, password}));
+      console.log(url + "register");
+      const response = await fetch(url + "register", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify({username, password}) 
+      });
+      return response;
+  }
+
 
     async login(username, password){
         const response = await fetch(url + "login", {
