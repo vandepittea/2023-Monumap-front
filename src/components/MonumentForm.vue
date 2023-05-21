@@ -4,19 +4,19 @@
         <label for="name">Name:</label>
         <div class="language-field">
           <div class="language-label">English</div>
-          <input type="text" name="name" v-model="formData.name.en" required>
+          <input type="text" name="name" v-model="formData.monument_language[1].name" required>
           <div class="language-label">Dutch</div>
-          <input type="text" name="name" v-model="formData.name.nl" required>
+          <input type="text" name="name" v-model="formData.monument_language[0].name" required>
         </div>
       </div>
 
-      <div class="form-field">
+       <div class="form-field">
         <label for="description">Description:</label>
         <div class="language-field">
           <div class="language-label">English</div>
-          <textarea name="description" v-model="formData.description.en" required></textarea>
+          <textarea name="description" v-model="formData.monument_language[1].description" required></textarea>
           <div class="language-label">Dutch</div>
-          <textarea name="description" v-model="formData.description.nl" required></textarea>
+          <textarea name="description" v-model="formData.monument_language[0].description" required></textarea>
         </div>
       </div>
 
@@ -24,13 +24,13 @@
         <label for="historical-significance">Historical significance:</label>
         <div class="language-field">
           <div class="language-label">English</div>
-          <textarea name="historical-significance" v-model="formData.historicalSignificance.en"></textarea>
+          <textarea name="historical-significance" v-model="formData.monument_language[1].historical_significance"></textarea>
           <div class="language-label">Dutch</div>
-          <textarea name="historical-significance" v-model="formData.historicalSignificance.nl"></textarea>
+          <textarea name="historical-significance" v-model="formData.monument_language[0].historical_significance"></textarea>
         </div>
       </div>
 
-      <fieldset>
+      <!-- <fieldset>
         <legend>Type:</legend>
         <div class="language-field">
           <div class="checkbox-container">
@@ -54,24 +54,22 @@
             <label for="option5">Option5</label>
           </div>
         </div>
-      </fieldset>
+      </fieldset> -->
 
       <div class="form-field">
         <label for="year-of-construction">Year of construction:</label>
-        <input type="number" name="year-of-construction" v-model="formData.yearOfConstruction" required>
+        <input type="number" name="year-of-construction" v-model="formData.year_of_construction" required>
       </div>
 
       <div class="form-field">
         <label for="monument-designer">Monument designer:</label>
         <div class="language-field">
           <div class="language-label">English</div>
-          <input type="text" name="monument-designer" v-model="formData.monumentDesigner.en" required>
-          <div class="language-label">Dutch</div>
-          <input type="text" name="monument-designer" v-model="formData.monumentDesigner.nl" required>
+          <input type="text" name="monument-designer" v-model="formData.monument_designer" required>
         </div>
       </div>
 
-      <fieldset>
+      <!-- <fieldset>
         <legend>Accessibility:</legend>
         <div class="language-field">
           <div class="checkbox-container">
@@ -87,15 +85,15 @@
             <label for="full">Full</label>
           </div>
         </div>
-      </fieldset>
+      </fieldset> -->
 
       <div class="form-field">
         <label for="materials-used">Materials used:</label>
         <div class="language-field">
           <div class="language-label">English</div>
-          <textarea name="materials-used" v-model="formData.materialsUsed.en" required></textarea>
+          <textarea name="materials-used" v-model="formData.monument_language[1].used_materials" required></textarea>
           <div class="language-label">Dutch</div>
-          <textarea name="materials-used" v-model="formData.materialsUsed.nl" required></textarea>
+          <textarea name="materials-used" v-model="formData.monument_language[0].used_materials" required></textarea>
         </div>
       </div>
 
@@ -106,7 +104,7 @@
 
       <div class="form-field">
         <label for="cost-of-construction">Cost of construction:</label>
-        <input type="number" name="const-of-construction" v-model="formData.costOfConstruction" required>
+        <input type="number" name="const-of-construction" v-model="formData.cost_to_construct" required>
       </div>
 
       <fieldset>
@@ -119,9 +117,9 @@
         </div>
         <div class="language-field">
           <div class="language-label">Street:</div>
-          <input type="text" v-model="formData.location.street" required>
+          <input type="text" v-model="formData.location.street">
           <div class="language-label">Number:</div>
-          <input type="number" v-model="formData.location.number" required>
+          <input type="number" v-model="formData.location.number">
         </div>
         <div class="language-field">
           <div class="language-label">City:</div>
@@ -143,7 +141,7 @@
         </div>
       </fieldset>
 
-      <fieldset>
+      <!-- <fieldset>
         <legend>Images:</legend>
         <div class="language-field">
           <div class="language-label">Url:</div>
@@ -151,9 +149,9 @@
           <div class="language-label">Caption:</div>
           <textarea name="caption" v-model="formData.images.caption" required></textarea>
         </div>
-      </fieldset>
+      </fieldset> -->
 
-      <fieldset>
+      <!-- <fieldset>
         <legend>AudiovisualSource:</legend>
         <div class="language-field">
           <div class="language-label">Title:</div>
@@ -169,44 +167,44 @@
             <option value="audio">Audio</option>
           </select>
         </div>
-      </fieldset>
+      </fieldset>  -->
 
       <input type="submit" value="Submit">
     </form>
-  </template>
+  </template> 
   
   <script>
   export default {
     mounted() {
-      this.formData.materialsUsed.en = this.formData.materialsUsed.en.join("\n");
-      this.formData.materialsUsed.nl = this.formData.materialsUsed.nl.join("\n");
-      this.formData.images.url = this.formData.images.url.join("\n");
-      this.formData.images.caption = this.formData.images.caption.join("\n");
+      // this.formData.materialsUsed.en = this.formData.materialsUsed.en.join("\n");
+      // this.formData.materialsUsed.nl = this.formData.materialsUsed.nl.join("\n");
+      // this.formData.images.url = this.formData.images.url.join("\n");
+      // this.formData.images.caption = this.formData.images.caption.join("\n");
     },
     props: {
       formData: {
         type: Object,
-        required: true
-      }
+        required: true,
+      },
     },
     computed: {
-    updatedMaterialsUsed() {
-      const updatedFormData = { ...this.formData };
-      updatedFormData.materialsUsed.en = updatedFormData.materialsUsed.en.split("\n");
-      updatedFormData.materialsUsed.nl = updatedFormData.materialsUsed.nl.split("\n");
-      return updatedFormData;
-    },
-    updatedImages() {
-      const updatedFormData = { ...this.formData };
-      updatedFormData.images.url = updatedFormData.images.url.split("\n");
-      updatedFormData.images.caption = updatedFormData.images.caption.split("\n");
-      return updatedFormData;
-    }
+    // updatedMaterialsUsed() {
+    //   const updatedFormData = { ...this.formData };
+    //   updatedFormData.materialsUsed.en = updatedFormData.materialsUsed.en.split("\n");
+    //   updatedFormData.materialsUsed.nl = updatedFormData.materialsUsed.nl.split("\n");
+    //   return updatedFormData;
+    // },
+    // updatedImages() {
+    //   const updatedFormData = { ...this.formData };
+    //   updatedFormData.images.url = updatedFormData.images.url.split("\n");
+    //   updatedFormData.images.caption = updatedFormData.images.caption.split("\n");
+    //   return updatedFormData;
+    // }
   },
     methods: {
       submitForm() {
         // Emit event to notify parent component
-        this.$emit("formSubmitted");
+        this.$emit("formSubmitted", this.formData); //todo: hier de formdata meegeven?
       }
     }
   };

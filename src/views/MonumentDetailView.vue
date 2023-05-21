@@ -1,7 +1,7 @@
 <script>
 import Slideshow from "../components/Slideshow.vue";
 import MonumentService from "../services/MonumentService";
-import { computed } from 'vue';
+//import { computed } from 'vue'; TODO: wegdoen
 export default {
   name: "MonumentDetail",
   components: {
@@ -34,7 +34,7 @@ export default {
   methods: {
     async fetchMonument() {
     try {
-      this.monument = await this.service.getMonumentById(this.monumentId);
+      this.monument = await this.service.getMonumentById(this.monumentId, this.$store.state.currentLanguage);
     } catch (error) {
       console.error('Error fetching monument:', error);
     }
@@ -69,9 +69,10 @@ export default {
         
     },
     updateMonument() {
-      //TODO: hier token meegeven of in de updateMonument zelf
-      this.$router.push({ name: 'UpdateMonument', params: { id: this.monument.id, formData: this.monument } });
+      //TODO: hier token meegeven of in de updateMonument zelf 
+      this.$router.push({ name: 'UpdateMonument', params: { id: this.monument.id } });
     },
+    
 //     getSlideshowImages() {
 //       const images = this.monument.images; 
 //       const captions = this.monument.audiovisual_source.map(audiovisual => audiovisual.caption); 

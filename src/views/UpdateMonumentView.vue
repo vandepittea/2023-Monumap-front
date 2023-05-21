@@ -1,12 +1,12 @@
 <template>
   <div class="container">
-    <h2>Add your monument here</h2>
+    <h2>Update your monument here</h2>
     <div class="error" v-if="hasErrors">
       <ul>
         <li v-for="error in errors" :key="error">{{ error }}</li>
       </ul>
     </div>
-    <MonumentForm :formData="this.formData" @formSubmitted="this.formSubmitted" />
+    <MonumentForm :formData="this.monument" @formSubmitted="this.formSubmitted" />
   </div>
 </template>
 
@@ -17,57 +17,72 @@ import MonumentService from "../services/MonumentService";
 export default {
   name: "UpdateMonumentView",
   props: {
-      formData: {
-        type: Object,
-        required: true
-      },
+      // formData: {
+      //   type: Object,
+      //   required: true
+      // },
+      monumentId: {
+      type: String,
+      required: true,
+    },
     },
   data() {
     return {
+      monument : {},
       errors: [],
-      "service": new MonumentService(),
+      service: new MonumentService(),
     };
   },
+  created() {
+    this.monument = this.fetchMonument()
+},
   computed: {
     hasErrors() {
       return this.errors.length > 0;
     }
   },
   methods: {
-    formSubmitted() {
+    async fetchMonument() {
+    try {
+      this.monument = await this.service.getMonumentById(this.monumentId);
+    } catch (error) {
+      console.error('Error fetching monument:', error);
+    }
+  },
+    formSubmitted(formData) { 
       this.errors = [];
 
+      console.log("formdata in updateMonumentView")
+      console.log(formData)
+      console.log(this.formData)
+      console.log("formdata in updateMonumentView")
+
       // Validate form fields
-      if (!this.formData.name.en || !this.formData.name.nl) {
+      if (!formData.monument_language[1].name|| !formData.monument_language[0].name) { //TODO: this hier terugzetten
         this.errors.push("Please enter the name in both English and Dutch.");
       }
-      if (!this.formData.description.en || !this.formData.description.nl) {
+      if (!formData.monument_language[1].description || !formData.monument_language[0].description) {
         this.errors.push("Please enter the description in both English and Dutch.");
       }
       // if (!this.formData.type.en || !this.formData.type.nl) { //TODO: nog implementeren
       //   this.errors.push("Please choose the type in both English and Dutch.");
       // }
-      if (!this.formData.yearOfConstruction) {
+      if (!formData.year_of_construction) {
         this.errors.push("Please enter the year of construction.");
       }
-      if (!this.formData.monumentDesigner.en || !this.formData.monumentDesigner.nl) {
-        this.errors.push("Please enter the monument designer in both English and Dutch.");
+      if (!formData.monument_designer) {
+        this.errors.push("Please enter the monument designer.");
       }
       /*if (this.formData.accessibility.en.length === 0 || this.formData.accessibility.nl.length === 0) { //TODO: terugzetten als beide talen er zijn
         this.errors.push("Please select the accessibility in both English and Dutch.");
       }*/
-      if (!this.formData.materialsUsed.en || !this.formData.materialsUsed.nl) {
+      if (!formData.monument_language[1].used_materials || !formData.monument_language[0].used_materials) {
         this.errors.push("Please enter the materials used in both English and Dutch.");
-      }
-      if (!this.formData.location.street || !this.formData.location.city) {
-        this.errors.push("Please enter the location in both English and Dutch.");
-      }
-      if (!this.formData.dimensions.height || !this.formData.dimensions.width || !this.formData.dimensions.depth) {
-        this.errors.push("Please enter the dimensions in both English and Dutch.");
       }
 
       if (this.errors.length === 0) {
         //TODO: hier logica van api 
+        console.log(formData)
         this.service.updateMonument(this.formData).then(response => {
           if (response.ok) {
             this.$router.push("/"); //TODO: moet dit hier / of Home zijn
@@ -79,6 +94,7 @@ export default {
       }
     }
   },
+  
   components: {
     MonumentForm
   }

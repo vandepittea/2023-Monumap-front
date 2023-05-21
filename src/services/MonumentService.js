@@ -60,16 +60,18 @@ export default class MonumnetService{
         return data;
     }
     
-    async getMonumentById(id){
-        let fullUrl = url + "/" + id ;
-        fullUrl += `?Language=${storedLanguage}`; //TODO: language hier uit store halen 
-        console.log(fullUrl);
+    async getMonumentById(id, language=""){
+        let fullUrl = url + "/" + id;
+        if (!language == ""){
+            fullUrl += `?language=${language}`; //TODO: language hier uit store halen
+        }
         const response = await fetch(fullUrl); 
-        //TODO: hier ook lanugage meegeven??
         const json = await response.json();
         const data = json.data;
+        console.log("-----------------------------")
         console.log(data);
-        console .log("--------------------")
+        console.log("-----------------------------")
+
         return data; 
     }
    
@@ -95,11 +97,13 @@ export default class MonumnetService{
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username, password}) 
-
+            body: JSON.stringify({username, password})
             //TODO: hier ergens cookies opvangen?
         });
-        console.log(response.headers.get('set-cookie'));
+
+    
+        // const setCookieHeader = response.headers.get("Set-Cookie");
+        // console.log(setCookieHeader);
 
         return response;  
     }
