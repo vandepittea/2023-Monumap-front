@@ -4,27 +4,7 @@
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" v-model="filter.name">
       </div>
-  
-      <!-- <div class="form-group">
-        <label for="type">Select the type:</label>
-        <select id="type" name="type" v-model="filter.type">
-          <option value="">Please choose an option</option> //TODO: Hier nog options krijgen via API of zelf toevoegen?
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-   -->
-<!-- 
-      <select v-model="formData.monument_types" required>
-      <option value="" disabled>Select Monument Type</option>
-      <option v-for="type in monumentTypesOptions" :key="type">{{ type }}</option>
-      </select> -->
 
-          <!-- <div class="language-label">Monument Type:</div>
-    <select v-model="selectedMonumentType">
-      <option v-for="type in monumentTypes" :key="type" :value="type">{{ type }}</option>
-    </select> -->
 
     <div class="form-group">
       <label for="monumentType">Monument Type:</label>

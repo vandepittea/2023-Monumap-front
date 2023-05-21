@@ -1,14 +1,13 @@
 // const url = "http://monuments.local/api/monuments";
+// import { store } from '../store.js'; // Import the Vuex store instance
+// const dsq = store.state.currentLanguage; // Access language from Vuex store
+// console.log(dsq); // Log the language to the console
 
 const url = "http://localhost:8000/api/monuments";
 
 const storedLanguage = localStorage.getItem('language');
-// console.log(this.$store.state.currentLanguage);
 console.log(storedLanguage);
-// import { useStore } from 'vuex';
-// const store = useStore();
-// const la = store.state.currentLanguage;
-// console.log(la);
+
 
 export default class MonumentService{
     constructor(){
@@ -50,7 +49,7 @@ export default class MonumentService{
         fullUrl += `page=${this.page}`;
         fullUrl += `&per_page=${this.perPage}`;
         fullUrl += `&Language=${storedLanguage}&`; //TODO: language hier uit store halen 
-
+   
 
         if (queryParams.length > 0) {
             console.log(queryParams.length);
@@ -95,7 +94,7 @@ export default class MonumentService{
     async login(username, password){
         const response = await fetch(url + "/login", {
             method: "POST",
-            credentials: 'include',
+           // credentials: 'include',
             headers: {
                 "Content-Type": "application/json"
             },
@@ -135,9 +134,8 @@ export default class MonumentService{
       async deleteMonument(id, token) {
         const response = await fetch(url + "/" + id, {
           method: 'DELETE',
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          credentials: 'include',
+          
         });
         const data = await response.json();
         return data;
