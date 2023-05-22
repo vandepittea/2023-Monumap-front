@@ -170,7 +170,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .monument-detail {
   text-align: center;
   padding: 2rem;

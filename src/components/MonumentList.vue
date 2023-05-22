@@ -26,7 +26,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   .flexcontainer {
     display: flex;
     flex-wrap: wrap;

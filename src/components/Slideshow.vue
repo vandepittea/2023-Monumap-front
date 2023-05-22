@@ -47,7 +47,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   .slideshow {
     position: relative;
     height: 25rem;

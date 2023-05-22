@@ -17,7 +17,7 @@
   };
   </script>
   
-  <style>
+  <style scoped>
   img{
     margin-bottom: 1rem;
   }
