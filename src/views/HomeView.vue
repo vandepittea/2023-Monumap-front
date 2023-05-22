@@ -6,6 +6,12 @@
     <MonumentFilter @filterMonuments="filterMonuments" />
 
     <MonumentList :monuments="monuments"  @viewMonumentDetail="viewMonumentDetail" />
+
+    <div class="pagination">
+      <button @click="previousPage" :disabled="page === 1">Previous</button>
+      <span>{{ page }}</span>
+      <button @click="nextPage" :disabled="monuments.length < perPage">Next</button>
+    </div>
   </main>
 </template>
 
@@ -30,6 +36,8 @@ export default {
         monumentDesigner: '',
         costToConstruct: '',
       },
+      page: 1,
+      perPage: 6,
       "service": new MonumentService(), 
     };
   },
@@ -42,11 +50,20 @@ export default {
       this.monuments = filteredMonuments;
     },
     async fetchMonuments() {
-      try {
-        this.monuments = await this.service.getAllMonuments(this.$store.state.currentLanguage);
-      } catch (error) {
-        console.error('Error fetching monuments:', error);
+        this.monuments = await this.service
+                  .setPage(this.page)
+                  .setPerPage(this.perPage)
+                  .getAllMonuments(this.$store.state.currentLanguage);
+    },
+    previousPage() {
+      if (this.page > 1) {
+        this.page--;
+        this.fetchMonuments();
       }
+    },
+    nextPage() {
+      this.page++;
+      this.fetchMonuments();
     },
   },
   async created() {
@@ -64,4 +81,35 @@ export default {
 </script>
 
 <style>
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #337ab7;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pagination button:hover {
+  background-color: #23527c;
+}
+
+.pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pagination span {
+  font-weight: bold;
+  margin: 0 10px;
+  color: #337ab7;
+}
 </style>

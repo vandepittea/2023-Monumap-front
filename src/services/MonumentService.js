@@ -1,13 +1,6 @@
 const url = "http://localhost:8000/api/";
 
-const storedLanguage = localStorage.getItem('language');
-
 export default class MonumentService{
-    constructor(){
-        this.page = 1;
-        this.perPage = 4;
-    }
-
     setPage(page){
         this.page = page;
         return this;
@@ -40,7 +33,7 @@ export default class MonumentService{
         let fullUrl = url + 'monuments?';
 
         fullUrl += `page=${this.page}`;
-        fullUrl += `&per_page=${this.perPage}`;
+        fullUrl += `&perPage=${this.perPage}`;
         fullUrl += `&language=${language}&`; 
    
         if (queryParams.length > 0) {
