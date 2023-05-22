@@ -29,6 +29,12 @@ export default {
     currentLanguage() {
       return this.$store.state.currentLanguage; 
     },
+    deleteButtonText() {
+      return this.$store.state.currentLanguage === 'Dutch' ? 'Verwijderen' : 'Delete';
+    },
+    updateButtonText() {
+      return this.$store.state.currentLanguage === 'Dutch' ? 'Updaten' : 'Update';
+    },
   },
   watch: {
     '$store.state.currentLanguage': 'fetchMonument',
@@ -99,15 +105,15 @@ export default {
     <slideshow :images="getSlideshowImages()" />
     <div class="details-container">
       <div class="detail-row">
-        <div class="label">Name</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Naam' : 'Name' }}</div>
         <div>{{ monument.monument_language[0].name }}</div>
       </div>
       <div class="detail-row">
-        <div class="label">Description</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Beschrijving' : 'Description' }}</div>
         <div>{{ monument.monument_language[0].description }}</div>
       </div>
       <div class="detail-row" v-if="monument.monument_language[0].historical_significance">
-        <div class="label">Historical Significance</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Historische waarde' : 'Historical Significance' }}</div>
         <div>{{ monument.monument_language[0].historical_significance }}</div>
       </div>
       <div class="detail-row">
@@ -115,35 +121,35 @@ export default {
         <div>{{ monument.monument_language[0].type }}</div>
       </div>
       <div class="detail-row" v-if="monument.year_of_construction">
-        <div class="label">Year of Construction</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Bouwjaar' : 'Year of construction' }}</div>
         <div>{{ monument.year_of_construction }}</div>
       </div>
       <div class="detail-row" v-if="monument.monument_designer">
-        <div class="label">Monument Designer</div>
+        <div class="label">Monument designer</div>
         <div>{{ monument.monument_designer }}</div>
       </div>
       <div class="detail-row" v-if="monument.monument_language[0].accessibility.length > 0">
-        <div class="label">Accessibility</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Toegankelijkheid' : 'Accessibility' }}</div>
         <div>{{ monument.monument_language[0].accessibility.join(", ") }}</div>
       </div>
       <div class="detail-row" v-if="monument.monument_language[0].used_materials.length > 0">
-        <div class="label">Used Materials</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Gebruikte materialen' : 'Used materials' }}</div>
         <div>{{ monument.monument_language[0].used_materials.join(", ") }}</div>
       </div>
       <div class="detail-row" v-if="monument.weight">
-        <div class="label">Weight</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Gewicht' : 'Weight' }}</div>
         <div>{{ monument.weight }} kg</div>
       </div>
       <div class="detail-row" v-if="monument.cost_to_construct">
-        <div class="label">Cost to Construct</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Bouwkosten' : 'Cost to construct' }}</div>
         <div>€ {{ monument.cost_to_construct }}</div>
       </div>
       <div class="detail-row">
-        <div class="label">Location</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Locatie' : 'Location' }}</div>
         <div>{{ getLocationString(monument.location) }}</div>
       </div>
       <div class="detail-row" v-if="monument.dimensions">
-        <div class="label">Dimensions</div>
+        <div class="label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Dimensies' : 'Dimensions' }}</div>
         <div>{{ getDimensionsString(monument.dimensions) }}</div>
       </div>
       <div class="audiovisual-row" v-if="monument.audiovisual_source">
@@ -165,8 +171,8 @@ export default {
     </div>
   </div>
   <div class="button-container" v-if="loggedIn">
-    <input type="submit" @click="deleteMonument" value="Delete">
-    <input type="submit" @click="updateMonument" value="Update">
+    <input type="submit" @click="deleteMonument" :value="deleteButtonText">
+    <input type="submit" @click="updateMonument" :value="updateButtonText">
   </div>
 </template>
 
