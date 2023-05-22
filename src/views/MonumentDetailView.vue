@@ -48,7 +48,9 @@ export default {
     },
     getLocationString(location) {
       const { latitude, longitude, street, number, city } = location;
-      return `${latitude}, ${longitude}, ${street} ${number}, ${city}`;
+      const addressParts = [street, number, city].filter((part) => part !== null && part !== 0 && part !== 'null');
+      const address = addressParts.filter(Boolean).join(" ");
+      return `${latitude}, ${longitude}${address ? ", " + address : ""}`;
     },
     getDimensionsString(dimensions) {
       if (!dimensions) {
@@ -92,64 +94,68 @@ export default {
 <template>
   <div class="monument-detail">
     <h1>{{ monument.monument_language[0].name }}</h1>
-    <slideshow :images="getSlideshowImages()" />  
+    <slideshow :images="getSlideshowImages()" />
     <div class="details-container">
       <div class="detail-row">
         <div class="label">Name</div>
-        <div>{{monument.monument_language[0].name  }}</div>
+        <div>{{ monument.monument_language[0].name }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Description</div>
         <div>{{ monument.monument_language[0].description }}</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.monument_language[0].historical_significance">
         <div class="label">Historical Significance</div>
-        <div>{{ monument.monument_language[0].historical_significance}}</div>
+        <div>{{ monument.monument_language[0].historical_significance }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Type</div>
         <div>{{ monument.monument_language[0].type }}</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.year_of_construction">
         <div class="label">Year of Construction</div>
         <div>{{ monument.year_of_construction }}</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.monument_designer">
         <div class="label">Monument Designer</div>
         <div>{{ monument.monument_designer }}</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.monument_language[0].accessibility.length > 0">
         <div class="label">Accessibility</div>
-        <div>{{ monument.monument_language[0].accessibility }}</div>
+        <div>{{ monument.monument_language[0].accessibility.join(", ") }}</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.monument_language[0].used_materials.length > 0">
         <div class="label">Used Materials</div>
-        <div>{{ monument.monument_language[0].used_materials }}</div>
+        <div>{{ monument.monument_language[0].used_materials.join(", ") }}</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.weight">
         <div class="label">Weight</div>
-        <div>{{ monument.weight }}</div>
+        <div>{{ monument.weight }} kg</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.cost_to_construct">
         <div class="label">Cost to Construct</div>
-        <div>{{ monument.cost_to_construct }}</div>
+        <div>€ {{ monument.cost_to_construct }}</div>
       </div>
       <div class="detail-row">
         <div class="label">Location</div>
         <div>{{ getLocationString(monument.location) }}</div>
       </div>
-      <div class="detail-row">
+      <div class="detail-row" v-if="monument.dimensions">
         <div class="label">Dimensions</div>
         <div>{{ getDimensionsString(monument.dimensions) }}</div>
       </div>
-      <div class="audiovisual-row">
+      <div class="audiovisual-row" v-if="monument.audiovisual_source">
         <div class="audiovisual-container">
-          <div v-for="audiovisual in monument.audiovisual_source" :key="audiovisual.type">
-            <div v-if="audiovisual.type === 'audio'">
-              <audio :src="audiovisual.url" controls></audio>
+          <div v-if="monument.audiovisual_source.type === 'audio'">
+            <audio :src="monument.audiovisual_source.url" controls></audio>
+            <div class="audiovisual" v-if="monument.audiovisual_source.audiovisual_source_language[0].title">
+              {{ monument.audiovisual_source.audiovisual_source_language[0].title }}
             </div>
-            <div v-else-if="audiovisual.type === 'video'">
-              <video :src="audiovisual.url" controls></video>
+          </div>
+          <div v-else-if="monument.audiovisual_source.type === 'video'">
+            <video :src="monument.audiovisual_source.url" controls></video>
+            <div class="audiovisual" v-if="monument.audiovisual_source.audiovisual_source_language[0].title">
+              {{ monument.audiovisual_source.audiovisual_source_language[0].title }}
             </div>
           </div>
         </div>
@@ -233,5 +239,9 @@ audio {
 
 .button {
   margin: 0 0.5rem;
+}
+
+.audiovisual {
+  text-align: center;
 }
 </style>
