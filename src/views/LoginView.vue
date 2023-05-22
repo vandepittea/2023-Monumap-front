@@ -38,21 +38,15 @@ export default {
     async login() {
         this.errors = [];
 
-        if (this.errors.length === 0) {
-        try {
-            const response = await this.service.login(this.username, this.password);
-            if (response.ok) { 
-                this.$store.commit('setLoggedIn', true);
+        const response = await this.service.login(this.username, this.password);
+        if (response.ok) { 
+            this.$store.commit('setLoggedIn', true);
             this.$router.push("/");
-            } else {
-            this.errors.push("Invalid login");
-            }
-        } catch (error) {
-            console.log(error);
-            this.errors.push("Failed to login"); 
+        } else {
+            const data = await response.json();
+            this.errors.push(data.error);
         }
         }
-    }
     }
 };
 </script>

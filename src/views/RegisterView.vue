@@ -41,30 +41,16 @@ export default {
     async register() {
         this.errors = [];
 
-        if (this.password !== this.confirmPassword) {
-        this.errors.push("Passwords do not match");
-        }
+        const response = await this.service.register(this.username, this.password);
 
-        if (this.password.length < 6) {
-        this.errors.push("Password should have a minimum length of 6 characters");
-    }
-
-        if (this.errors.length === 0) {
-        try {
-            const response = await this.service.register(this.username, this.password);
-
-        if (response.ok || response.status === 204) { // Handle 204 as successful
+        if (response.ok || response.status === 204) {
           this.$router.push("/login");
         } else {
-          this.errors.push("Could not register");
-        }
-        } catch (error) {
-            this.errors.push("An error occurred while registering");
-            console.log(error);
+            const data = await response.json();
+            this.errors.push(data.error);
         }
         }
     }
-}
 };  
 </script>
 
