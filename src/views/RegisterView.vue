@@ -55,31 +55,4 @@ export default {
 </script>
 
 <style>
-h2 {
-  font-weight: bold;
-  font-size: 2rem;
-  margin-bottom: 2rem;
-}
-
-form label,
-form input,
-form select,
-form textarea,
-fieldset {
-   display: block;
-   width: 100%;
-   margin-bottom: 10px;
-}
-
-.errors {
- color: red;
-}
-
-.error{
-    border: 1px solid red;
-    background-color: rgb(255,182,182);
-    width: 100%;
-    margin-bottom: 2rem;
-}
-
 </style>

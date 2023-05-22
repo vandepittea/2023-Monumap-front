@@ -53,9 +53,6 @@ export default {
     logout() {
       this.$store.commit('setLoggedIn', false);
       this.$router.push({ name: 'Home' });
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
    }
   },
 
