@@ -14,10 +14,10 @@
     <nav>
       <ul>
         <li><router-link to="/">Home</router-link></li>
-        <li v-if="!store.state.loggedIn"><router-link to="/login">Login</router-link></li>
-        <li v-if="!store.state.loggedIn"><router-link to="/register">Register</router-link></li>
-        <li v-if="store.state.loggedIn"><router-link to="/new-monument">Add Monument</router-link></li> 
-        <li v-if="store.state.loggedIn"><button @click="logout">Logout</button></li> 
+        <li v-if="!store.state.loggedIn"><router-link to="/login">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Inloggen' : 'Login' }}</router-link></li>
+        <li v-if="!store.state.loggedIn"><router-link to="/register">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Registreren' : 'Register' }}</router-link></li>
+        <li v-if="store.state.loggedIn"><router-link to="/new-monument">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Monument Toevoegen' : 'Add Monument' }}</router-link></li> 
+        <li v-if="store.state.loggedIn"><button @click="logout">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Uitloggen' : 'Logout' }}</button></li> 
       </ul>
     </nav>
     <img :src="languageImage" @click="toggleLanguage" id="languageImage" alt="Language switcher" />

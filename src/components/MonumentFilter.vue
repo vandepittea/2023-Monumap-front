@@ -29,7 +29,7 @@
         <input type="number" id="costToConstruct" name="costToConstruct" v-model="filter.costToConstruct">
       </div>
   
-      <input type="submit" value="Filter">
+      <input type="submit" :value="filterButtonText">
     </form>
   </template>
   
@@ -61,6 +61,9 @@
           return [];
         }
       },
+      filterButtonText() {
+      return this.$store.state.currentLanguage === 'Dutch' ? 'Filteren' : 'Filter';
+    },
     },
     methods: {
       getMonumentTypeLabel() {

@@ -1,6 +1,6 @@
 <template>
     <main>
-        <h2>Login</h2>
+        <h2>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Inloggen' : 'Login' }}</h2>
         <div class="error" v-show="errors.length > 0">
             <ul>
                 <li v-for="error in errors" :key="error">
@@ -9,13 +9,13 @@
             </ul>
         </div>
         <form @submit.prevent="login">
-            <label for="username">Username:</label>
+            <label for="username">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Gebruikersnaam:' : 'Username:' }}</label>
             <input type="text" id="username" name="username" v-model="username" required>
 
-            <label for="password">Password:</label>
+            <label for="password">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Wachtwoord:' : 'Password:' }}</label>
             <input type="password" id="password" name="password" v-model="password" required>
 
-            <input type="submit" value="Login">
+            <input type="submit" :value="loginButtonText">
         </form>
     </main>
 </template>
@@ -34,6 +34,11 @@ export default {
         
     };
     },
+    computed: {
+    loginButtonText() {
+      return this.$store.state.currentLanguage === 'Dutch' ? 'Inloggen' : 'Login';
+    },
+  },
     methods: {
     async login() {
         this.errors = [];

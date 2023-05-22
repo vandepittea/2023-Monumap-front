@@ -1,6 +1,6 @@
 <template>
     <main>
-        <h2>Register</h2>
+        <h2>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Registreren' : 'Register' }}</h2>
         <div class="error" v-show="errors.length > 0">
             <ul>
                 <li v-for="error in errors" :key="error">
@@ -9,16 +9,16 @@
             </ul>
         </div>
         <form @submit.prevent="register">
-            <label for="username">Username:</label>
+            <label for="username">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Gebruikersnaam:' : 'Username:' }}</label>
             <input type="text" id="username" name="username" v-model="username" required>
 
-            <label for="password">Password:</label>
+            <label for="password">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Wachtwoord:' : 'Password:' }}</label>
             <input type="password" id="password" name="password" v-model="password" required>
 
-            <label for="confirm-password">Confirm Password:</label>
+            <label for="confirm-password">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Bevestig wachtwoord:' : 'Confirm password:' }}</label>
             <input type="password" id="confirm-password" name="confirm_password" v-model="confirmPassword" required>
 
-            <input type="submit" value="Register">
+            <input type="submit" :value="registerButtonText">
         </form>
     </main>
 </template>
@@ -37,6 +37,11 @@ export default {
         "service": new MonumentService(), 
     };
     },
+    computed: {
+    registerButtonText() {
+      return this.$store.state.currentLanguage === 'Dutch' ? 'Registreren' : 'Register';
+    },
+  },
     methods: {
     async register() {
         this.errors = [];
