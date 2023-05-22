@@ -22,7 +22,6 @@ export default {
   created() {
     this.monument = this.fetchMonument()
 },
-
   computed: {
     loggedIn() {
       return this.$store.state.loggedIn;
@@ -30,6 +29,9 @@ export default {
     currentLanguage() {
       return this.$store.state.currentLanguage; 
     },
+  },
+  watch: {
+    '$store.state.currentLanguage': 'fetchMonument',
   },
   methods: {
     async fetchMonument() {
