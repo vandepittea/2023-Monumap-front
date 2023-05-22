@@ -89,7 +89,7 @@ export default class MonumentService{
         return response;  
     }
 
-    async addMonument(monumentData){
+    async addMonument(monumentData, router){
         const response = await fetch(url + "monuments", {
             method: "POST",
             credentials: 'include',
@@ -98,11 +98,21 @@ export default class MonumentService{
             }, 
             body: JSON.stringify(monumentData),
         });
+
+        if(response.status === 409){
+          const errorData = await response.json();
+          throw new Error(errorData.message);
+        }
+
+        if (response.status === 500) {
+          router.push({ name: 'Login' });
+        }
+    
         const data = await response.json();
         return data;
-    }
+      }
  
-    async updateMonument(id, monumentData) {
+    async updateMonument(id, monumentData, router) {
         const response = await fetch(url + "monuments/" + id, {
           method: 'PUT',
           credentials: 'include',
@@ -112,15 +122,29 @@ export default class MonumentService{
           body: JSON.stringify(monumentData),
         });
 
+        if(response.status === 404){
+          const errorData = await response.json();
+          throw new Error(errorData.message);
+        }
+
+        if (response.status === 500) {
+          router.push({ name: 'Login' });
+        }
+
         const data = await response.json();
         return data;
       }
       
-      async deleteMonument(id) {
+      async deleteMonument(id, router) {
         const response = await fetch(url + "monuments/" + id, {
           method: 'DELETE',
           credentials: 'include',
         });
+
+        if (response.status === 500) {
+          router.push({ name: 'Login' });
+        }
+
         const data = await response.json();
         return data;
       }

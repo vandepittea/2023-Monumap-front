@@ -1,13 +1,13 @@
 const typesNl = [
     'Oorlogsmonumenten',
-    'Beelden en sculpturen',
-    'Historische gebouwen en plaatsen',
+    'Beelden en Sculpturen',
+    'Historische Gebouwen en Plaatsen',
     'Nationale Monumenten',
-    'Archeologische sites',
-    'Culturele en religieuze monumenten',
+    'Archeologische Plaatsen',
+    'Culturele en Religieuze Monumenten',
     'Openbare Kunstinstallaties',
-    'Herdenkingen voor historische gebeurtenissen',
-    'Natuurmonumenten,Graven en Mausolea'
+    'Gedenktekens voor Historische Evenementen',
+    'Natuurmonumenten en Graven en Mausoleums'
 ]
 
 const typesEn = [ 
@@ -15,14 +15,14 @@ const typesEn = [
     'Statues and Sculptures',
     'Historical Buildings and Sites',
     'National Monuments',
-    'Archaeological Sites',
-    'Cultural and Religious Monuments',
+    'Archaeological Sites and Cultural and Religious Monuments',
     'Public Art Installations',
     'Memorials for Historical Events',
-    'Natural Monuments,Tombs and Mausoleums'
+    'Natural Monuments',
+    'Tombs and Mausoleums'
 ]
 
-const accessibilityEn = ["wheelchair-friendly","near parking areas","low-slope ramps","power-assisted doors", "elevators","accessible washrooms"]
+const accessibilityEn = ["wheelchair-friendly","near parking areas","low-slope ramps","power-assisted doors and elevators","accessible washrooms"]
 const accessibilityNl = ["rolstoelvriendelijk","in de buurt van parkeerterreinen","laaghellende opritten","elektrisch ondersteunde deuren en liften","toegankelijke toiletten"]
 
 export {typesNl, typesEn, accessibilityEn, accessibilityNl}

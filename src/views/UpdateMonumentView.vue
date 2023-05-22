@@ -17,10 +17,6 @@ import MonumentService from "../services/MonumentService";
 export default {
   name: "UpdateMonumentView",
   props: {
-      // formData: {
-      //   type: Object,
-      //   required: true
-      // },
       monumentId: {
       type: String,
       required: true,
@@ -31,6 +27,9 @@ export default {
       monument : {},
       errors: [],
       service: new MonumentService(),
+      urlInput: "",
+      captionEnInput: "",
+      captionNlInput: "",
     };
   },
   created() {
@@ -43,47 +42,29 @@ export default {
   },
   methods: {
     async fetchMonument() {
-    try {
       this.monument = await this.service.getMonumentById(this.monumentId);
-    } catch (error) {
-      console.error('Error fetching monument:', error);
-    }
   },
-    formSubmitted(formData) { 
+  formSubmitted(monument) {
       this.errors = [];
 
-      // Validate form fields
-      if (!formData.monument_language[1].name|| !formData.monument_language[0].name) { 
-        this.errors.push("Please enter the name in both English and Dutch.");
-      }
-      if (!formData.monument_language[1].description || !formData.monument_language[0].description) {
-        this.errors.push("Please enter the description in both English and Dutch.");
-      }
-
-      if (!formData.year_of_construction) {
-        this.errors.push("Please enter the year of construction.");
-      }
-      if (!formData.monument_designer) {
-        this.errors.push("Please enter the monument designer.");
-      }
-
-      if (!formData.monument_language[1].used_materials || !formData.monument_language[0].used_materials) {
-        this.errors.push("Please enter the materials used in both English and Dutch.");
-      }
-
-      if (this.errors.length === 0) {
-        this.service.updateMonument(formData).then(response => {
-          if (response.ok) {
-            this.$router.push("/"); 
-          } else {
-            this.errors.push("Could not update the monument");
-          }
-       }
-        );
-      }
-    }
-  },
-  
+      this.service.updateMonument(this.monumentId, monument, this.$router)
+      .then(response => {
+        if (response.errors) {
+          Object.keys(response.errors).forEach(field => {
+            this.errors.push(...response.errors[field]);
+          });
+        } else {
+          this.$router.push("/");
+        }
+      })
+      .catch (error => {
+        this.errors.push(error.message);
+      });
+    },
+    handleFormError(error) {
+      this.errors.push(error);
+    },
+  },  
   components: {
     MonumentForm
   }

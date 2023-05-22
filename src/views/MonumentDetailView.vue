@@ -63,7 +63,7 @@ export default {
     },
 
     deleteMonument() {
-      this.service.deleteMonument(this.monument.id) 
+      this.service.deleteMonument(this.monument.id, this.$router) 
         .then(() => {
         this.$router.push({ name: 'Home' }); 
       })
@@ -155,7 +155,7 @@ export default {
             </div>
           </div>
           <div v-else-if="monument.audiovisual_source.type === 'video'">
-            <video :src="monument.audiovisual_source.url" controls></video>
+            <iframe width="560" height="315" :src="monument.audiovisual_source.url" frameborder="0" allowfullscreen></iframe>
             <div class="audiovisual" v-if="monument.audiovisual_source.audiovisual_source_language[0].title">
               {{ monument.audiovisual_source.audiovisual_source_language[0].title }}
             </div>
