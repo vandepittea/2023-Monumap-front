@@ -1,16 +1,16 @@
 <template>
   <main class="home-view">
-    <h1>Welcome to MonuMap</h1>
-    <h3>Find your favorite monuments</h3>
+    <h1>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Welkom bij MonuMap' : 'Welcome to MonuMap' }}</h1>
+    <h3>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Vind je favoriete monumenten' : 'Find your favorite monuments' }}</h3>
 
     <MonumentFilter @filterMonuments="filterMonuments" />
 
     <MonumentList :monuments="monuments"  @viewMonumentDetail="viewMonumentDetail" />
 
     <div class="pagination">
-      <button @click="previousPage" :disabled="page === 1">Previous</button>
+      <button @click="previousPage" :disabled="page === 1">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Vorige' : 'Previous' }}</button>
       <span>{{ page }}</span>
-      <button @click="nextPage" :disabled="monuments.length < perPage">Next</button>
+      <button @click="nextPage" :disabled="monuments.length < perPage">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Volgende' : 'Next' }}</button>
     </div>
   </main>
 </template>

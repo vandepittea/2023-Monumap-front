@@ -336,8 +336,7 @@
       }
     }
   };
-
-  </script scope>
+  </script>
   
   <style scoped>
   .form-field {

@@ -1,13 +1,13 @@
 <template>
     <form class="filter-form" @submit.prevent="filterMonuments">
       <div class="form-group">
-        <label for="name">Name:</label>
+        <label for="name">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Naam:' : 'Name:' }}</label>
         <input type="text" id="name" name="name" v-model="filter.name">
       </div>
 
 
     <div class="form-group">
-      <label for="monumentType">Monument Type:</label>
+      <label for="monumentType">Monument type:</label>
       <select id="monumentType" name="monumentType" v-model="filter.type">
         <option value="">{{ getMonumentTypeLabel() }}</option>
         <option v-for="type in monumentTypesOptions" :key="type" :value="type">{{ type }}</option>
@@ -15,7 +15,7 @@
     </div>
 
       <div class="form-group">
-        <label for="yearOfConstruction">Year of construction:</label>
+        <label for="yearOfConstruction">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Bouwjaar:' : 'Year of construction:' }}</label>
         <input type="number" id="yearOfConstruction" name="yearOfConstruction" v-model="filter.yearOfConstruction">
       </div>
   
@@ -25,7 +25,7 @@
       </div>
   
       <div class="form-group">
-        <label for="costToConstruct">Cost to construct:</label>
+        <label for="costToConstruct">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Bouwkosten:' : 'Cost to construct:' }}</label>
         <input type="number" id="costToConstruct" name="costToConstruct" v-model="filter.costToConstruct">
       </div>
   
