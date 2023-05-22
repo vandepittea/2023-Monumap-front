@@ -9,7 +9,7 @@
     <div class="form-group">
       <label for="monumentType">Monument Type:</label>
       <select id="monumentType" name="monumentType" v-model="filter.type">
-        <option value="" disabled>Select Monument Type</option>
+        <option value="" disabled>{{ getMonumentTypeLabel() }}</option>
         <option v-for="type in monumentTypesOptions" :key="type" :value="type">{{ type }}</option>
       </select>
     </div>
@@ -34,7 +34,7 @@
   </template>
   
   <script>
-  import MonumnetService from '../services/MonumentService';
+  import MonumentService from '../services/MonumentService';
   import { typesNl, typesEn } from "../utils/arraysValues.js";
 
   export default {
@@ -48,15 +48,14 @@
           monumentDesigner: '',
           costToConstruct: '',
         },
-        "service": new MonumnetService(), 
+        "service": new MonumentService(), 
       };
     },
     computed: {
       monumentTypesOptions() {
-        const language = localStorage.getItem('language') 
-        if (language === 'Dutch') {
+        if (this.$store.state.currentLanguage === 'Dutch') {
           return typesNl;
-        } else if (language === 'English') {
+        } else if (this.$store.state.currentLanguage === 'English') {
           return typesEn;
         } else {
           return [];
@@ -64,18 +63,31 @@
       },
     },
     methods: {
+      getMonumentTypeLabel() {
+        return this.$store.state.currentLanguage === 'Dutch' ? 'Selecteer monument type' : 'Select monument type';
+      },
       async filterMonuments() {
-        const filteredMonuments  = await this.service
-                                  .getAllMonuments(this.filter.name, 
+        const filteredMonuments  = await this.service.getAllMonuments(
+                                                  this.$store.state.currentLanguage,
+                                                  this.filter.name, 
                                                   this.filter.type, 
                                                   this.filter.yearOfConstruction, 
                                                   this.filter.monumentDesigner, 
                                                   this.filter.costToConstruct);
-
         this.$emit('filterMonuments', filteredMonuments);
-
       },
     },
+    watch: {
+    '$store.state.currentLanguage': {
+      handler() {
+        // Trigger recomputation of monumentTypesOptions when the language changes
+        this.$nextTick(() => {
+          this.$forceUpdate();
+        });
+      },
+      immediate: true,
+    },
+  },
   };
   </script>
   <style>

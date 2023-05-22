@@ -3,7 +3,7 @@
     <h1>Welcome to MonuMap</h1>
     <h3>Find your favorite monuments</h3>
 
-    <MonumentFilter @filterMonuments="monuments" />
+    <MonumentFilter @filterMonuments="filterMonuments" />
 
     <MonumentList :monuments="monuments"  @viewMonumentDetail="viewMonumentDetail" />
   </main>
@@ -41,10 +41,25 @@ export default {
     filterMonuments(filteredMonuments) {
       this.monuments = filteredMonuments;
     },
+    async fetchMonuments() {
+      try {
+        this.monuments = await this.service.getAllMonuments(this.$store.state.currentLanguage);
+      } catch (error) {
+        console.error('Error fetching monuments:', error);
+      }
+    },
   },
   async created() {
-    this.monuments  = await this.service.getAllMonuments();
+    this.fetchMonuments();
   },
+  watch: {
+    '$store.state.currentLanguage': {
+      handler() {
+        this.fetchMonuments();
+      },
+      immediate: true,
+    },
+  }
 };
 </script>
 

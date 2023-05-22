@@ -18,7 +18,7 @@ export default class MonumentService{
         return this;
     }
 
-    async getAllMonuments(name, type, yearOfConstruction, monumentDesigner, costToConstruct, language) {
+    async getAllMonuments(language, name, type, yearOfConstruction, monumentDesigner, costToConstruct) {
         let queryParams = [];
       
         if (name) {
@@ -34,14 +34,14 @@ export default class MonumentService{
           queryParams.push(`designer=${encodeURIComponent(monumentDesigner)}`);
         }
         if (costToConstruct) {
-          queryParams.push(`costToConstruct=${encodeURIComponent(costToConstruct)}`); 
+          queryParams.push(`cost=${encodeURIComponent(costToConstruct)}`); 
         }
       
         let fullUrl = url + 'monuments?';
 
         fullUrl += `page=${this.page}`;
         fullUrl += `&per_page=${this.perPage}`;
-        fullUrl += `&Language=${storedLanguage}&`; 
+        fullUrl += `&language=${language}&`; 
    
         if (queryParams.length > 0) {
           fullUrl += `${queryParams.join('&')}`;
