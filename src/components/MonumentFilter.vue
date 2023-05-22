@@ -9,7 +9,7 @@
     <div class="form-group">
       <label for="monumentType">Monument Type:</label>
       <select id="monumentType" name="monumentType" v-model="filter.type">
-        <option value="" disabled>{{ getMonumentTypeLabel() }}</option>
+        <option value="">{{ getMonumentTypeLabel() }}</option>
         <option v-for="type in monumentTypesOptions" :key="type" :value="type">{{ type }}</option>
       </select>
     </div>

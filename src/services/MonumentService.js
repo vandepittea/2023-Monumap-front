@@ -1,6 +1,11 @@
 const url = "http://localhost:8000/api/";
 
 export default class MonumentService{
+    constructor(){
+        this.page = 1;
+        this.perPage = 6;
+    }
+
     setPage(page){
         this.page = page;
         return this;
