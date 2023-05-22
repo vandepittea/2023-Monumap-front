@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h2>Update your monument here</h2>
+    <h2>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Update je monument hier' : 'Update your monument here' }}</h2>
     <div class="error" v-if="hasErrors">
       <ul>
         <li v-for="error in errors" :key="error">{{ error }}</li>

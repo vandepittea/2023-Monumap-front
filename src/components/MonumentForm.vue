@@ -1,27 +1,27 @@
 <template>
   <form @submit.prevent="submitForm">
     <div class="form-field">
-      <div class="language-label">Name:</div>
+      <div class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Naam:' : 'Name:' }}</div>
       <div class="language-field">
-        <label for="name-eng" class="language-label">English</label>
+        <label for="name-eng" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Engels' : 'English' }}</label>
         <input type="text" id="name-eng" v-model="formData.monument_language.find(lang => lang.language === 'English').name">
-        <label for="name-nl" class="language-label">Dutch</label>
+        <label for="name-nl" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Nederlands' : 'Dutch' }}</label>
         <input type="text" id="name-nl" v-model="formData.monument_language.find(lang => lang.language === 'Dutch').name" required>
       </div>
     </div>
 
     <div class="form-field">
-      <div class="language-label">Description:</div>
+      <div class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Beschrijving:' : 'Description:' }}</div>
       <div class="language-field">
-        <label for="description-eng" class="language-label">English</label>
+        <label for="description-eng" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Engels' : 'English' }}</label>
         <textarea id="description-eng" v-model="formData.monument_language.find(lang => lang.language === 'English').description" required></textarea>
-        <label for="description-nl" class="language-label">Dutch</label>
+        <label for="description-nl" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Nederlands' : 'Dutch' }}</label>
         <textarea id="description-nl" v-model="formData.monument_language.find(lang => lang.language === 'Dutch').description" required></textarea>
       </div>
     </div>
 
     <div class="form-field">
-      <div class="language-label">Historical significance:</div>
+      <div class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Historische waarde' : 'Historical significance:' }}</div>
       <div class="language-field">
         <label for="historical-significance-eng" class="language-label">English</label>
         <textarea id="historical-significance-eng" v-model="formData.monument_language.find(lang => lang.language === 'English').historical_significance"></textarea>
@@ -33,13 +33,13 @@
     <div class="form-field">
       <div class="language-label">Type:</div>
       <div class="language-field">
-        <label for="type-eng" class="language-label">English</label>
+        <label for="type-eng" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Engels' : 'English' }}</label>
         <select id="type-eng" v-model="formData.monument_language.find(lang => lang.language === 'English').type" required>
           <option value="">Please choose an option</option>
           <option v-for="type in typesEn" :key="type" :value="type">{{ type }}</option>
         </select>
 
-        <label for="type-nl" class="language-label">Dutch</label>
+        <label for="type-nl" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Nederlands' : 'Dutch' }}</label>
         <select id="type-nl" v-model="formData.monument_language.find(lang => lang.language === 'Dutch').type" required>
           <option value="">Please choose an option</option>
           <option v-for="type in typesNl" :key="type" :value="type">{{ type }}</option>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="form-field">
-      <label for="year-of-construction">Year of construction:</label>
+      <label for="year-of-construction">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Bouwjaar:' : 'Year of construction:' }}</label>
       <input type="number" id="year-of-construction" v-model="formData.year_of_construction" required>
     </div>
 
@@ -58,8 +58,8 @@
     </div>
 
       <fieldset>
-        <legend>Accessibility:</legend>
-        <div class="language-label">English</div>
+        <legend>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Toegankelijkheid:' : 'Accessibility:' }}</legend>
+        <div class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Engels' : 'English' }}</div>
         <div class="checkbox-container" v-for="option in accessibilityEn" :key="option">
           <input
             type="checkbox"
@@ -72,7 +72,7 @@
           <label :for="option">{{ option }}</label>
         </div>
 
-        <div class="language-label">Dutch</div>
+        <div class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Nederlands' : 'Dutch' }}</div>
         <div class="checkbox-container" v-for="option in accessibilityNl" :key="option">
           <input
             type="checkbox"
@@ -87,53 +87,53 @@
       </fieldset>
 
       <div class="form-field">
-        <div class="language-label">Materials used:</div>
+        <div class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Gebruikte materialen:' : 'Materials used:' }}</div>
         <div class="language-field">
-          <label for="materials-used-eng" class="language-label">English</label>
+          <label for="materials-used-eng" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Engels' : 'English' }}</label>
           <textarea id="materials-used-eng" v-model="englishUsedMaterials"></textarea>
 
-          <label for="materials-used-nl" class="language-label">Dutch</label>
+          <label for="materials-used-nl" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Nederlands' : 'Dutch' }}</label>
           <textarea id="materials-used-nl" v-model="dutchUsedMaterials"></textarea>
         </div>
       </div>
 
       <div class="form-field">
-        <label for="weight">Weight:</label>
+        <label for="weight">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Gewicht:' : 'Weight:' }}</label>
         <input type="number" id="weight" v-model="formData.weight">
       </div>
 
       <div class="form-field">
-        <label for="cost-of-construction">Cost of construction:</label>
+        <label for="cost-of-construction">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Bouwkosten:' : 'Cost of construction:' }}</label>
         <input type="number" id="const-of-construction" v-model="formData.cost_to_construct">
       </div>
 
       <fieldset>
-        <legend>Location:</legend>
-          <label class="language-label">Latitude:</label>
+        <legend>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Locatie:' : 'Location:' }}</legend>
+          <label class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Breedtegraad:' : 'Latitude:' }}</label>
           <input type="number" v-model="formData.location.latitude" step="any" required>
 
-          <label class="language-label">Longitude:</label>
+          <label class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Lengtegraad:' : 'Longitude:' }}</label>
           <input type="number" v-model="formData.location.longitude" step="any" required>
 
-          <label class="language-label">Street:</label>
+          <label class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Straat:' : 'Street:' }}</label>
           <input type="text" v-model="formData.location.street">
 
-          <label class="language-label">Number:</label>
+          <label class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Nummer:' : 'Number:' }}</label>
           <input type="number" v-model="formData.location.number">
 
-          <label class="language-label">City:</label>
+          <label class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Stad:' : 'City:' }}</label>
           <input type="text" v-model="formData.location.city" required>
       </fieldset>
 
       <fieldset>
-        <legend>Dimensions:</legend>
-          <label for="height" class="language-label">Height:</label>
+        <legend>{{ this.$store.state.currentLanguage === 'Dutch' ? 'Dimensies:' : 'Dimensions:' }}</legend>
+          <label for="height" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Hoogte:' : 'Height:' }}</label>
           <input id="height" type="number" v-model="formData.dimensions.height">
 
-          <label for="width" class="language-label">Width:</label>
+          <label for="width" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Breedte:' : 'Width:' }}</label>
           <input id="width" type="number" v-model="formData.dimensions.width">
 
-          <label for="depth" class="language-label">Depth:</label>
+          <label for="depth" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Diepte:' : 'Depth:' }}</label>
           <input id="depth" type="number" v-model="formData.dimensions.depth">
       </fieldset>
 
@@ -142,10 +142,10 @@
           <label for="image-url">URLs:</label>
           <textarea id="image-url" v-model="urlInput" required></textarea>
 
-          <label for="caption-en">Captions English:</label>
+          <label for="caption-en">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Beschrijvingen Engels:' : 'Captions English:' }}</label>
           <textarea id="caption-en" v-model="captionEnInput" required></textarea>
 
-          <label for="caption-nl">Captions Dutch:</label>
+          <label for="caption-nl">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Beschrijvingen Nederlands:' : 'Captions Dutch:' }}</label>
           <textarea id="caption-nl" v-model="captionNlInput" required></textarea>
     </fieldset>
 
@@ -154,21 +154,21 @@
         <label for="audio-video-url" class="language-label">Url:</label>
         <input type="text" id="audio-video-url" v-model="formData.audiovisual_source.url">
 
-        <label for="audio-video-title-eng" class="language-label">Title English:</label>
+        <label for="audio-video-title-eng" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Titel Engels:' : 'Title English:' }}</label>
         <input id="audio-video-title-eng" type="text" v-model="formData.audiovisual_source.audiovisual_source_language.find(lang => lang.language === 'English').title">        
 
-        <label for="audio-video-title-nl" class="language-label">Title Dutch:</label>
+        <label for="audio-video-title-nl" class="language-label">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Titel Nederlands:' : 'Title Dutch:' }}</label>
         <input id="audio-video-title-nl" type="text" v-model="formData.audiovisual_source.audiovisual_source_language.find(lang => lang.language === 'Dutch').title">     
 
         <label class="language-label" for="audio-video-type">Type:</label>
         <select id="audio-video-type" v-model="formData.audiovisual_source.type">
-          <option value="">Please choose an option</option>
+          <option value="">{{ this.$store.state.currentLanguage === 'Dutch' ? 'Kies een optie' : 'Please choose an option' }}</option>
           <option value="video">Video</option>
           <option value="audio">Audio</option>
         </select>
     </fieldset>
 
-    <input type="submit" value="Submit">
+    <input type="submit" :value="submitButtonText">
 
     </form>
   </template>  
@@ -216,7 +216,10 @@
         set(value) {
           this.formData.monument_language.find(lang => lang.language === 'Dutch').used_materials = value.split(",").map(item => item.trim());
         }
-      }
+      },
+      submitButtonText() {
+        return this.$store.state.currentLanguage === 'Dutch' ? 'Opslaan' : 'Save';
+      },
     },
     methods: {
       populateImageData() {
