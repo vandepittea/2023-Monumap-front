@@ -21,8 +21,7 @@
 </template>
 
 <script>
-import MonumnetService from '../services/MonumentService';
-import { useStore } from 'vuex'; 
+import MonumentService from '../services/MonumentService';
 
 export default {    
     name: "LoginView",
@@ -31,7 +30,7 @@ export default {
         username: "",
         password: "",
         errors: [],
-        "service": new MonumnetService(), 
+        "service": new MonumentService(), 
         
     };
     },

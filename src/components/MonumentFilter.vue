@@ -80,7 +80,6 @@
     watch: {
     '$store.state.currentLanguage': {
       handler() {
-        // Trigger recomputation of monumentTypesOptions when the language changes
         this.$nextTick(() => {
           this.$forceUpdate();
         });
