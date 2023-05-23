@@ -59,12 +59,25 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
     #languageImage {
     width: 4rem;
     height: 4rem;
     cursor: pointer;
     margin-left: 5rem;
     margin-top: 1.5rem;
+  }
+
+  button{
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: color 0.3s;
   }
 </style>
